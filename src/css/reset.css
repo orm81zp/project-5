@@ -27,8 +27,15 @@ button {
   cursor: pointer;
 }
 
+input,
+button {
+  font-size: inherit;
+  font-family: inherit;
+}
+
 img {
   display: block;
   max-width: 100%;
   height: auto;
+  object-fit: cover;
 }

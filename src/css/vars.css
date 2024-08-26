@@ -1,0 +1,9 @@
+:root {
+  --default: #242424;
+  --default-60: rgba(36, 36, 36, 0.6);
+  --default-50: rgba(36, 36, 36, 0.5);
+  --default-40: rgba(36, 36, 36, 0.4);
+  --font-main: "DM Sans", Helvetica, Arial, sans-serif;
+  --trns-slow: 600ms ease-out;
+  --trns-fast: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
