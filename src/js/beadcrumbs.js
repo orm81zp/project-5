@@ -17,18 +17,6 @@ const state = {
   const mainCards = document.getElementById('main-cards');
   const categoryCards = document.getElementById('cards-category');
 
-  // bodyPart: 'waist';
-  // burnedCalories: 220;
-  // description: "This refers
-  // equipment: 'body weight';
-  // gifUrl: 'https://ftp.goit.study/img/power-pulse/gifs/0001.gif';
-  // name: '3/4 sit-up';
-  // popularity: 16834;
-  // rating: 3.92;
-  // target: 'abs';
-  // time: 3;
-  // _id: '64f389465ae26083f39b17a2';
-
   const clearCards = () => {
     mainCards.innerHTML = '';
     categoryCards.innerHTML = '';
