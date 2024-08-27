@@ -3,7 +3,7 @@ body {
   font-size: 16px;
   font-weight: 400;
   line-height: 1.5;
-  color: var(--default);
+  color: var(--color-primary);
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -29,6 +29,6 @@ body > main {
 @media only screen and (min-width: 1200px) {
   .main-container .container {
     flex-direction: row;
-    gap: 64px;
+    gap: 32px;
   }
 }
