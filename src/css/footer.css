@@ -117,7 +117,7 @@
   
   .footer_form_btn:active {
     outline: var(--color-primary);
-    background-color: #3e3d3d;
+    background-color: var(--input-active);
   
     transform: scaleX(0.99);
   
