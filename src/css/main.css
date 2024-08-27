@@ -1,1 +1,138 @@
 /**/
+.main .cards {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 20px;
+}
+
+.main .cards .card-item {
+  position: relative;
+  flex-basis: 335px;
+  height: 225px;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.main .cards .card-link {
+  position: relative;
+}
+
+.main .cards .card-content {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: var(--color-primary-50);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.main .cards .card-name {
+  color: var(--color-secondary);
+  font-size: 24px;
+  line-height: 1;
+  text-transform: capitalize;
+}
+
+.main .cards .card-filter {
+  color: var(--color-secondary-40);
+  font-size: 12px;
+  line-height: 1;
+}
+
+
+.main .cards-category {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  row-gap: 20px;
+  column-gap: 20px;
+}
+
+.main .cards-category .card-item {
+  flex-basis: 335px;
+  height: 140px;
+  border-radius: 15px;
+  overflow: hidden;
+  background-color: #FFFFFF;
+  padding: 16px;
+}
+
+
+.main .cards-category .card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 32px;
+}
+
+.main .cards-category .card-header .badge-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.main .cards-category .card-content {
+  font-size: 24px;
+  line-height: 1.3;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.main .cards-category .card-footer {
+  font-size: 12px;
+  line-height: 1.5;
+}
+.main .cards-category .card-footer .__name {
+  color: var(--color-primary-40);
+}
+
+.main .cards-category .card-footer .card-footer-list {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.main .cards-category .card-footer .card-footer-list .item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+
+
+
+/* tablet */
+@media only screen and (min-width: 768px) {
+  .main .cards {
+    gap: 14px;
+  }
+  .main .cards .card-item {
+    flex-basis: 225px;
+    height: auto;
+  }
+  .main .cards-category {
+    row-gap: 32px;
+    column-gap: 16px;
+  }
+  .main .cards-category .card-item {
+    flex-basis: 344px;
+  }
+}
+
+/* desktop */
+@media only screen and (min-width: 1440px) {
+  .main .cards .card-item {
+    flex-basis: 290px;
+  }
+  .main .cards-category .card-item {
+    flex-basis: 442px;
+  }
+}
