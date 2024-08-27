@@ -27,11 +27,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all var(--transition);
+    transition: all var(--trns-fast);
   }
   .footer_soc_icon {
     fill: var(--color-secondary);
-    transition: fill var(--transition);
+    transition: fill var(--trns-fast);
   }
   
   .footer_soc_link:hover,
@@ -53,7 +53,7 @@
     font-size: 40px;
     font-style: normal;
     font-weight: 400;
-    line-height: 48px; /* 120% */
+    line-height: 48px;
     letter-spacing: 0.02em;
   }
   .footer_title_span {
@@ -77,7 +77,7 @@
     font-size: 14px;
     font-style: normal;
     font-weight: 400;
-    line-height: 18px; /* 128.571% */
+    line-height: 18px;
   }
   .footer_form > input {
     font-size: 14px;
@@ -87,12 +87,12 @@
     border: 1px solid var(--color-secondary);
     background-color: transparent;
     color: var(--color-secondary);
-    transition: all var(--transition);
+    transition: all var(--trns-fast);
   }
   .footer_form > input:focus,
   .footer_form > input:hover {
     outline: none;
-    background-color: #3e3d3d;
+    background-color: var(--input-active);
   }
   
   .footer_form_btn {
@@ -108,7 +108,7 @@
     font-style: normal;
     font-weight: 400;
     line-height: 18px;
-    transition: all var(--transition);
+    transition: all var(--trns-fast);
   }
   
    .footer_form_btn:hover {
@@ -164,7 +164,7 @@
     font-weight: 400;
     line-height: 18px; /* 128.571% */
     letter-spacing: -0.02em;
-    transition: all var(--transition);
+    transition: all var(--trns-fast);
   }
   .footer_link_info:hover,
   .footer_link_info:focus {
@@ -213,7 +213,6 @@
     .footer_title_span {
       font-size: 56px;
       font-style: italic;
-      font-weight: 400;
       line-height: 60px;
       letter-spacing: -0.02em;
     }
@@ -281,7 +280,7 @@
       background-color: unset;
       border: none;
       color: var(--color-secondary);
-      transition: all var(--transition);
+      transition: all var(--trns-fast);
     }
     .footer_text_year {
       margin-left: 314px;
