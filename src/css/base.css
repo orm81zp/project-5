@@ -20,12 +20,14 @@ body > main {
   gap: 80px;
 }
 
+/* tablet */
 @media only screen and (min-width: 768px) {
   .main-container .container {
     gap: 64px;
   }
 }
 
+/* desktop */
 @media only screen and (min-width: 1200px) {
   .main-container .container {
     flex-direction: row;
