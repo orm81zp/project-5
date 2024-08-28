@@ -101,8 +101,6 @@ const state = {
     searchByFilter(filter);
   };
 
-  searchByFilter(state.filter);
-
   breadcrumbsFilters.addEventListener('click', filterClickHandler);
 
   const categoryClickHandler = event => {
@@ -118,8 +116,6 @@ const state = {
     }
   };
 
-  searchByFilter(state.filter);
-
   mainCards.addEventListener('click', categoryClickHandler);
 
   const searchHandler = event => {
@@ -134,6 +130,8 @@ const state = {
   searchFieldSubmit.addEventListener('click', searchHandler);
   searchForm.addEventListener('submit', searchHandler);
 
-  searchByFilter(state.filter);
   renderFilters(Object.values(FILTERS), breadcrumbsFilters);
+
+  // init rendering cards be a default filter
+  searchByFilter(state.filter);
 })();
