@@ -62,7 +62,6 @@ socialItems.forEach(item => {
   const icon = item.querySelector('.footer_soc_icon');
 
   item.addEventListener('mouseenter', () => {
-    // Анімація для блоку (бокса)
     gsap.to(item, {
       keyframes: {
         '0%': { rotation: -5 },
@@ -75,7 +74,6 @@ socialItems.forEach(item => {
       repeat: 1,
     });
 
-    // Анімація для іконки
     gsap.to(icon, {
       keyframes: {
         '0%': { x: -3 },
@@ -90,13 +88,11 @@ socialItems.forEach(item => {
   });
 
   item.addEventListener('mouseleave', () => {
-    // Повернення блоку в початкове положення
     gsap.to(item, {
       rotation: 0,
       duration: 0.2,
     });
 
-    // Повернення іконки в початкове положення
     gsap.to(icon, {
       x: 0,
       duration: 0.2,
