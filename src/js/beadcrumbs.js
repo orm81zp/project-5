@@ -16,6 +16,9 @@ const state = {
   const breadcrumbsFilters = document.getElementById('breadcrumbs-filters');
   const mainCards = document.getElementById('main-cards');
   const categoryCards = document.getElementById('cards-category');
+  const searchField = document.getElementById('search-field');
+  const searchFieldInput = searchField.querySelector('.search-input');
+  const searchFieldSubmit = searchField.querySelector('.seach-submit');
 
   const clearCards = () => {
     mainCards.innerHTML = '';
@@ -104,10 +107,11 @@ const state = {
     mainCards.insertAdjacentHTML('beforeend', adjacentImages);
   };
 
-  const searchByExercises = async (filter, category) => {
+  const searchByExercises = async (filter, category, keyword = '') => {
     try {
       const params = {
-        [filter.toLowerCase()]: category,
+        [searchMapping[filter.toLowerCase()]]: category,
+        keyword,
       };
 
       const response = await Api.getExercises(params);
@@ -118,6 +122,7 @@ const state = {
 
       const categoryItem = breadcrumbsNav.querySelector('.item-category');
       categoryItem.innerText = category;
+      searchField.classList.remove('visually-hidden');
     } catch (error) {
       console.error(error);
     }
@@ -125,6 +130,7 @@ const state = {
 
   const searchByFilter = async filter => {
     try {
+      searchField.classList.add('visually-hidden');
       const response = await Api.getFilters({ filter });
       const { results } = response;
       state.filter = filter;
@@ -176,4 +182,13 @@ const state = {
   searchByFilter(state.filter);
 
   mainCards.addEventListener('click', categoryClickHandler);
+
+  const searchClickHandler = event => {
+    event.preventDefault();
+    const { filter, category } = state;
+    searchByExercises(filter, category, searchFieldInput.value);
+    searchFieldInput.value = '';
+  };
+
+  searchFieldSubmit.addEventListener('click', searchClickHandler);
 })();
