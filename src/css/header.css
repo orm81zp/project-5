@@ -1,1 +1,232 @@
-/**/
+header {
+  width: 100%;
+}
+
+header .container {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.menu-wrapper {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.menu-wrapper .logo {
+  display: flex;
+  text-decoration: none;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.menu-wrapper .hamburger {
+  padding: 0;
+  border: none;
+  background: transparent;
+}
+
+.menu-wrapper .hamburger .icon {
+  width: 32px;
+  height: 32px;
+  fill: var(--color-primary);
+}
+
+.navigation-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: auto;
+}
+
+.navigation-menu .menu-item {
+  position: relative;
+}
+
+.navigation-menu .menu-item .menu-link {
+  color: var(--color-secondary);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 18px;
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+.socials-menu {
+  display: flex;
+  gap: 12px;
+  margin-top: auto;
+}
+
+.socials-menu .menu-item {
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 10px;
+  border: 1px solid var(--color-secondary-10);
+}
+
+.socials-menu .menu-item .menu-link {
+  display: flex;
+}
+
+.socials-menu .menu-item .menu-icon {
+  fill: var(--color-secondary);
+}
+
+.mobile-menu-overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  pointer-events: none;
+  background: var(--overlay);
+  height: 100%;
+  width: 100%;
+  z-index: 70;
+  opacity: 0;
+}
+
+.mobile-menu-container.is-open .mobile-menu-overlay {
+  overflow: auto;
+  pointer-events: auto;
+  opacity: 1;
+  transition: all .25s linear;
+}
+
+.mobile-menu-container.is-open .mobile-menu {
+  transform: translateX(0);
+  transition: transform .25s linear;
+}
+
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 60%;
+  padding: 20px;
+  background-color: var(--color-primary);
+  text-align: center;
+  transform: translateX(100%);
+  z-index: 71;
+}
+
+.mobile-menu .close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  border: none;
+  background: transparent;
+}
+
+/* таблет версія */
+@media screen and (min-width: 768px) {
+  header .container {
+    display: flex;
+    justify-content: center;
+  }
+
+  header .inner-container {
+    width: 100%;
+    max-width: 768px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  /*navigation-menu*/
+
+  .navigation-menu {
+    flex-direction: row;
+    width: 233px;
+    border-radius: 60px;
+    background: var(--color-primary);
+    padding: 8px 34px;
+  }
+
+  .navigation-menu .menu-item .menu-link {
+    color: var(--color-secondary);
+    border-radius: 30px;
+    padding: 6px 12px;
+  }
+
+  .navigation-menu .menu-item .menu-link.active {
+    background-color: var(--color-secondary);
+    color: var(--color-primary);
+  }
+
+  /*socials-menu*/
+
+  .socials-menu .menu-item {
+    border: 1px solid var(--color-primary-10);
+  }
+
+  .socials-menu .menu-item:hover {
+    background-color: var(--color-primary);
+    border: none;
+  }
+
+  .socials-menu .menu-item .menu-icon {
+    fill: var(--color-primary);
+    transition: fill var(--trns-fast);
+  }
+
+  .socials-menu .menu-item:hover .menu-icon {
+    fill: var(--color-secondary);
+    animation: shake 2s;
+  }
+
+  /*other*/
+  .mobile-menu-container {
+    flex: 1;
+  }
+
+  .mobile-menu {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0;
+    transform: none;
+    background: var(--color-secondary);
+  }
+
+  .mobile-menu-overlay {
+    display: none;
+  }
+
+  .mobile-menu .close {
+    display: none;
+  }
+
+  .menu-wrapper {
+    width: auto;
+  }
+
+  .menu-wrapper .hamburger {
+    display: none;
+  }
+}
+
+/* десктопна версія */
+@media screen and (min-width: 1440px) {
+  header .inner-container {
+    width: 100%;
+    max-width: 1440px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  header .navigation-menu {
+    flex-direction: row;
+    width: 265px;
+    padding: 8px 50px;
+  }
+}
