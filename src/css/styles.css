@@ -18,7 +18,3 @@
 
 /* Scroll-up style */
 @import url('./scroll-up.css');
-
-html {
-  scroll-behavior: smooth;
-}
