@@ -33,6 +33,10 @@ body > main {
   overflow: hidden;
 }
 
+.hidden {
+  display: none;
+}
+
 .main-container {
   padding-bottom: 80px;
 }

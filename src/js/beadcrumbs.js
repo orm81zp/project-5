@@ -1,12 +1,13 @@
 import Api from './api';
 import { renderByExercises, renderByFilters, renderFilters } from './utils';
 
+const HIDDEN_CLASS = 'hidden';
 const FILTERS = {
   muscles: 'Muscles',
   bodyParts: 'Body parts',
   equipment: 'Equipment',
 };
-
+const DEFAULT_FILTER = FILTERS.muscles;
 const searchMapping = {
   [FILTERS.muscles]: 'muscles',
   [FILTERS.bodyParts]: 'bodypart',
@@ -14,12 +15,13 @@ const searchMapping = {
 };
 
 const state = {
-  filter: FILTERS.muscles,
+  filter: DEFAULT_FILTER,
   exercise: null,
 };
 
 (() => {
   const breadcrumbsNav = document.getElementById('breadcrumbs-nav');
+  const breadcrumbsHome = breadcrumbsNav.querySelector('.item-home');
   const breadcrumbsFilters = document.getElementById('breadcrumbs-filters');
   const mainCards = document.getElementById('main-cards');
   const categoryCards = document.getElementById('cards-category');
@@ -27,6 +29,16 @@ const state = {
   const searchField = document.getElementById('search-field');
   const searchFieldInput = searchField.querySelector('.search-input');
   const searchFieldSubmit = searchField.querySelector('.seach-submit');
+  const searchFieldReset = searchField.querySelector('.seach-reset');
+
+  // helpers
+  const showResetButton = (shouldHide = false) => {
+    if (shouldHide) {
+      searchFieldReset.classList.add(HIDDEN_CLASS);
+    } else {
+      searchFieldReset.classList.remove(HIDDEN_CLASS);
+    }
+  };
 
   const clearCards = () => {
     mainCards.innerHTML = '';
@@ -40,12 +52,17 @@ const state = {
     categoryItem.innerText = '';
   };
 
+  const updateBreadcrumbs = exercise => {
+    const categoryItem = breadcrumbsNav.querySelector('.item-exercise');
+    categoryItem.setAttribute('title', exercise);
+    categoryItem.classList.add('active');
+    categoryItem.innerText = exercise;
+  };
+
+  // functional
   const searchByExercise = async (filter, exercise, keyword = '') => {
     try {
-      const categoryItem = breadcrumbsNav.querySelector('.item-exercise');
-      categoryItem.innerText = exercise;
-      categoryItem.setAttribute('title', exercise);
-      categoryItem.classList.add('active');
+      updateBreadcrumbs(exercise);
 
       const params = {
         [searchMapping[filter]]: exercise,
@@ -59,7 +76,7 @@ const state = {
       clearCards();
       renderByExercises(results, categoryCards);
 
-      searchField.classList.remove('visually-hidden');
+      searchField.classList.remove(HIDDEN_CLASS);
     } catch (error) {
       console.error(error);
     }
@@ -67,7 +84,7 @@ const state = {
 
   const searchByFilter = async filter => {
     try {
-      searchField.classList.add('visually-hidden');
+      searchField.classList.add(HIDDEN_CLASS);
       searchFieldInput.value = '';
 
       const response = await Api.getFilters({ filter });
@@ -123,18 +140,36 @@ const state = {
 
   mainCards.addEventListener('click', exerciseClickHandler);
 
-  // search listerner
+  // search input / form listerners
   const searchHandler = event => {
     event.preventDefault();
     const { filter, exercise } = state;
 
-    if (searchFieldInput.value) {
+    if (searchFieldInput.value.trim()) {
       searchByExercise(filter, exercise, searchFieldInput.value);
     }
   };
 
   searchFieldSubmit.addEventListener('click', searchHandler);
   searchForm.addEventListener('submit', searchHandler);
+  searchForm.addEventListener('reset', () => {
+    showResetButton(true);
+  });
+
+  // search input listerner
+  const searchInputHandler = event => {
+    if (event.target.value.trim()) {
+      showResetButton();
+    } else {
+      showResetButton(true);
+    }
+  };
+
+  searchFieldInput.addEventListener('input', searchInputHandler);
+
+  breadcrumbsHome.addEventListener('click', () => {
+    searchByFilter(DEFAULT_FILTER);
+  });
 
   // init
   // rendering filters

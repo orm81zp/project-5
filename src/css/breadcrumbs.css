@@ -14,6 +14,7 @@
   border-radius: 30px;
   padding: 12px 14px;
   height: 48px;
+  width: 100%;
 }
 .breadcrumbs .search-field .search-form {
   display: flex;
@@ -80,6 +81,10 @@
   position: relative;
 }
 
+.breadcrumbs .filters .item:hover {
+  color: var(--color-primary);
+}
+
 .breadcrumbs .filters .item.active::before {
   content: "";
   height: 4px;
@@ -132,6 +137,9 @@
 @media only screen and (min-width: 768px) {
   .breadcrumbs {
     padding-bottom: 32px;
+  }
+  .breadcrumbs .search-field {
+    width: 272px;
   }
   .breadcrumbs .search-filters-wrapper {
     flex-direction: row;

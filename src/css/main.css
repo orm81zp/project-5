@@ -1,4 +1,8 @@
 /**/
+.main {
+  min-height: 335px;
+}
+
 .main .cards {
   display: flex;
   flex-wrap: wrap;
@@ -10,12 +14,19 @@
   position: relative;
   flex-basis: 335px;
   height: 225px;
-  border-radius: 12px;
-  overflow: hidden;
 }
 
 .main .cards .card-link {
   position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  display: block;
+  outline: none;
+}
+
+.main .cards .card-link:hover,
+.main .cards .card-link:focus {
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.35);
 }
 
 .main .cards .card-content {
