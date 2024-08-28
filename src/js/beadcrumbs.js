@@ -15,7 +15,7 @@ const searchMapping = {
 
 const state = {
   filter: FILTERS.muscles,
-  category: null,
+  exercise: null,
 };
 
 (() => {
@@ -33,26 +33,28 @@ const state = {
     categoryCards.innerHTML = '';
   };
 
-  const clearCategory = () => {
-    const categoryItem = breadcrumbsNav.querySelector('.item-category');
+  const clearBreadcrumbs = () => {
+    const categoryItem = breadcrumbsNav.querySelector('.item-exercise');
+    categoryItem.removeAttribute('title');
     categoryItem.classList.remove('active');
     categoryItem.innerText = '';
   };
 
-  const searchByExercises = async (filter, category, keyword = '') => {
+  const searchByExercise = async (filter, exercise, keyword = '') => {
     try {
-      const categoryItem = breadcrumbsNav.querySelector('.item-category');
-      categoryItem.innerText = category;
+      const categoryItem = breadcrumbsNav.querySelector('.item-exercise');
+      categoryItem.innerText = exercise;
+      categoryItem.setAttribute('title', exercise);
       categoryItem.classList.add('active');
 
       const params = {
-        [searchMapping[filter]]: category,
+        [searchMapping[filter]]: exercise,
         keyword,
       };
 
       const response = await Api.getExercises(params);
       const { results } = response;
-      state.category = category;
+      state.exercise = exercise;
 
       clearCards();
       renderByExercises(results, categoryCards);
@@ -73,7 +75,7 @@ const state = {
       state.filter = filter;
 
       clearCards();
-      clearCategory();
+      clearBreadcrumbs();
       renderByFilters(results, mainCards);
 
       const filterItems = breadcrumbsFilters.querySelectorAll('.item');
@@ -90,6 +92,7 @@ const state = {
     }
   };
 
+  // filter listerner
   const filterClickHandler = event => {
     event.preventDefault();
 
@@ -103,35 +106,39 @@ const state = {
 
   breadcrumbsFilters.addEventListener('click', filterClickHandler);
 
-  const categoryClickHandler = event => {
+  // exercise listerner
+  const exerciseClickHandler = event => {
     event.preventDefault();
+    const { filter } = state;
 
     if (event.target.nodeName !== 'DIV') {
       return;
     }
 
-    const category = event.target.dataset.category;
-    if (category) {
-      searchByExercises(state.filter, category);
+    const exercise = event.target.dataset.category;
+    if (exercise) {
+      searchByExercise(filter, exercise);
     }
   };
 
-  mainCards.addEventListener('click', categoryClickHandler);
+  mainCards.addEventListener('click', exerciseClickHandler);
 
+  // search listerner
   const searchHandler = event => {
     event.preventDefault();
-    const { filter, category } = state;
+    const { filter, exercise } = state;
 
     if (searchFieldInput.value) {
-      searchByExercises(filter, category, searchFieldInput.value);
+      searchByExercise(filter, exercise, searchFieldInput.value);
     }
   };
 
   searchFieldSubmit.addEventListener('click', searchHandler);
   searchForm.addEventListener('submit', searchHandler);
 
+  // init
+  // rendering filters
   renderFilters(Object.values(FILTERS), breadcrumbsFilters);
-
   // init rendering cards by a default filter
   searchByFilter(state.filter);
 })();

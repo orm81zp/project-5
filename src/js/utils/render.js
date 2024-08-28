@@ -52,18 +52,18 @@ export const renderByExercises = (exercises, container) => {
             width="24"
             height="24"
           />
-          <span class="card-content-name">${name}</span>
+          <span class="card-content-name" title="${name}">${name}</span>
         </div>
         <div class="card-footer">
           <ul class="card-footer-list">
             <li class="item">
-              <span class="item-name">Burned calories:</span><span class="item-value">${burnedCalories} / ${time} min</span>
+              <span class="item-name">Burned calories:</span><span class="item-value" title="${burnedCalories} / ${time} min">${burnedCalories} / ${time} min</span>
             </li>
             <li class="item">
-              <span class="item-name">Body part:</span><span class="item-value">${bodyPart}</span>
+              <span class="item-name">Body part:</span><span class="item-value" title="${bodyPart}">${bodyPart}</span>
             </li>
             <li class="item">
-              <span class="item-name">Target:</span><span class="item-value">${target}</span>
+              <span class="item-name">Target:</span><span class="item-value" title="${target}">${target}</span>
             </li>
           </ul>
         </div>
