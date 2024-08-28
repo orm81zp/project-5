@@ -11,15 +11,15 @@ import"./assets/main-CNeT7qKl.js";import{a as M}from"./assets/vendor-CR7N1gwd.js
           </div>
         </a>
       </li>
-      `).join("");s.insertAdjacentHTML("beforeend",r)},C=(i,s)=>{const r=i.map(({bodyPart:c,burnedCalories:a,gifUrl:d,name:f,rating:v,target:n,time:u,_id:g})=>`
-      <li class="card-item" data-id="${g}">
+      `).join("");s.insertAdjacentHTML("beforeend",r)},C=(i,s)=>{const r=i.map(({bodyPart:c,burnedCalories:a,gifUrl:d,name:y,rating:v,target:n,time:u,_id:g})=>`
+      <li class="card-item">
         <div class="card-header">
           <div class="badge-wrapper">
             <div class="__badge">WORKOUT</div>
             <div class="__rating">${v}</div>
           </div>
           <div>
-            <div class="__start">Start</div>
+            <a class="__start" href="#" data-id="${g}">Start</a>
           </div>
         </div>
         <div class="card-content">
@@ -29,7 +29,7 @@ import"./assets/main-CNeT7qKl.js";import{a as M}from"./assets/vendor-CR7N1gwd.js
             width="24"
             height="24"
           />
-          <span class="card-content-name" title="${f}">${f}</span>
+          <span class="card-content-name" title="${y}">${y}</span>
         </div>
         <div class="card-footer">
           <ul class="card-footer-list">
@@ -45,5 +45,5 @@ import"./assets/main-CNeT7qKl.js";import{a as M}from"./assets/vendor-CR7N1gwd.js
           </ul>
         </div>
       </li>
-      `).join("");s.insertAdjacentHTML("beforeend",r)};(()=>{const i="hidden",s={muscles:"Muscles",bodyParts:"Body parts",equipment:"Equipment"},r=s.muscles,c={[s.muscles]:"muscles",[s.bodyParts]:"bodypart",[s.equipment]:"equipment"},a={filter:null,exercise:null},d=document.getElementById("breadcrumbs-nav"),f=d.querySelector(".item-home"),v=document.getElementById("breadcrumbs-filters"),n=document.querySelector(".exercises"),u=n.querySelector(".cards"),g=n.querySelector(".cards-exercises"),m=document.getElementById("search-field"),$=m.querySelector(".search-form"),b=m.querySelector(".search-input"),I=m.querySelector(".seach-submit"),T=m.querySelector(".seach-reset"),h=(e=!1)=>{if(e){const t=n.querySelector(".loader");t&&t.remove()}else n.insertAdjacentHTML("beforeend",'<div class="loader"></div>')},x=(e=!1)=>{e?T.classList.add(i):T.classList.remove(i)},S=(e=!1,t=!1)=>{e?m.classList.add(i):m.classList.remove(i),t&&(b.value="")},q=()=>{u.innerHTML="",g.innerHTML=""},j=()=>{const e=d.querySelector(".item-exercise");e.removeAttribute("title"),e.classList.remove("active"),e.innerText=""},w=e=>{const t=d.querySelector(".item-exercise");t.setAttribute("title",e),t.classList.add("active"),t.innerText=e},L=async(e,t,l="")=>{try{q(),h(),w(t);const o={[c[e]]:t,keyword:l},y=await B.getExercises(o),{results:k}=y;a.exercise=t,C(k,g)}catch(o){console.error(o)}finally{h(!0),S()}},E=async e=>{try{q(),j(),h(),S(!0,!0);const t=await B.getFilters({filter:e}),{results:l}=t;a.filter=e,N(l,u);const o=v.querySelectorAll(".item");for(let y of o)y.innerText===e?y.classList.add("active"):y.classList.remove("active")}catch(t){console.error(t)}finally{h(!0)}},A=e=>{if(e.preventDefault(),e.target.nodeName!=="A")return;const t=e.target.innerText.trim();E(t)};v.addEventListener("click",A);const H=e=>{e.preventDefault();const{filter:t}=a;if(e.target.nodeName!=="DIV")return;const l=e.target.dataset.category.trim();l&&L(t,l)};u.addEventListener("click",H);const F=e=>{e.preventDefault();const{filter:t,exercise:l}=a,o=b.value.trim();o&&L(t,l,o)},R=()=>{x(!0);const{filter:e,exercise:t}=a;L(e,t)};I.addEventListener("click",F),$.addEventListener("submit",F),$.addEventListener("reset",R);const _=e=>{e.target.value.trim()?x():x(!0)};b.addEventListener("input",_),f.addEventListener("click",()=>{E(r)}),D(Object.values(s),v),E(r)})();
+      `).join("");s.insertAdjacentHTML("beforeend",r)};(()=>{const i="hidden",s={muscles:"Muscles",bodyParts:"Body parts",equipment:"Equipment"},r=s.muscles,c={[s.muscles]:"muscles",[s.bodyParts]:"bodypart",[s.equipment]:"equipment"},a={filter:null,exercise:null},d=document.getElementById("breadcrumbs-nav"),y=d.querySelector(".item-home"),v=document.getElementById("breadcrumbs-filters"),n=document.querySelector(".exercises"),u=n.querySelector(".cards"),g=n.querySelector(".cards-exercises"),m=document.getElementById("search-field"),$=m.querySelector(".search-form"),b=m.querySelector(".search-input"),I=m.querySelector(".seach-submit"),T=m.querySelector(".seach-reset"),h=(e=!1)=>{if(e){const t=n.querySelector(".loader");t&&t.remove()}else n.insertAdjacentHTML("beforeend",'<div class="loader"></div>')},x=(e=!1)=>{e?T.classList.add(i):T.classList.remove(i)},S=(e=!1,t=!1)=>{e?m.classList.add(i):m.classList.remove(i),t&&(b.value="")},q=()=>{u.innerHTML="",g.innerHTML=""},j=()=>{const e=d.querySelector(".item-exercise");e.removeAttribute("title"),e.classList.remove("active"),e.innerText=""},w=e=>{const t=d.querySelector(".item-exercise");t.setAttribute("title",e),t.classList.add("active"),t.innerText=e},L=async(e,t,l="")=>{try{q(),h(),w(t);const o={[c[e]]:t,keyword:l},f=await B.getExercises(o),{results:k}=f;a.exercise=t,C(k,g)}catch(o){console.error(o)}finally{h(!0),S()}},E=async e=>{try{q(),j(),h(),S(!0,!0);const t=await B.getFilters({filter:e}),{results:l}=t;a.filter=e,N(l,u);const o=v.querySelectorAll(".item");for(let f of o)f.innerText===e?f.classList.add("active"):f.classList.remove("active")}catch(t){console.error(t)}finally{h(!0)}},A=e=>{if(e.preventDefault(),e.target.nodeName!=="A")return;const t=e.target.innerText.trim();E(t)};v.addEventListener("click",A);const H=e=>{e.preventDefault();const{filter:t}=a;if(e.target.nodeName!=="DIV")return;const l=e.target.dataset.category.trim();l&&L(t,l)};u.addEventListener("click",H);const F=e=>{e.preventDefault();const{filter:t,exercise:l}=a,o=b.value.trim();o&&L(t,l,o)},R=()=>{x(!0);const{filter:e,exercise:t}=a;L(e,t)};I.addEventListener("click",F),$.addEventListener("submit",F),$.addEventListener("reset",R);const _=e=>{e.target.value.trim()?x():x(!0)};b.addEventListener("input",_),y.addEventListener("click",()=>{E(r)}),D(Object.values(s),v),E(r)})();
 //# sourceMappingURL=index.js.map
