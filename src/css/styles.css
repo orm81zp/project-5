@@ -15,3 +15,10 @@
 @import url('./footer.css');
 @import url('./modal.css');
 @import url('./rating-form.css');
+
+/* Scroll-up style */
+@import url('./scroll-up.css');
+
+html {
+  scroll-behavior: smooth;
+}
