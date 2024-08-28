@@ -74,3 +74,55 @@ export const renderByExercises = (exercises, container) => {
 
   container.insertAdjacentHTML('beforeend', adjacentText);
 };
+
+export const renderExerciseModal = (exercise, container) => {
+  const {
+    bodyPart,
+    burnedCalories,
+    description,
+    equipment,
+    gifUrl,
+    name,
+    popularity,
+    rating,
+    target,
+    time,
+    _id,
+  } = exercise;
+
+  const innerText = `
+      <div class="modal-gif-container">
+        <img class="modal-gif" src="${gifUrl}" alt="${target}">
+      </div>
+      <div class="modal-content">
+        <h2>${name}</h2>
+        <div class="modal-rating">
+            <span>${rating}</span>
+            <span class="modal-stars">★★★★☆</span>
+        </div>
+        <div class="modal-details">
+            <p><strong>Target:</strong> ${target}</p>
+            <p><strong>Body Part:</strong> ${bodyPart}</p>
+            <p><strong>Equipment:</strong> ${equipment}</p>
+            <p><strong>Popular:</strong> ${popularity}</p>
+            <p><strong>Burned Calories:</strong> ${burnedCalories}/${time} min</p>
+        </div>
+        <p class="description">${description}</p>
+        <ul class="modal-controls" data-id=${_id}>
+          <li class="modal-controls-item">
+            <button class="modal-favorite-button">
+              Add to favorites
+                <svg class="modal-favorite-icon" width="24" height="24">
+                  <use href="./img/icons.svg#icon-heart"></use>
+                </svg>
+            </button>
+          </li>
+          <li class="modal-controls-item">
+            <button class="modal-rating-button">Give a rating</button>
+          </li>
+        </div>
+      </div>
+      `;
+
+  container.innerHTML = innerText;
+};
