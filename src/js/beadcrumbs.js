@@ -1,13 +1,20 @@
 import Api from './api';
+import { renderByExercises, renderByFilters, renderFilters } from './utils';
+
+const FILTERS = {
+  muscles: 'Muscles',
+  bodyParts: 'Body parts',
+  equipment: 'Equipment',
+};
 
 const searchMapping = {
-  muscles: 'muscles',
-  'body parts': 'bodypart',
-  equipment: 'equipment',
+  [FILTERS.muscles]: 'muscles',
+  [FILTERS.bodyParts]: 'bodypart',
+  [FILTERS.equipment]: 'equipment',
 };
 
 const state = {
-  filter: 'Muscles',
+  filter: FILTERS.muscles,
   category: null,
 };
 
@@ -16,99 +23,20 @@ const state = {
   const breadcrumbsFilters = document.getElementById('breadcrumbs-filters');
   const mainCards = document.getElementById('main-cards');
   const categoryCards = document.getElementById('cards-category');
+  const searchForm = document.querySelector('.search-form');
   const searchField = document.getElementById('search-field');
   const searchFieldInput = searchField.querySelector('.search-input');
   const searchFieldSubmit = searchField.querySelector('.seach-submit');
 
-  const clearCards = (clearCategory = false) => {
+  const clearCards = () => {
     mainCards.innerHTML = '';
     categoryCards.innerHTML = '';
-
-    if (clearCategory) {
-      const categoryItem = breadcrumbsNav.querySelector('.item-category');
-      categoryItem.classList.remove('active');
-      categoryItem.innerText = '';
-    }
   };
 
-  const renderByExercises = exercises => {
-    clearCards();
-    const adjacentImages = exercises
-      .map(
-        ({
-          bodyPart,
-          burnedCalories,
-          gifUrl,
-          name,
-          rating,
-          target,
-          time,
-          _id,
-        }) =>
-          `
-      <li class="card-item" data-id="${_id}">
-        <div class="card-header">
-          <div class="badge-wrapper">
-            <div class="__badge">WORKOUT</div>
-            <div class="__rating">${rating}</div>
-          </div>
-          <div>
-            <div class="__start">Start</div>
-          </div>
-        </div>
-        <div class="card-content">
-          <img
-            src="${gifUrl}"
-            alt="${target}"
-            width="24"
-            height="24"
-          />
-          <span class="card-content-name">${name}</span>
-        </div>
-        <div class="card-footer">
-          <ul class="card-footer-list">
-            <li class="item">
-              <span class="item-name">Burned calories:</span><span class="item-value">${burnedCalories} / ${time} min</span>
-            </li>
-            <li class="item">
-              <span class="item-name">Body part:</span><span class="item-value">${bodyPart}</span>
-            </li>
-            <li class="item">
-              <span class="item-name">Target:</span><span class="item-value">${target}</span>
-            </li>
-          </ul>
-        </div>
-      </li>
-      `
-      )
-      .join('');
-
-    categoryCards.insertAdjacentHTML('beforeend', adjacentImages);
-  };
-
-  const renderByFilters = cards => {
-    clearCards(true);
-    const adjacentImages = cards
-      .map(
-        ({ filter, name, imgURL }) =>
-          `
-      <li class="card-item">
-        <a class="card-link" href="#">
-          <img
-            src="${imgURL}"
-            alt="${name}"
-          />
-          <div class="card-content" data-category="${name}">
-            <div class="card-name">${name}</div>
-            <div class="card-filter">${filter}</div>
-          </div>
-        </a>
-      </li>
-      `
-      )
-      .join('');
-
-    mainCards.insertAdjacentHTML('beforeend', adjacentImages);
+  const clearCategory = () => {
+    const categoryItem = breadcrumbsNav.querySelector('.item-category');
+    categoryItem.classList.remove('active');
+    categoryItem.innerText = '';
   };
 
   const searchByExercises = async (filter, category, keyword = '') => {
@@ -118,7 +46,7 @@ const state = {
       categoryItem.classList.add('active');
 
       const params = {
-        [searchMapping[filter.toLowerCase()]]: category,
+        [searchMapping[filter]]: category,
         keyword,
       };
 
@@ -126,7 +54,8 @@ const state = {
       const { results } = response;
       state.category = category;
 
-      renderByExercises(results);
+      clearCards();
+      renderByExercises(results, categoryCards);
 
       searchField.classList.remove('visually-hidden');
     } catch (error) {
@@ -143,7 +72,9 @@ const state = {
       const { results } = response;
       state.filter = filter;
 
-      renderByFilters(results);
+      clearCards();
+      clearCategory();
+      renderByFilters(results, mainCards);
 
       const filterItems = breadcrumbsFilters.querySelectorAll('.item');
 
@@ -191,11 +122,18 @@ const state = {
 
   mainCards.addEventListener('click', categoryClickHandler);
 
-  const searchClickHandler = event => {
+  const searchHandler = event => {
     event.preventDefault();
     const { filter, category } = state;
-    searchByExercises(filter, category, searchFieldInput.value);
+
+    if (searchFieldInput.value) {
+      searchByExercises(filter, category, searchFieldInput.value);
+    }
   };
 
-  searchFieldSubmit.addEventListener('click', searchClickHandler);
+  searchFieldSubmit.addEventListener('click', searchHandler);
+  searchForm.addEventListener('submit', searchHandler);
+
+  searchByFilter(state.filter);
+  renderFilters(Object.values(FILTERS), breadcrumbsFilters);
 })();

@@ -33,7 +33,11 @@ body > main {
   overflow: hidden;
 }
 
-.main-container .container {
+.main-container {
+  padding-bottom: 80px;
+}
+
+.main-container .container { 
   display: flex;
   flex-direction: column-reverse;
   gap: 80px;
@@ -41,6 +45,10 @@ body > main {
 
 /* tablet */
 @media only screen and (min-width: 768px) {
+  .main-container {
+    padding-bottom: 100px;
+  }
+  
   .main-container .container {
     gap: 64px;
   }
@@ -48,6 +56,10 @@ body > main {
 
 /* desktop */
 @media only screen and (min-width: 1440px) {
+  .main-container {
+    padding-bottom
+    : 132px;
+  }
   .main-container .container {
     flex-direction: row;
     gap: 32px;
