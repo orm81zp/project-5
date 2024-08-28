@@ -12,8 +12,7 @@
 
 .main .cards .card-item {
   position: relative;
-  flex-basis: 335px;
-  height: 225px;
+  width: 335px;
 }
 
 .main .cards .card-link {
@@ -22,6 +21,11 @@
   overflow: hidden;
   display: block;
   outline: none;
+  transition: box-shadow var(--trns-fast);
+}
+
+.main .cards .card-link:hover .card-content {
+  background-color: transparent;
 }
 
 .main .cards .card-link:hover,
@@ -41,6 +45,7 @@
   align-items: center;
   justify-content: center;
   gap: 4px;
+  transition: var(--trns-fast);
 }
 
 .main .cards .card-name {
@@ -137,8 +142,7 @@
     gap: 14px;
   }
   .main .cards .card-item {
-    flex-basis: 225px;
-    height: auto;
+    width: 225px;
   }
   .main .cards-category {
     row-gap: 32px;
@@ -152,7 +156,7 @@
 /* desktop */
 @media only screen and (min-width: 1440px) {
   .main .cards .card-item {
-    flex-basis: 290px;
+    width: 290px;
   }
   .main .cards-category .card-item {
     flex-basis: 442px;

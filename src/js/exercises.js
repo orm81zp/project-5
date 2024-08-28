@@ -25,13 +25,18 @@ const state = {
   const breadcrumbsFilters = document.getElementById('breadcrumbs-filters');
   const mainCards = document.getElementById('main-cards');
   const categoryCards = document.getElementById('cards-category');
-  const searchForm = document.querySelector('.search-form');
   const searchField = document.getElementById('search-field');
+  const searchForm = searchField.querySelector('.search-form');
   const searchFieldInput = searchField.querySelector('.search-input');
   const searchFieldSubmit = searchField.querySelector('.seach-submit');
   const searchFieldReset = searchField.querySelector('.seach-reset');
 
   // helpers
+  /**
+   * Show / hide the search field's reset button
+   *
+   * @param {boolean} shouldHide
+   */
   const showResetButton = (shouldHide = false) => {
     if (shouldHide) {
       searchFieldReset.classList.add(HIDDEN_CLASS);
@@ -40,11 +45,35 @@ const state = {
     }
   };
 
+  /**
+   * Show / hide and clear the search field's input
+   *
+   * @param {boolean} shouldHide
+   * @param {boolean} shouldClear
+   */
+  const showSearchField = (shouldHide = false, shouldClear = false) => {
+    if (shouldHide) {
+      searchField.classList.add(HIDDEN_CLASS);
+    } else {
+      searchField.classList.remove(HIDDEN_CLASS);
+    }
+
+    if (shouldClear) {
+      searchFieldInput.value = '';
+    }
+  };
+
+  /**
+   * Clear all cards, should be called before calling api
+   */
   const clearCards = () => {
     mainCards.innerHTML = '';
     categoryCards.innerHTML = '';
   };
 
+  /**
+   * Clear an exercise in breadcrums
+   */
   const clearBreadcrumbs = () => {
     const categoryItem = breadcrumbsNav.querySelector('.item-exercise');
     categoryItem.removeAttribute('title');
@@ -52,6 +81,9 @@ const state = {
     categoryItem.innerText = '';
   };
 
+  /**
+   * Add / update an exercise in breadcrums
+   */
   const updateBreadcrumbs = exercise => {
     const categoryItem = breadcrumbsNav.querySelector('.item-exercise');
     categoryItem.setAttribute('title', exercise);
@@ -59,7 +91,13 @@ const state = {
     categoryItem.innerText = exercise;
   };
 
-  // functional
+  /**
+   * Calls API to get exercises
+   *
+   * @param {string} filter
+   * @param {string} exercise
+   * @param {string} keyword
+   */
   const searchByExercise = async (filter, exercise, keyword = '') => {
     try {
       updateBreadcrumbs(exercise);
@@ -75,18 +113,20 @@ const state = {
 
       clearCards();
       renderByExercises(results, categoryCards);
-
-      searchField.classList.remove(HIDDEN_CLASS);
+      showSearchField();
     } catch (error) {
       console.error(error);
     }
   };
 
+  /**
+   * Calls API to get filters
+   *
+   * @param {string} filter
+   */
   const searchByFilter = async filter => {
     try {
-      searchField.classList.add(HIDDEN_CLASS);
-      searchFieldInput.value = '';
-
+      showSearchField(true, true);
       const response = await Api.getFilters({ filter });
       const { results } = response;
       state.filter = filter;
@@ -109,7 +149,7 @@ const state = {
     }
   };
 
-  // filter listerner
+  // filter click listerner
   const filterClickHandler = event => {
     event.preventDefault();
 
@@ -117,13 +157,13 @@ const state = {
       return;
     }
 
-    const filter = event.target.innerText;
+    const filter = event.target.innerText.trim();
     searchByFilter(filter);
   };
 
   breadcrumbsFilters.addEventListener('click', filterClickHandler);
 
-  // exercise listerner
+  // exercise click listerner
   const exerciseClickHandler = event => {
     event.preventDefault();
     const { filter } = state;
@@ -132,7 +172,8 @@ const state = {
       return;
     }
 
-    const exercise = event.target.dataset.category;
+    const exercise = event.target.dataset.category.trim();
+
     if (exercise) {
       searchByExercise(filter, exercise);
     }
@@ -140,13 +181,14 @@ const state = {
 
   mainCards.addEventListener('click', exerciseClickHandler);
 
-  // search input / form listerners
+  // form listerners
   const searchHandler = event => {
     event.preventDefault();
     const { filter, exercise } = state;
+    const value = searchFieldInput.value;
 
-    if (searchFieldInput.value.trim()) {
-      searchByExercise(filter, exercise, searchFieldInput.value);
+    if (value.trim()) {
+      searchByExercise(filter, exercise, value);
     }
   };
 
@@ -174,6 +216,6 @@ const state = {
   // init
   // rendering filters
   renderFilters(Object.values(FILTERS), breadcrumbsFilters);
-  // init rendering cards by a default filter
+  // rendering cards by default filter
   searchByFilter(state.filter);
 })();
