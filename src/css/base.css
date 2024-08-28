@@ -9,7 +9,6 @@ body {
   flex-direction: column;
   background-color: var(--color-secondary);
   margin: 0;
-  box-sizing: border-box;
 }
 
 body > main {
