@@ -1,30 +1,30 @@
 import Api from './api';
 import { renderByExercises, renderByFilters, renderFilters } from './utils';
 
-const HIDDEN_CLASS = 'hidden';
-const FILTERS = {
-  muscles: 'Muscles',
-  bodyParts: 'Body parts',
-  equipment: 'Equipment',
-};
-const DEFAULT_FILTER = FILTERS.muscles;
-const searchMapping = {
-  [FILTERS.muscles]: 'muscles',
-  [FILTERS.bodyParts]: 'bodypart',
-  [FILTERS.equipment]: 'equipment',
-};
-
-const state = {
-  filter: DEFAULT_FILTER,
-  exercise: null,
-};
-
 (() => {
+  const HIDDEN_CLASS = 'hidden';
+  const FILTERS = {
+    muscles: 'Muscles',
+    bodyParts: 'Body parts',
+    equipment: 'Equipment',
+  };
+  const DEFAULT_FILTER = FILTERS.muscles;
+  const SEARCH_FILTER_MAPPING = {
+    [FILTERS.muscles]: 'muscles',
+    [FILTERS.bodyParts]: 'bodypart',
+    [FILTERS.equipment]: 'equipment',
+  };
+  const state = {
+    filter: null,
+    exercise: null,
+  };
+
   const breadcrumbsNav = document.getElementById('breadcrumbs-nav');
   const breadcrumbsHome = breadcrumbsNav.querySelector('.item-home');
   const breadcrumbsFilters = document.getElementById('breadcrumbs-filters');
-  const mainCards = document.getElementById('main-cards');
-  const categoryCards = document.getElementById('cards-category');
+  const exercisesWrapper = document.querySelector('.exercises');
+  const cards = exercisesWrapper.querySelector('.cards');
+  const cardsExercises = exercisesWrapper.querySelector('.cards-exercises');
   const searchField = document.getElementById('search-field');
   const searchForm = searchField.querySelector('.search-form');
   const searchFieldInput = searchField.querySelector('.search-input');
@@ -32,6 +32,19 @@ const state = {
   const searchFieldReset = searchField.querySelector('.seach-reset');
 
   // helpers
+  const showLoader = (shouldHide = false) => {
+    if (shouldHide) {
+      const loader = exercisesWrapper.querySelector('.loader');
+
+      if (loader) {
+        loader.remove();
+      }
+    } else {
+      const adjacentText = `<div class="loader"></div>`;
+      exercisesWrapper.insertAdjacentHTML('beforeend', adjacentText);
+    }
+  };
+
   /**
    * Show / hide the search field's reset button
    *
@@ -67,8 +80,8 @@ const state = {
    * Clear all cards, should be called before calling api
    */
   const clearCards = () => {
-    mainCards.innerHTML = '';
-    categoryCards.innerHTML = '';
+    cards.innerHTML = '';
+    cardsExercises.innerHTML = '';
   };
 
   /**
@@ -100,10 +113,12 @@ const state = {
    */
   const searchByExercise = async (filter, exercise, keyword = '') => {
     try {
+      clearCards();
+      showLoader();
       updateBreadcrumbs(exercise);
 
       const params = {
-        [searchMapping[filter]]: exercise,
+        [SEARCH_FILTER_MAPPING[filter]]: exercise,
         keyword,
       };
 
@@ -111,11 +126,12 @@ const state = {
       const { results } = response;
       state.exercise = exercise;
 
-      clearCards();
-      renderByExercises(results, categoryCards);
-      showSearchField();
+      renderByExercises(results, cardsExercises);
     } catch (error) {
       console.error(error);
+    } finally {
+      showLoader(true);
+      showSearchField();
     }
   };
 
@@ -126,26 +142,30 @@ const state = {
    */
   const searchByFilter = async filter => {
     try {
+      clearCards();
+      clearBreadcrumbs();
+      showLoader();
       showSearchField(true, true);
       const response = await Api.getFilters({ filter });
       const { results } = response;
       state.filter = filter;
 
-      clearCards();
-      clearBreadcrumbs();
-      renderByFilters(results, mainCards);
+      renderByFilters(results, cards);
 
-      const filterItems = breadcrumbsFilters.querySelectorAll('.item');
+      // highlight active filter
+      const filterElements = breadcrumbsFilters.querySelectorAll('.item');
 
-      for (let filterItem of filterItems) {
-        if (filterItem.innerText === filter) {
-          filterItem.classList.add('active');
+      for (let filterElement of filterElements) {
+        if (filterElement.innerText === filter) {
+          filterElement.classList.add('active');
         } else {
-          filterItem.classList.remove('active');
+          filterElement.classList.remove('active');
         }
       }
     } catch (error) {
       console.error(error);
+    } finally {
+      showLoader(true);
     }
   };
 
@@ -179,24 +199,28 @@ const state = {
     }
   };
 
-  mainCards.addEventListener('click', exerciseClickHandler);
+  cards.addEventListener('click', exerciseClickHandler);
 
   // form listerners
   const searchHandler = event => {
     event.preventDefault();
     const { filter, exercise } = state;
-    const value = searchFieldInput.value;
+    const keyword = searchFieldInput.value.trim();
 
-    if (value.trim()) {
-      searchByExercise(filter, exercise, value);
+    if (keyword) {
+      searchByExercise(filter, exercise, keyword);
     }
+  };
+
+  const formResetHandler = () => {
+    showResetButton(true);
+    const { filter, exercise } = state;
+    searchByExercise(filter, exercise);
   };
 
   searchFieldSubmit.addEventListener('click', searchHandler);
   searchForm.addEventListener('submit', searchHandler);
-  searchForm.addEventListener('reset', () => {
-    showResetButton(true);
-  });
+  searchForm.addEventListener('reset', formResetHandler);
 
   // search input listerner
   const searchInputHandler = event => {
@@ -216,6 +240,7 @@ const state = {
   // init
   // rendering filters
   renderFilters(Object.values(FILTERS), breadcrumbsFilters);
+
   // rendering cards by default filter
-  searchByFilter(state.filter);
+  searchByFilter(DEFAULT_FILTER);
 })();
