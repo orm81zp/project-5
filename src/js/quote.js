@@ -26,6 +26,7 @@ async function fetchAndSaveQuote() {
 
 fetchAndSaveQuote().then(quote => {
   console.log("Используемая цитата:", quote);
-  document.getElementById('quote_text').innerText(quote.quote)
-  document.getElementById('quote_author').innerText(quote.author)
+  document.getElementById('quote_text').innerText = quote.quote;
+  document.getElementById('quote_author').innerText = quote.author;
+
 });

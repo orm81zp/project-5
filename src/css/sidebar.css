@@ -34,8 +34,11 @@
   display: flex;
   flex-direction: column;
   position: relative;
+  margin-bottom: 15px;
 }
-
+.image-card{
+  margin-top: 15px;
+}
 .quote-content {
   display: flex;
   justify-content: space-between;
@@ -137,4 +140,9 @@ h3 {
   .info-description {
     font-size: 14px;
   }
+
+  .sidebar-icon-1, .sidebar-icon-2, .sidebar-icon-3 {
+    box-sizing: content-box !important;
+  }
+
 }
