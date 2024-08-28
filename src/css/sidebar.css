@@ -5,3 +5,136 @@
     flex-shrink: 0;
   }
 }
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+.info-card {
+  background-color: #f7f7f7;
+  color: var(--color-primary);
+  padding: 30px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  max-width: 900px;
+  margin: 0 auto;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.quote-block {
+  background-color: #333;
+  color: white;
+  padding: 40px;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.quote-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  background-color: #444;
+  border-radius: 50%;
+}
+
+.icon .svg-icon {
+  width: 32px;
+  height: 32px;
+  fill: white; /* Ensures the quotes icon is white */
+}
+
+.quote-end-icon {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+}
+
+.quote-end-icon .svg-icon {
+  width: 40px;
+  height: 40px;
+  fill: white;
+}
+
+h2 {
+  margin: 0;
+  font-size: 24px;
+}
+
+#quote_text {
+  margin: 20px 0 0 0;
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+#quote_author {
+  margin-top: 20px;
+  font-style: italic;
+  font-size: 16px;
+}
+
+.icon {
+  height: 32px;
+  width: 32px;
+  background-color: var(--color-dark-gray);
+  padding: 15px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon i {
+  color: white;
+  font-size: 24px;
+}
+
+h3 {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 600;
+}
+
+.subtitle {
+  margin: 5px 0;
+  font-size: 16px;
+  color: #888;
+}
+
+.info-description {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #333;
+}
+
+@media (max-width: 768px) {
+  .info-card {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  h3 {
+    font-size: 24px;
+  }
+
+  .info-description {
+    font-size: 14px;
+  }
+}
