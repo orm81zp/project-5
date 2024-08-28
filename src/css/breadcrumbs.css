@@ -11,19 +11,28 @@
   height: 48px;
 }
 
-.breadcrumbs .search-field input {
+.breadcrumbs .search-field .search-input {
   height: 100%;
   font-size: 16px;
   line-height: 1.5;
   border: none;
   background-color: transparent;
   outline: none;
+  color: var(--color-primary);
+}
+
+.breadcrumbs .search-field .search-input::placeholder {
+  color: var(--color-primary);
 }
 
 .breadcrumbs .search-field .seach-submit {
   border: none;
   background-color: transparent;
   outline: none;
+}
+
+.breadcrumbs .icon-search {
+  fill: var(--color-primary);
 }
 
 .breadcrumbs .wrapper {

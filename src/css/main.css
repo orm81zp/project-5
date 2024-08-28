@@ -84,6 +84,12 @@
   align-items: center;
   gap: 16px;
   margin-bottom: 12px;
+  text-overflow: ellipsis;
+}
+.main .cards-category .card-content .__card_name {
+  text-wrap: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 .main .cards-category .card-footer {

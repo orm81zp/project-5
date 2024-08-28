@@ -59,7 +59,7 @@ const state = {
             width="24"
             height="24"
           />
-          <span>${name}</span>
+          <span class="__card_name">${name}</span>
         </div>
         <div class="card-footer">
           <ul class="card-footer-list">
@@ -131,6 +131,8 @@ const state = {
   const searchByFilter = async filter => {
     try {
       searchField.classList.add('visually-hidden');
+      searchFieldInput.value = '';
+
       const response = await Api.getFilters({ filter });
       const { results } = response;
       state.filter = filter;
@@ -187,7 +189,6 @@ const state = {
     event.preventDefault();
     const { filter, category } = state;
     searchByExercises(filter, category, searchFieldInput.value);
-    searchFieldInput.value = '';
   };
 
   searchFieldSubmit.addEventListener('click', searchClickHandler);
