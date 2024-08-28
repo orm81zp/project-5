@@ -20,11 +20,15 @@ const state = {
   const searchFieldInput = searchField.querySelector('.search-input');
   const searchFieldSubmit = searchField.querySelector('.seach-submit');
 
-  const clearCards = () => {
+  const clearCards = (clearCategory = false) => {
     mainCards.innerHTML = '';
     categoryCards.innerHTML = '';
-    const categoryItem = breadcrumbsNav.querySelector('.item-category');
-    categoryItem.innerText = '';
+
+    if (clearCategory) {
+      const categoryItem = breadcrumbsNav.querySelector('.item-category');
+      categoryItem.classList.remove('active');
+      categoryItem.innerText = '';
+    }
   };
 
   const renderByExercises = exercises => {
@@ -59,18 +63,18 @@ const state = {
             width="24"
             height="24"
           />
-          <span class="__card_name">${name}</span>
+          <span class="card-content-name">${name}</span>
         </div>
         <div class="card-footer">
           <ul class="card-footer-list">
             <li class="item">
-              <span class="__name">Burned calories:</span><span class="__value">${burnedCalories} / ${time} min</span>
+              <span class="item-name">Burned calories:</span><span class="item-value">${burnedCalories} / ${time} min</span>
             </li>
             <li class="item">
-              <span class="__name">Body part:</span><span class="__value">${bodyPart}</span>
+              <span class="item-name">Body part:</span><span class="item-value">${bodyPart}</span>
             </li>
             <li class="item">
-              <span class="__name">Target:</span><span class="__value">${target}</span>
+              <span class="item-name">Target:</span><span class="item-value">${target}</span>
             </li>
           </ul>
         </div>
@@ -83,7 +87,7 @@ const state = {
   };
 
   const renderByFilters = cards => {
-    clearCards();
+    clearCards(true);
     const adjacentImages = cards
       .map(
         ({ filter, name, imgURL }) =>
@@ -109,6 +113,10 @@ const state = {
 
   const searchByExercises = async (filter, category, keyword = '') => {
     try {
+      const categoryItem = breadcrumbsNav.querySelector('.item-category');
+      categoryItem.innerText = category;
+      categoryItem.classList.add('active');
+
       const params = {
         [searchMapping[filter.toLowerCase()]]: category,
         keyword,
@@ -120,8 +128,6 @@ const state = {
 
       renderByExercises(results);
 
-      const categoryItem = breadcrumbsNav.querySelector('.item-category');
-      categoryItem.innerText = category;
       searchField.classList.remove('visually-hidden');
     } catch (error) {
       console.error(error);

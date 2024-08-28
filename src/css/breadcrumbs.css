@@ -93,7 +93,7 @@
   text-transform: capitalize;
 }
 
-.breadcrumbs .nav .item:not(:first-of-type)::before {
+.breadcrumbs .nav .item.active:not(:first-of-type)::before {
   content: "/";
   font-size: 28px;
   line-height: 1.35;

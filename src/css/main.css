@@ -45,7 +45,6 @@
   line-height: 1;
 }
 
-
 .main .cards-category {
   display: flex;
   flex-wrap: wrap;
@@ -62,7 +61,6 @@
   background-color: #FFFFFF;
   padding: 16px;
 }
-
 
 .main .cards-category .card-header {
   display: flex;
@@ -86,7 +84,7 @@
   margin-bottom: 12px;
   text-overflow: ellipsis;
 }
-.main .cards-category .card-content .__card_name {
+.main .cards-category .card-content .card-content-name {
   text-wrap: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
@@ -96,7 +94,7 @@
   font-size: 12px;
   line-height: 1.5;
 }
-.main .cards-category .card-footer .__name {
+.main .cards-category .card-footer .item-name {
   color: var(--color-primary-40);
 }
 
@@ -111,8 +109,6 @@
   align-items: center;
   gap: 4px;
 }
-
-
 
 
 /* tablet */
