@@ -1,7 +1,3 @@
-* {
-  box-sizing: border-box;
-}
-
 body {
   font-family: var(--font-main);
   font-size: 16px;
@@ -11,6 +7,7 @@ body {
   height: 100vh;
   display: flex;
   flex-direction: column;
+  background-color: var(--color-secondary);
   margin: 0;
 }
 
@@ -18,21 +15,72 @@ body > main {
   flex-grow: 1;
 }
 
-.main-container .container {
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+  white-space: nowrap;
+  clip-path: inset(100%);
+  clip: rect(0 0 0 0);
+  overflow: hidden;
+}
+
+.hidden {
+  display: none;
+}
+
+.main-container {
+  padding-bottom: 80px;
+}
+
+.main-container .container { 
   display: flex;
   flex-direction: column-reverse;
   gap: 80px;
 }
 
+.loader {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+}
+
+.loader::before {
+  width: 48px;
+  height: 48px;
+  border: 5px solid var(--color-primary);
+  border-bottom-color: transparent;
+  border-radius: 50%;
+  display: none;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+  margin: 0 auto;
+  display: block;
+  content: "";
+}
+
 /* tablet */
 @media only screen and (min-width: 768px) {
+  .main-container {
+    padding-bottom: 100px;
+  }
+  
   .main-container .container {
     gap: 64px;
   }
 }
 
 /* desktop */
-@media only screen and (min-width: 1200px) {
+@media only screen and (min-width: 1440px) {
+  .main-container {
+    padding-bottom
+    : 132px;
+  }
   .main-container .container {
     flex-direction: row;
     gap: 32px;
