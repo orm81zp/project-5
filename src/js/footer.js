@@ -2,7 +2,10 @@ import Notiflix from 'notiflix';
 import Api from './api/index';
 import { gsap } from 'gsap';
 
+Notiflix.Notify.init();
+
 const formSubmit = document.querySelector('.js-footer-form');
+const emailInput = document.querySelector('input[type="email"]');
 const btnSubmit = document.querySelector('.footer_form_btn');
 formSubmit.addEventListener('submit', fetchSubscription);
 
@@ -33,7 +36,8 @@ function fetchSubscription(event) {
   const email = emailInput.value;
 
   if (!isValidEmail(email)) {
-    return Notiflix.Notify.failure('Invalid email address was entered.');
+    Notiflix.Notify.failure('Invalid email address was entered.');
+    return;
   }
 
   const subscriptionData = {
