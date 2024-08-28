@@ -35,14 +35,14 @@ export const renderByExercises = (exercises, container) => {
     .map(
       ({ bodyPart, burnedCalories, gifUrl, name, rating, target, time, _id }) =>
         `
-      <li class="card-item" data-id="${_id}">
+      <li class="card-item">
         <div class="card-header">
           <div class="badge-wrapper">
             <div class="__badge">WORKOUT</div>
             <div class="__rating">${rating}</div>
           </div>
           <div>
-            <div class="__start">Start</div>
+            <a class="__start" href="#" data-id="${_id}">Start</a>
           </div>
         </div>
         <div class="card-content">
