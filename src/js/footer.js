@@ -1,42 +1,59 @@
-import Notiflix from 'notiflix';
+import 'izitoast/dist/css/iziToast.min.css';
+import iziToast from 'izitoast';
 import Api from './api/index';
 import { gsap } from 'gsap';
-
-Notiflix.Notify.init();
 
 const formSubmit = document.querySelector('.js-footer-form');
 const emailInput = document.querySelector('input[type="email"]');
 const btnSubmit = document.querySelector('.footer_form_btn');
-formSubmit.addEventListener('submit', fetchSubscription);
+btnSubmit.addEventListener('click', fetchSubscription);
 
 function isValidEmail(email) {
-  // const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-  const emailPattern = /^[\w\.-]+@[a-zA-Z\d\.-]+\.[a-zA-Z]{2,}$/;
+  const emailPattern = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
   return emailPattern.test(email);
 }
 
 btnSubmit.disabled = true;
 
+const rootStyles = getComputedStyle(document.documentElement);
+const colorSecondary = rootStyles.getPropertyValue('--color-secondary').trim();
+const inputActive= rootStyles.getPropertyValue('--input-active').trim();
+
+
 emailInput.addEventListener('input', () => {
   const email = emailInput.value;
 
   if (isValidEmail(email)) {
-    btnSubmit.style.backgroundColor = '#c6cdd1';
+    btnSubmit.style.backgroundColor = colorSecondary;
     btnSubmit.disabled = false;
   } else {
-    btnSubmit.style.backgroundColor = '#f4f4f4';
+    btnSubmit.style.backgroundColor = inputActive;
     btnSubmit.disabled = true;
   }
 });
 
+emailInput.addEventListener('blur', () => {
+    const email = emailInput.value;
+  
+    if (!isValidEmail(email)) {
+      iziToast.error({
+        title: 'Error',
+        message: 'Invalid email address was entered.',
+      });
+    }else {
+        btnSubmit.style.backgroundColor = inputActive;
+      }
+  });
+
 function fetchSubscription(event) {
   event.preventDefault();
-
-  const emailInput = document.querySelector('input[type="email"]');
   const email = emailInput.value;
-
   if (!isValidEmail(email)) {
-    Notiflix.Notify.failure('Invalid email address was entered.');
+    console.log('tyta');
+    iziToast.error({
+      title: 'Error',
+      message: 'Invalid email address was entered.',
+    });
     return;
   }
 
@@ -46,25 +63,34 @@ function fetchSubscription(event) {
 
   Api.addSubscription(subscriptionData)
     .then(resp => {
-      const massage = resp.data.message;
-      Notiflix.Notify.success(massage);
+      const message = resp.data.message;
+      iziToast.success({
+        title: 'Success',
+        message: message,
+      });
     })
     .catch(error => {
       const badRequest = error.response.data.message;
       if (error.response.status === 409) {
-        Notiflix.Notify.warning('Subscription already exists');
-      }
-      if (error.response.status === 400) {
-        Notiflix.Notify.warning(badRequest);
+        iziToast.warning({
+          title: 'Warning',
+          message: 'Subscription already exists',
+        });
+        
+      } else if (error.response.status === 400) {
+        iziToast.warning({
+          title: 'Warning',
+          message: badRequest,
+        });
       }
     });
   formSubmit.reset();
 }
+
 const socialItems = document.querySelectorAll('.footer_soc_item');
 
 socialItems.forEach(item => {
   const icon = item.querySelector('.footer_soc_icon');
-
   item.addEventListener('mouseenter', () => {
     gsap.to(item, {
       keyframes: {
