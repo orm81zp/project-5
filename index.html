@@ -11,8 +11,10 @@
       rel="stylesheet"
     />
     <title>Your energy</title>
-    <script type="module" crossorigin src="/project-5/assets/main-aRBadCBC.js"></script>
-    <link rel="stylesheet" crossorigin href="/project-5/assets/main-BQGDw5Bi.css">
+    <script type="module" crossorigin src="/project-5/index.js"></script>
+    <link rel="modulepreload" crossorigin href="/project-5/assets/main-gfsY7ZHY.js">
+    <link rel="modulepreload" crossorigin href="/project-5/assets/vendor-CR7N1gwd.js">
+    <link rel="stylesheet" crossorigin href="/project-5/assets/main-Oi5q9aet.css">
   </head>
   <body>
     <header id="header" class="header">
@@ -38,7 +40,36 @@
 </section>
 
       <section class="breadcrumbs">
-  <div class="container">breadcrumbs</div>
+  <div class="container">
+    <div class="wrapper">
+      <ul id="breadcrumbs-nav" class="nav">
+        <li class="item item-home"><a href="#">Exercises</a></li>
+        <li class="item item-exercise"></li>
+      </ul>
+
+      <div class="search-filters-wrapper">
+        <div id="search-field" class="search-field hidden">
+          <form class="search-form">
+            <input placeholder="Search" class="search-input" />
+            <div class="actions">
+              <button type="reset" class="seach-reset hidden">
+                <svg class="icon-reset" width="18" height="18">
+                  <use href="/project-5/assets/icons-CsDiaS6b.svg#icon-cross"></use>
+                </svg>
+              </button>
+              <button type="submit" class="seach-submit">
+                <svg class="icon-search" width="18" height="18">
+                  <use href="/project-5/assets/icons-CsDiaS6b.svg#icon-search"></use>
+                </svg>
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <ul id="breadcrumbs-filters" class="filters"></ul>
+      </div>
+    </div>
+  </div>
 </section>
 
       <div class="main-container">
@@ -47,7 +78,10 @@
   SIDEBAR
 </section>
 
-          <section class="main">MAIN</section>
+          <section class="exercises">
+  <ul class="cards"></ul>
+  <ul class="cards-exercises"></ul>
+</section>
 
         </div>
       </div>
