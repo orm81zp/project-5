@@ -56,6 +56,53 @@ function fetchSubscription(event) {
     });
   formSubmit.reset();
 }
+const socialItems = document.querySelectorAll('.footer_soc_item');
+
+socialItems.forEach(item => {
+  const icon = item.querySelector('.footer_soc_icon');
+
+  item.addEventListener('mouseenter', () => {
+    // Анімація для блоку (бокса)
+    gsap.to(item, {
+      keyframes: {
+        '0%': { rotation: -5 },
+        '25%': { rotation: 5 },
+        '50%': { rotation: -5 },
+        '75%': { rotation: 5 },
+        '100%': { rotation: 0 },
+      },
+      duration: 0.5,
+      repeat: 1,
+    });
+
+    // Анімація для іконки
+    gsap.to(icon, {
+      keyframes: {
+        '0%': { x: -3 },
+        '25%': { x: 3 },
+        '50%': { x: -3 },
+        '75%': { x: 3 },
+        '100%': { x: 0 },
+      },
+      duration: 0.2,
+      repeat: 3,
+    });
+  });
+
+  item.addEventListener('mouseleave', () => {
+    // Повернення блоку в початкове положення
+    gsap.to(item, {
+      rotation: 0,
+      duration: 0.2,
+    });
+
+    // Повернення іконки в початкове положення
+    gsap.to(icon, {
+      x: 0,
+      duration: 0.2,
+    });
+  });
+});
 
 const options = {
   root: null,
