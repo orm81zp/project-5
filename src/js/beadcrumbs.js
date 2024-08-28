@@ -132,6 +132,6 @@ const state = {
 
   renderFilters(Object.values(FILTERS), breadcrumbsFilters);
 
-  // init rendering cards be a default filter
+  // init rendering cards by a default filter
   searchByFilter(state.filter);
 })();
