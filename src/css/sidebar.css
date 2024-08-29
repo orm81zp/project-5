@@ -177,7 +177,7 @@
   .page-favorites .sidebar {
     display: flex;
     flex-direction: row-reverse;
-    width: 40%;
+    width: 494px;
     flex-wrap: wrap;
   }
 
