@@ -1,4 +1,5 @@
-.backdrop {
+.backdrop,
+.raiting.backdrop {
   position: fixed;
   inset: 0;
   background-color: var(--color-primary-50);
@@ -21,13 +22,15 @@
   padding: 40px 20px;
 }
 
-.backdrop.is-hidden {
+.backdrop.is-hidden,
+.raiting.backdrop.is-hidden {
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
 }
 
-.backdrop.is-hidden .modal-exercise {
+.backdrop.is-hidden .modal-exercise,
+.raiting.backdrop.is-hidden .modal-raiting {
   transform: translateX(-50%) translateY(-50%) scale(0.3);
   opacity: 0;
 }
@@ -50,17 +53,26 @@
 
 .modal-exercise .button-close:hover,
 .modal-exercise .button-close:focus,
-.modal-exercise .button-close:active {
+.modal-exercise .button-close:active,
+
+.modal-raiting .button-close:hover,
+.modal-raiting .button-close:focus,
+.modal-raiting .button-close:active{
   background-color: var(--color-secondary);
 }
 
-.modal-exercise .button-close-icon {
+.modal-exercise .button-close-icon,
+.modal-raiting .button-close-icon{
   stroke: var(--color-secondary);
   transition: stroke var(--trns-fast);
 }
 
 .modal-exercise .button-close:hover .button-close-icon,
 .modal-exercise .button-close:focus .button-close-icon,
-.modal-exercise .button-close:active .button-close-icon {
+.modal-exercise .button-close:active .button-close-icon,
+
+.modal-raiting .button-close:hover .button-close-icon,
+.modal-raiting .button-close:focus .button-close-icon,
+.modal-raiting .button-close:active .button-close-icon {
   stroke: var(--color-primary);
 }

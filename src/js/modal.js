@@ -1,7 +1,10 @@
 import Api from './api/index';
 import { renderExerciseModal } from './utils';
+import rater from 'rater-js';
 
 let refs = {};
+let raitingRefs = {};
+let modalId;
 
 const resetExerciseModal = async id => {
   try {
@@ -10,6 +13,8 @@ const resetExerciseModal = async id => {
     renderExerciseModal(data, refs.container);
 
     refs.modal.classList.toggle('is-hidden');
+
+    setupRaitingModal(data['_id']);
   } catch (error) {
     console.log(error);
   }
@@ -45,6 +50,67 @@ const setupExerciseModal = () => {
     refs.modal.classList.toggle('is-hidden');
     refs.container.innerHTML = '';
   });
+};
+
+function setValueToRaiting(raiting) {
+  let value = document.querySelector('.raiting-value');
+  value.innerText = `${raiting.toFixed(1)}`;
+}
+
+let myRater = rater({
+  starSize: 24,
+  element: document.querySelector('#rater'),
+  rateCallback: function rateCallback(raiting, done) {
+    setValueToRaiting(raiting);
+    this.setRating(raiting);
+    done();
+  },
+});
+
+function resetRateForm() {
+  document.querySelector('.raiting-form input').value = '';
+  document.querySelector('.raiting-form textarea').value = '';
+  myRater.clear();
+}
+
+function sendRaiting(event) {
+  try {
+    Api.addRateByExerciseId(modalId, {
+      rate: myRater.getRating(),
+      email: event.target[0].value,
+      review: event.target[1].value,
+    });
+  } catch (error) {
+    console.log(error);
+  } finally {
+    setValueToRaiting(0);
+    resetRateForm();
+    toggleRaitingModal();
+  }
+}
+
+const form = document.querySelector('.raiting-form');
+form.addEventListener('submit', event => {
+  event.preventDefault();
+  sendRaiting(event);
+});
+
+function toggleRaitingModal() {
+  raitingRefs.modal.classList.toggle('is-hidden');
+  refs.modal.classList.toggle('is-hidden');
+}
+
+const setupRaitingModal = id => {
+  modalId = id;
+
+  raitingRefs = {
+    openModalBtn: document.querySelector('[data-raiting-modal-open]'),
+    closeModalBtn: document.querySelector('[data-raiting-modal-close]'),
+    modal: document.querySelector('[data-raiting-modal]'),
+  };
+
+  raitingRefs.openModalBtn.addEventListener('click', toggleRaitingModal);
+  raitingRefs.closeModalBtn.addEventListener('click', toggleRaitingModal);
 };
 
 window.addEventListener('load', () => {
