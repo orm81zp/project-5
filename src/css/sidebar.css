@@ -135,17 +135,20 @@ h3 {
 }
 
 /* Styles when favoritesActive class is applied */
-.sidebar.favoritesActive {
-  display: flex;
-  flex-direction: column;
-  width: 40%;
-  gap: 20px;
+@media (min-width: 1024px) {
+  .sidebar.favoritesActive {
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+  }
 }
 
 .sidebar.favoritesActive .info-description {
   display: none;
 }
-
+.sidebar .favoritesActive .quote-block{
+  margin-bottom: 0px;
+}
 
 /* Styles for larger screens (like in the first image) */
 @media only screen and (min-width: 1440px) {
@@ -159,11 +162,11 @@ h3 {
     justify-content: space-between;
     align-items: center;
     flex-direction: row-reverse;
+    gap: 15px;
   }
 
   .sidebar.favoritesActive .image-card {
     flex: 2;
-    margin-right: 20px;
   }
 
   .sidebar.favoritesActive .info-card {
