@@ -167,12 +167,12 @@ header .container {
 
   .socials-menu .menu-item:hover {
     background-color: var(--color-primary);
-    border: none;
+    border: 1px solid transparent;
   }
 
   .socials-menu .menu-item .menu-icon {
     fill: var(--color-primary);
-    transition: fill var(--trns-fast);
+    transition: all var(--trns-fast);
   }
 
   .socials-menu .menu-item:hover .menu-icon {
