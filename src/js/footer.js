@@ -15,19 +15,14 @@ function isValidEmail(email) {
 
 btnSubmit.disabled = true;
 
-const rootStyles = getComputedStyle(document.documentElement);
-const colorSecondary = rootStyles.getPropertyValue('--color-secondary').trim();
-const inputActive= rootStyles.getPropertyValue('--input-active').trim();
-
-
 emailInput.addEventListener('input', () => {
   const email = emailInput.value;
 
   if (isValidEmail(email)) {
-    btnSubmit.style.backgroundColor = colorSecondary;
+    btnSubmit.classList.add('active');
     btnSubmit.disabled = false;
   } else {
-    btnSubmit.style.backgroundColor = inputActive;
+    btnSubmit.classList.remove('active');
     btnSubmit.disabled = true;
   }
 });
@@ -41,7 +36,7 @@ emailInput.addEventListener('blur', () => {
         message: 'Invalid email address was entered.',
       });
     }else {
-        btnSubmit.style.backgroundColor = inputActive;
+      btnSubmit.classList.add('active');
       }
   });
 
