@@ -1,28 +1,26 @@
-/**/
-@media only screen and (min-width: 1440px) {
-.sidebar {
-    width: 444px;
-    flex-shrink: 0;
-  }
-}
-
 .sidebar .info-card {
-  background-color: var( --color-secondary);
+  background-color: var(--color-secondary);
   color: var(--color-primary);
   padding: 30px;
   border-radius: 20px;
-  display: flex;
   gap: 20px;
   max-width: 900px;
   margin: 0 auto;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
-.sidebar .info-card .icon{
-  margin-top:5px
+.page-favorites .sidebar{
+  display: flex;
+  flex-direction: column-reverse;
 }
-.quote-block {
-  background-color: var( --input-active);
-  color: var( --color-secondary);
+
+
+.sidebar .info-card .icon {
+  margin-top: 5px
+}
+
+.sidebar .quote-block {
+  background-color: var(--input-active);
+  color: var(--color-secondary);
   padding: 40px;
   border-radius: 20px;
   display: flex;
@@ -30,23 +28,24 @@
   position: relative;
   margin-bottom: 15px;
 }
-.image-card{
-  margin-top: 15px;
-  margin-bottom: 15px;
+
+.sidebar .image-card {
+  padding: 0;
 }
-.quote-content {
+
+.sidebar .quote-content {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
 }
 
-.icon .svg-icon {
+.sidebar .icon .svg-icon {
   width: 32px;
   height: 32px;
   fill: white;
 }
 
-.quote-end-icon {
+.sidebar .quote-end-icon {
   position: absolute;
   top: 30px;
   right: 20px;
@@ -55,30 +54,30 @@
   height: 40px;
 }
 
-h2 {
+.sidebar h2 {
   margin: 0;
   font-size: 24px;
 }
 
-#quote_text {
+.sidebar #quote_text {
   margin: 20px 0 0 0;
   font-size: 18px;
   line-height: 1.6;
 }
 
-#quote_author {
+.sidebar #quote_author {
   margin-top: 20px;
   font-style: italic;
   font-size: 16px;
 }
 
-.icon-wrapper {
+.sidebar .icon-wrapper {
   margin-right: 15px;
   fill: var(--color-secondary);
   height: 38px;
   width: 38px;
   background-color: var(--color-dark-gray);
-  padding:5px;
+  padding: 5px;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -86,137 +85,119 @@ h2 {
 }
 
 
-h3 {
+.sidebar h3 {
   margin: 0;
   font-size: 28px;
   font-weight: 600;
 }
 
-.subtitle {
+.sidebar .subtitle {
   margin: 5px 0;
   font-size: 16px;
   color: #888;
 }
 
-.info-description {
+.sidebar .info-description {
   margin: 0;
   font-size: 16px;
   line-height: 1.6;
   color: #333;
 }
 
-@media (max-width: 768px) {
-  .info-card {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  h3 {
-    font-size: 24px;
-  }
-
-  .info-description {
-    font-size: 14px;
-  }
-
-  .sidebar-icon-1 {
-    box-sizing: border-box;
-    width: 32px;
-    height: 32px;
-    fill: var(--color-secondary);
-  }
-}
-/* Default styles for the sidebar */
 .sidebar {
   display: flex;
   flex-direction: column;
   gap: 15px;
 }
-@media only screen and (min-width: 768px) {
-  .page-favorites .sidebar {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-  }
+
+.page-favorites .sidebar {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 15px;
 }
-/* Styles when favoritesActive class is applied */
-@media (min-width: 1024px) {
- .page-favorites .sidebar {
-    display: flex;
-    flex-direction: column;
-    width: 40%;
-  }
+
+.page-favorites .quote-block {
+width: 50%;
+  order: 3;
 }
+
+
+.page-favorites .image-card {
+  order: 2;
+}
+
+
+.page-favorites .element {
+  order: 1;
+}
+
+ .page-favorites .image-card,
+ .page-favorites .element {
+   flex: 1 1 48%;
+   box-sizing: border-box;
+ }
 
 .page-favorites .sidebar .info-description {
   display: none;
 }
-.page-favorites .sidebar  .quote-block{
-  margin-bottom: 0px;
+
+@media only screen and (min-width: 1440px) {
+
+  .page-favorites .quote-block {
+    width: 100%;
+  }
+.page-favorites .sidebar{
+  flex-direction: row;
 }
 
-/* Styles for larger screens (like in the first image) */
-@media only screen and (min-width: 1440px) {
+  .page-favorites .quote-block {
+    width: 50%;
+    order: 1;
+  }
+
+
+  .page-favorites .image-card {
+    order: 2;
+  }
+
+
+  .page-favorites .element {
+    order: 3;
+  }
   .sidebar {
     width: 444px;
     flex-shrink: 0;
   }
 
-.page-favorites  .sidebar  .info-block {
+  .page-favorites .sidebar {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
     flex-direction: row-reverse;
-    gap: 15px;
+    width: 40%;
+    flex-wrap: wrap;
   }
 
-  .page-favorites  .sidebar  .image-card {
+  .page-favorites .sidebar .quote-block {
+    width: 100%;
+  }
+
+  .page-favorites .sidebar .info-card {
+    width: 50%;
+    overflow: hidden
+  }
+
+
+
+  .page-favorites .sidebar .quote-block {
+    margin-bottom: 0px;
+  }
+
+
+  .page-favorites .sidebar .info-card {
     flex: 2;
   }
-
-  .page-favorites  .sidebar  .info-card {
-    flex: 2;
-  }
 }
 
-/* Styles for smaller screens (like in the second image) */
-@media only screen and (max-width: 1439px) {
-  .sidebar .info-block {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-  }
 
-  .sidebar .image-card {
-    margin-bottom: 15px;
-  }
-
-  .sidebar .info-card {
-    padding: 20px;
-    flex-direction: column;
-    text-align: left;
-  }
-
-  .page-favorites  .sidebar   .info-card .info-description {
-    display: block;
-    font-size: 14px;
-  }
-}
-
-/* Additional adjustments for mobile devices */
-@media (max-width: 768px) {
-  .sidebar .info-card {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .sidebar .info-card h3 {
-    font-size: 24px;
-  }
-
-  .sidebar .info-card .info-description {
-    font-size: 14px;
-  }
-}
 
 
