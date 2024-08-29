@@ -61,7 +61,7 @@ body > main {
   border-bottom-color: transparent;
   border-radius: 50%;
   display: none;
-  box-sizing: border-box;
+
   animation: rotation 1s linear infinite;
   margin: 0 auto;
   display: block;
