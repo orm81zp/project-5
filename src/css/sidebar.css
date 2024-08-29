@@ -118,7 +118,7 @@
 }
 
 .page-favorites .quote-block {
-width: 50%;
+  width: 50%;
   order: 3;
 }
 
@@ -141,9 +141,12 @@ width: 50%;
 .page-favorites .sidebar .info-description {
   display: none;
 }
-
+@media  (max-width: 768px) {
+  .page-favorites .quote-block {
+    width: 100%;
+  }
+}
 @media only screen and (min-width: 1440px) {
-
   .page-favorites .quote-block {
     width: 100%;
   }
