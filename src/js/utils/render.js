@@ -136,7 +136,7 @@ export const renderExerciseModal = (exercise, container) => {
             </button>
           </li>
           <li class="modal-controls-item">
-            <button class="modal-rating-button">Give a rating</button>
+            <button class="modal-rating-button" data-raiting-modal-open>Give a rating</button>
           </li>
         </div>
       </div>
