@@ -1,13 +1,19 @@
 .sidebar .info-card {
   background-color: var(--color-secondary);
   color: var(--color-primary);
-  padding: 30px;
+
+  box-sizing: border-box;
   border-radius: 20px;
   gap: 20px;
   max-width: 900px;
   margin: 0 auto;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+.sidebar .elm{
+  margin: 20px;
+}
+
+
 .page-favorites .sidebar{
   display: flex;
   flex-direction: column-reverse;
@@ -157,13 +163,9 @@
     width: 50%;
     order: 1;
   }
-
-
   .page-favorites .image-card {
     order: 2;
   }
-
-
   .page-favorites .element {
     order: 3;
   }
@@ -188,15 +190,8 @@
     overflow: hidden
   }
 
-
-
   .page-favorites .sidebar .quote-block {
     margin-bottom: 0px;
-  }
-
-
-  .page-favorites .sidebar .info-card {
-    flex: 2;
   }
 }
 
