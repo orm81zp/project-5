@@ -1,7 +1,23 @@
 import Api from './api';
-import { renderByExercises } from './utils';
+import { LOCAL_STORAGE_KEY } from './const';
+import {
+  clearContent,
+  getClosest,
+  renderByExercises,
+  showLoader,
+} from './utils';
 
 (() => {
+  const favoritesWrapper = document.querySelector('.favorites');
+  if (!favoritesWrapper) {
+    return;
+  }
+
+  const state = {
+    exercisesIds: [],
+  };
+
+  // TODO remove mock data before going to LIVE
   const MOCK_EXERCISES = [
     '64f389465ae26083f39b1b16',
     '64f389465ae26083f39b1b22',
@@ -12,32 +28,60 @@ import { renderByExercises } from './utils';
     '64f389465ae26083f39b1964',
   ];
 
-  // const exercises = JSON.parse(localStorage.getItem('exercises')) || []
-  const exercisesIds = MOCK_EXERCISES;
-  const favoritesWrapper = document.querySelector('.favorites');
+  state.exercisesIds =
+    JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) || MOCK_EXERCISES;
   const exercisesContainer = favoritesWrapper.querySelector('.cards-exercises');
-
+  const favoritesWrapperContainer =
+    favoritesWrapper.querySelector('.favorites-wrapper');
   const messageContainer = favoritesWrapper.querySelector(
     '.notification-message'
   );
 
+  // helpers
+  const removeIdFromStorage = exerciseId => {
+    state.exercisesIds = state.exercisesIds.filter(id => id !== exerciseId);
+  };
+
+  const exerciseClickHandler = event => {
+    event.preventDefault();
+    // check if clicked trash-button
+    const className = event.target.className;
+    const isTrashButton = className && className.includes('trash-link');
+
+    if (isTrashButton) {
+      const cardItem = getClosest(event.target, '.card-item');
+
+      if (cardItem && cardItem.dataset) {
+        removeIdFromStorage(cardItem.dataset.id);
+        const { exercisesIds } = state;
+        searchExercises(exercisesIds);
+      }
+    }
+  };
+
   const searchExercises = async exercisesIds => {
     if (!exercisesIds || exercisesIds.length === 0) {
+      clearContent(exercisesContainer);
       messageContainer.classList.remove('hidden');
       return;
     }
 
-    const promises = [];
-    for (let id of exercisesIds) {
-      promises.push(Api.getExerciseById(id));
-    }
+    messageContainer.classList.add('hidden');
+
     try {
-      const [...exercises] = await Promise.all(promises);
-      renderByExercises(exercises, exercisesContainer);
+      clearContent(exercisesContainer);
+      showLoader(favoritesWrapperContainer);
+      const [...exercises] = await Promise.all(
+        exercisesIds.map(id => Api.getExerciseById(id))
+      );
+      renderByExercises(exercises, exercisesContainer, true);
     } catch (error) {
       console.log(error);
+    } finally {
+      showLoader(favoritesWrapperContainer, true);
     }
   };
 
-  searchExercises(exercisesIds);
+  exercisesContainer.addEventListener('click', exerciseClickHandler);
+  searchExercises(state.exercisesIds);
 })();
