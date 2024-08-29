@@ -1,5 +1,6 @@
 import Api from './api';
 import { renderByExercises, renderByFilters, renderFilters } from './utils';
+import { setupPagination } from './setup-pagination';
 
 (() => {
   const HIDDEN_CLASS = 'hidden';
@@ -30,6 +31,7 @@ import { renderByExercises, renderByFilters, renderFilters } from './utils';
   const searchFieldInput = searchField.querySelector('.search-input');
   const searchFieldSubmit = searchField.querySelector('.seach-submit');
   const searchFieldReset = searchField.querySelector('.seach-reset');
+  const pagination = document.querySelector('.pagination');
 
   // helpers
   const showLoader = (shouldHide = false) => {
@@ -125,6 +127,16 @@ import { renderByExercises, renderByFilters, renderFilters } from './utils';
       const response = await Api.getExercises(params);
       const { results } = response;
       state.exercise = exercise;
+
+      // todo
+      pagination.innerHTML = '';
+      if (results.totalPages > 1) {
+        setupPagination({
+          params: params,
+          totalPages: results?.totalPages,
+          method: searchByExercise,
+        });
+      }
 
       renderByExercises(results, cardsExercises);
     } catch (error) {
