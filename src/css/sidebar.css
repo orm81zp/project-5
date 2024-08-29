@@ -139,11 +139,10 @@ h3 {
   }
 
   .sidebar-icon-1 {
-    box-sizing: border-box !important;
+    box-sizing: border-box;
     width: 32px;
     height: 32px;
     fill: var(--color-secondary);
   }
-
-
 }
+

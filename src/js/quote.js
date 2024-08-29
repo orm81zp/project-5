@@ -1,31 +1,28 @@
 import Api from './api';
 
-// Функция для получения и сохранения цитаты
 async function fetchAndSaveQuote() {
+  try{
   const today = new Date().toLocaleDateString();
   const savedQuoteData = JSON.parse(localStorage.getItem('quoteData'));
   if (savedQuoteData && savedQuoteData.date === today) {
-    // console.log("Цитата на сегодня уже существует:", savedQuoteData.quote);
     return savedQuoteData.quote;
   }
 
-  let quote = await Api.getQuote();
+    let quote = await Api.getQuote();
 
   const newQuoteData = {
     date: today,
     quote: quote
   };
-
   localStorage.setItem('quoteData', JSON.stringify(newQuoteData));
 
-  console.log("Новая цитата сохранена:", newQuoteData.quote);
-
-  return newQuoteData.quote;
+  return newQuoteData.quote;}catch (e){
+    console.log('Error during  getting quote')
+  }
 }
 
 
 fetchAndSaveQuote().then(quote => {
-  console.log("Используемая цитата:", quote);
   document.getElementById('quote_text').innerText = quote.quote;
   document.getElementById('quote_author').innerText = quote.author;
 
