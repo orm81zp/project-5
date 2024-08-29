@@ -1,3 +1,7 @@
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: var(--font-main);
   font-size: 16px;
@@ -61,7 +65,7 @@ body > main {
   animation: rotation 1s linear infinite;
   margin: 0 auto;
   display: block;
-  content: "";
+  content: '';
 }
 
 /* tablet */
@@ -78,8 +82,7 @@ body > main {
 /* desktop */
 @media only screen and (min-width: 1440px) {
   .main-container {
-    padding-bottom
-    : 132px;
+    padding-bottom: 132px;
   }
   .main-container .container {
     flex-direction: row;
