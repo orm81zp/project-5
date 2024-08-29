@@ -1,1 +1,66 @@
-/**/
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: var(--color-primary-50);
+  transition: var(--trns-fast);
+  transition-property: opacity, visibility;
+}
+
+.modal-exercise {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%) scale(1);
+  min-width: 335px;
+  min-height: 584px;
+  border-radius: 20px;
+  color: var(--color-secondary);
+  background-color: var(--color-primary);
+  transition: var(--trns-fast);
+  transition-property: opacity, transform;
+  padding: 40px 20px;
+}
+
+.backdrop.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.backdrop.is-hidden .modal-exercise {
+  transform: translateX(-50%) translateY(-50%) scale(0.3);
+  opacity: 0;
+}
+
+.modal-exercise .button-close {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 24px;
+  right: 24px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: none;
+  background-color: var(--color-primary);
+  transition: background-color var(--trns-fast);
+  cursor: pointer;
+}
+
+.modal-exercise .button-close:hover,
+.modal-exercise .button-close:focus,
+.modal-exercise .button-close:active {
+  background-color: var(--color-secondary);
+}
+
+.modal-exercise .button-close-icon {
+  stroke: var(--color-secondary);
+  transition: stroke var(--trns-fast);
+}
+
+.modal-exercise .button-close:hover .button-close-icon,
+.modal-exercise .button-close:focus .button-close-icon,
+.modal-exercise .button-close:active .button-close-icon {
+  stroke: var(--color-primary);
+}

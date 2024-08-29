@@ -5,12 +5,16 @@
   --color-primary-50: rgba(36, 36, 36, 0.5);
   --color-primary-40: rgba(36, 36, 36, 0.4);
   --color-primary-20: rgba(36, 36, 36, 0.2);
+  --color-primary-10: rgba(36, 36, 36, 0.1);
   --color-secondary: #F4F4F4;
   --color-secondary-60: rgba(244, 244, 244, 0.6);
+  --color-secondary-40: rgba(244, 244, 244, 0.4);
+  --color-secondary-10: rgba(244, 244, 244, 0.1);
   --color-gold: #EEA10C;
   --color-hidden: #D4D4D4;
   --font-main: "DM Sans", Helvetica, Arial, sans-serif;
   --trns-slow: 600ms ease-out;
   --trns-fast: 250ms cubic-bezier(0.4, 0, 0.2, 1);
   --input-active: #3e3d3d;
+  --overlay: rgba(18, 20, 23, 0.40)
 }

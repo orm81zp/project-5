@@ -1,0 +1,58 @@
+.scroll-up {
+  position: fixed;
+  z-index: 10;
+  bottom: 40px;
+  right: 40px;
+  width: 40px;
+  height: 40px;
+  display: none;
+  background-color: var(--color-primary);
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  cursor: pointer;
+  color: var(--color-secondary);
+  animation-name: spin;
+  animation-duration: 5s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  box-shadow: 0px 0px 6px 2px rgba(183, 182, 182, 0.75);
+  -webkit-box-shadow: 0px 0px 6px 2px rgba(183, 182, 182, 0.75);
+  -moz-box-shadow: 0px 0px 6px 2px rgba(183, 182, 182, 0.75);
+}
+
+.scroll-icon-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.icon-arrow-up {
+  fill: var(--color-secondary);
+  width: 13px;
+  height: 13px;
+}
+
+@media screen and (min-width: 768px) {
+  .scroll-up {
+    width: 60px;
+    height: 60px;
+  }
+
+  .icon-arrow-up {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .scroll-up {
+    width: 100px;
+    height: 100px;
+  }
+
+  .icon-arrow-up {
+    width: 33px;
+    height: 33px;
+  }
+}

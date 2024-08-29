@@ -39,3 +39,7 @@ img {
   height: auto;
   object-fit: cover;
 }
+
+* {
+  box-sizing: border-box;
+}
