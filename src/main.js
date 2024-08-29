@@ -1,3 +1,4 @@
+import './js/footer';
 import './js/mobileMenu';
 import './js/modal';
 import './js/quote';

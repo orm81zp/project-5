@@ -9,7 +9,6 @@ import {
 
 (() => {
   const favoritesWrapper = document.querySelector('.favorites');
-  console.log('favorites 1');
   if (!favoritesWrapper) {
     return;
   }
@@ -38,8 +37,6 @@ import {
     '.notification-message'
   );
 
-  console.log('favorites 2');
-
   // helpers
   const removeIdFromStorage = exerciseId => {
     state.exercisesIds = state.exercisesIds.filter(id => id !== exerciseId);
@@ -63,7 +60,6 @@ import {
   };
 
   const searchExercises = async exercisesIds => {
-    console.log('favorites 3');
     if (!exercisesIds || exercisesIds.length === 0) {
       clearContent(exercisesContainer);
       messageContainer.classList.remove('hidden');
@@ -73,7 +69,6 @@ import {
     messageContainer.classList.add('hidden');
 
     try {
-      console.log('favorites 4');
       clearContent(exercisesContainer);
       showLoader(favoritesWrapperContainer);
       const [...exercises] = await Promise.all(
@@ -83,7 +78,6 @@ import {
     } catch (error) {
       console.log(error);
     } finally {
-      console.log('favorites 5');
       showLoader(favoritesWrapperContainer, true);
     }
   };

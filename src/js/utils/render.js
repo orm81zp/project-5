@@ -46,7 +46,7 @@ export const renderByExercises = (exercises, container, isFavorite = false) => {
         const ratingOrTrash = isFavorite
           ? `<a class="trash-link" href="#" title="Remove">
               <svg class="icon-trash" width="16" height="16">
-                <use href="./img/icons.svg#icon-trash"></use>
+                <use href="../../img/icons.svg#icon-trash"></use>
               </svg>
             </a>`
           : `<div class="__rating">${rating}</div>`;
