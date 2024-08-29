@@ -49,20 +49,20 @@
   transition: var(--trns-fast);
 }
 
-.exercises .cards .card-name {
+.cards .card-name {
   color: var(--color-secondary);
   font-size: 24px;
   line-height: 1;
   text-transform: capitalize;
 }
 
-.exercises .cards .card-filter {
+.cards .card-filter {
   color: var(--color-secondary-40);
   font-size: 12px;
   line-height: 1;
 }
 
-.exercises .cards-exercises {
+.cards-exercises {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -70,7 +70,7 @@
   column-gap: 20px;
 }
 
-.exercises .cards-exercises .card-item {
+.cards-exercises .card-item {
   flex-basis: 335px;
   height: 140px;
   border-radius: 15px;
@@ -79,20 +79,20 @@
   padding: 16px;
 }
 
-.exercises .cards-exercises .card-header {
+.cards-exercises .card-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-bottom: 32px;
 }
 
-.exercises .cards-exercises .card-header .badge-wrapper {
+.cards-exercises .card-header .badge-wrapper {
   display: flex;
   align-items: center;
   gap: 16px;
 }
 
-.exercises .cards-exercises .card-header .badge-wrapper .__badge {
+.cards-exercises .card-header .badge-wrapper .__badge {
   text-transform: uppercase;
   font-size: 12px;
   line-height: 1.33;
@@ -102,7 +102,7 @@
   border-radius: 15px;
 }
 
-.exercises .cards-exercises .card-content {
+.cards-exercises .card-content {
   font-size: 24px;
   line-height: 1.3;
   display: flex;
@@ -110,36 +110,36 @@
   gap: 16px;
   margin-bottom: 12px;
 }
-.exercises .cards-exercises .card-content .card-content-name {
+.cards-exercises .card-content .card-content-name {
   text-wrap: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
 }
 
-.exercises .cards-exercises .card-footer {
+.cards-exercises .card-footer {
   font-size: 12px;
   line-height: 1.5;
 }
 
-.exercises .cards-exercises .card-footer .item-name {
+.cards-exercises .card-footer .item-name {
   color: var(--color-primary-40);
   text-wrap: nowrap;
 
 }
 
-.exercises .cards-exercises .card-footer .item-value {
+.cards-exercises .card-footer .item-value {
   text-wrap: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
 }
 
-.exercises .cards-exercises .card-footer .card-footer-list {
+.cards-exercises .card-footer .card-footer-list {
   display: flex;
   align-items: center;
   gap: 16px;
 }
 
-.exercises .cards-exercises .card-footer .card-footer-list .item {
+.cards-exercises .card-footer .card-footer-list .item {
   display: flex;
   align-items: center;
   gap: 4px;
@@ -155,11 +155,11 @@
   .exercises .cards .card-item {
     width: 225px;
   }
-  .exercises .cards-exercises {
+  .cards-exercises {
     row-gap: 32px;
     column-gap: 16px;
   }
-  .exercises .cards-exercises .card-item {
+  .cards-exercises .card-item {
     flex-basis: 344px;
   }
 }
@@ -169,7 +169,7 @@
   .exercises .cards .card-item {
     width: 290px;
   }
-  .exercises .cards-exercises .card-item {
+  .cards-exercises .card-item {
     flex-basis: 442px;
   }
 }

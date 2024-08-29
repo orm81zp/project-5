@@ -1,1 +1,22 @@
-/**/
+.favorites .cards-exercises .card-item {
+  flex-basis: 335px;
+}
+
+/* tablet */
+@media only screen and (min-width: 768px) {
+  .favorites .cards-exercises .card-item {
+      flex-basis: 344px;
+    }
+}
+
+/* desktop */
+@media only screen and (min-width: 1440px) {
+.favorites .favorites-wrapper {
+    overflow-y: auto;
+    height: 487px
+  }
+
+  .favorites .cards-exercises .card-item {
+    flex-basis: 405px;
+  }
+}
