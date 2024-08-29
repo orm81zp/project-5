@@ -83,7 +83,6 @@ h2 {
   display: flex;
   align-items: center;
   justify-content: center;
-
 }
 
 
@@ -133,20 +132,26 @@ h3 {
   flex-direction: column;
   gap: 15px;
 }
-
+@media only screen and (min-width: 768px) {
+  .page-favorites .sidebar {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+  }
+}
 /* Styles when favoritesActive class is applied */
 @media (min-width: 1024px) {
-  .sidebar.favoritesActive {
+ .page-favorites .sidebar {
     display: flex;
     flex-direction: column;
     width: 40%;
   }
 }
 
-.sidebar.favoritesActive .info-description {
+.page-favorites .sidebar .info-description {
   display: none;
 }
-.sidebar .favoritesActive .quote-block{
+.page-favorites .sidebar  .quote-block{
   margin-bottom: 0px;
 }
 
@@ -157,7 +162,7 @@ h3 {
     flex-shrink: 0;
   }
 
-  .sidebar.favoritesActive .info-block {
+.page-favorites  .sidebar  .info-block {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -165,11 +170,11 @@ h3 {
     gap: 15px;
   }
 
-  .sidebar.favoritesActive .image-card {
+  .page-favorites  .sidebar  .image-card {
     flex: 2;
   }
 
-  .sidebar.favoritesActive .info-card {
+  .page-favorites  .sidebar  .info-card {
     flex: 2;
   }
 }
@@ -192,7 +197,7 @@ h3 {
     text-align: left;
   }
 
-  .sidebar.favoritesActive .info-card .info-description {
+  .page-favorites  .sidebar   .info-card .info-description {
     display: block;
     font-size: 14px;
   }

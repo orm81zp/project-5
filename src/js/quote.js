@@ -1,11 +1,5 @@
 import Api from './api';
 
-let favoritesActive = true;
-const sidebarEl = document.getElementsByClassName('sidebar')[0];
-
-sidebarEl.classList.toggle('favoritesActive', favoritesActive);
-
-
 async function fetchAndSaveQuote() {
   try{
   const today = new Date().toLocaleDateString();
