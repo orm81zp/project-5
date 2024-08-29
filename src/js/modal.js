@@ -77,7 +77,7 @@ function resetRateForm() {
 
 function sendRaiting(event) {
   try {
-    Api.addRateByExerciseId(null, {
+    Api.addRateByExerciseId(modalId, {
       rate: myRater.getRating(),
       email: event.target[0].value,
       review: event.target[1].value,
