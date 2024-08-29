@@ -1,6 +1,8 @@
 import Api from './api/index';
 import { renderExerciseModal } from './utils';
 import rater from 'rater-js';
+import 'izitoast/dist/css/iziToast.min.css';
+import iziToast from 'izitoast';
 
 let refs = {};
 let raitingRefs = {};
@@ -75,12 +77,16 @@ function resetRateForm() {
 
 function sendRaiting(event) {
   try {
-    Api.addRateByExerciseId(modalId, {
+    Api.addRateByExerciseId(null, {
       rate: myRater.getRating(),
       email: event.target[0].value,
       review: event.target[1].value,
     });
   } catch (error) {
+    iziToast.error({
+      title: 'Error',
+      message: 'Unable to send rate',
+    });
     console.log(error);
   } finally {
     setValueToRaiting(0);
@@ -92,6 +98,18 @@ function sendRaiting(event) {
 const form = document.querySelector('.raiting-form');
 form.addEventListener('submit', event => {
   event.preventDefault();
+
+  const email = !event.target[0].value;
+  const comment = !event.target[1].value;
+
+  if (email || comment) {
+    iziToast.error({
+      title: 'Error',
+      message: 'Email and comment fields should not be empty',
+    });
+    return;
+  }
+
   sendRaiting(event);
 });
 
