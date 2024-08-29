@@ -1,5 +1,4 @@
-import './js/quote';
 import './js/mobileMenu';
 import './js/modal';
-import './js/footer';
+import './js/quote';
 import './js/scroll-up';
