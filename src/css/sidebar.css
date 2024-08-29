@@ -6,7 +6,7 @@
   }
 }
 
-.info-card {
+.sidebar .info-card {
   background-color: var( --color-secondary);
   color: var(--color-primary);
   padding: 30px;
@@ -17,7 +17,7 @@
   margin: 0 auto;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
-.info-card .icon{
+.sidebar .info-card .icon{
   margin-top:5px
 }
 .quote-block {
@@ -127,4 +127,88 @@ h3 {
     fill: var(--color-secondary);
   }
 }
+/* Default styles for the sidebar */
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Styles when favoritesActive class is applied */
+.sidebar.favoritesActive {
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+  gap: 20px;
+}
+
+.sidebar.favoritesActive .info-description {
+  display: none;
+}
+
+
+/* Styles for larger screens (like in the first image) */
+@media only screen and (min-width: 1440px) {
+  .sidebar {
+    width: 444px;
+    flex-shrink: 0;
+  }
+
+  .sidebar.favoritesActive .info-block {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row-reverse;
+  }
+
+  .sidebar.favoritesActive .image-card {
+    flex: 2;
+    margin-right: 20px;
+  }
+
+  .sidebar.favoritesActive .info-card {
+    flex: 2;
+  }
+}
+
+/* Styles for smaller screens (like in the second image) */
+@media only screen and (max-width: 1439px) {
+  .sidebar .info-block {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .sidebar .image-card {
+    margin-bottom: 15px;
+  }
+
+  .sidebar .info-card {
+    padding: 20px;
+    flex-direction: column;
+    text-align: left;
+  }
+
+  .sidebar.favoritesActive .info-card .info-description {
+    display: block;
+    font-size: 14px;
+  }
+}
+
+/* Additional adjustments for mobile devices */
+@media (max-width: 768px) {
+  .sidebar .info-card {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .sidebar .info-card h3 {
+    font-size: 24px;
+  }
+
+  .sidebar .info-card .info-description {
+    font-size: 14px;
+  }
+}
+
 
