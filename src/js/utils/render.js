@@ -1,3 +1,5 @@
+import iconsPath from '../../img/icons.svg';
+
 export const convertRating = (rating) => {
   return rating % 1 ? `${Math.round(rating * 10) / 10}` : `${rating}.0`;
 }
@@ -53,7 +55,7 @@ export const renderByExercises = (exercises, container, isFavorite = false) => {
         const ratingOrTrash = isFavorite
           ? `<a class="trash-link" href="#" title="Remove">
               <svg class="icon-trash" width="16" height="16">
-                <use href="../../img/icons.svg#icon-trash"></use>
+                <use href="${iconsPath}#icon-trash"></use>
               </svg>
             </a>`
           : `<div class="exercises-ratio"><p class="ratio-value">${convertRating(rating)}</p><svg class="icon-star ratio-star" width="20" height="20"><use href="./img/icons.svg#icon-star"></use></svg></div>`;
@@ -109,7 +111,7 @@ const ratingStarsHTML = rating => {
     return `
     <li class="rating-item">
       <svg class="rating-star ${starClass}" width="18" height="18">
-        <use href="./img/icons.svg#icon-star"></use>
+        <use href="${iconsPath}#icon-star"></use>
         ${overlay}
       </svg>
     </li>`;
@@ -124,7 +126,7 @@ const ratingStarsHTML = rating => {
         'partial',
         `<svg class="overlay" style="clip-path:inset(0 ${
           100 - partialFillPercentage
-        }% 0 0);"><use href="./img/icons.svg#icon-star"></use></svg>`
+        }% 0 0);"><use href="${iconsPath}#icon-star"></use></svg>`
       );
     } else {
       starsText += starItemText('empty');
@@ -138,9 +140,9 @@ export const updateFavoriteButton = (isFavorite, container) => {
   const innerText = `
       ${!isFavorite ? 'Add to favorites' : 'Remove from favorites'}
         <svg class="favorite-icon" width="18" height="18">
-          <use href="./img/icons.svg#${
-            !isFavorite ? 'icon-heart' : 'icon-trash'
-          }"></use>
+          <use href="${iconsPath}#${
+    !isFavorite ? 'icon-heart' : 'icon-trash'
+  }"></use>
         </svg>`;
 
   container.innerHTML = innerText;
@@ -213,7 +215,7 @@ export function createDevMarkup(developers) {
       const { name, linkedin, github } = developer;
       return ` <li class="team-item">
           <svg class="more-icon" width="20" height="20">
-            <use href="../../img/icons.svg#icon-more"></use>
+            <use href="${iconsPath}#icon-more"></use>
           </svg>
           <h3 class="team-name">${name}</h3>
           <div class="hidden-content">
@@ -226,7 +228,7 @@ export function createDevMarkup(developers) {
                   rel="noopener noreferrer"
                 >
                   <svg class="team-icon" width="28" height="28">
-                    <use href="../../img/icons.svg#icon-linkedin"></use>
+                    <use href="${iconsPath}#icon-linkedin"></use>
                   </svg>
                 </a>
               </li>
@@ -238,7 +240,7 @@ export function createDevMarkup(developers) {
                   rel="noopener noreferrer"
                 >
                   <svg class="team-icon" width="28" height="28">
-                    <use href="../../img/icons.svg#icon-github"></use>
+                    <use href="${iconsPath}#icon-github"></use>
                   </svg>
                 </a>
               </li>
