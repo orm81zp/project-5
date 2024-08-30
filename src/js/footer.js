@@ -1,13 +1,13 @@
+import 'izitoast/dist/css/iziToast.min.css';
+import iziToast from 'izitoast';
+import Api from './api/index';
+import { gsap } from 'gsap';
+
 (() => {
   const footerWrapper = document.querySelector('footer');
   if (!footerWrapper) {
     return; // Якщо футера немає на сторінці, код не виконується.
   }
-
-  import 'izitoast/dist/css/iziToast.min.css';
-  import iziToast from 'izitoast';
-  import Api from './api/index';
-  import { gsap } from 'gsap';
 
   const formSubmit = document.querySelector('.js-footer-form');
   const emailInput = document.querySelector('input[type="email"]');

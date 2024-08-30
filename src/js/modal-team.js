@@ -1,6 +1,12 @@
 import { createDevMarkup } from '../js/utils/render.js';
 import { DEVELOPERS } from './const/team.js';
 
+(() => {
+  const footerWrapper = document.querySelector('footer');
+  if (!footerWrapper) {
+    return; // Якщо футера немає на сторінці, код не виконується.
+  }
+
 const teamModalOpenBtn = document.querySelector('.team-btn-open');
 const teamModalCloseBtn = document.querySelector('.team-btn-close');
 const teamList = document.querySelector('.team-list');
@@ -76,3 +82,4 @@ function onDevClick(e) {
     moreIcon.classList.add('arrow-up');
   }
 }
+})();
