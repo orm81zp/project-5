@@ -6,6 +6,7 @@
   background-color: var(--color-primary-50);
   transition: var(--trns-fast);
   transition-property: opacity, visibility;
+  overflow-y: scroll;
 }
 
 .backdrop.is-hidden,
@@ -17,7 +18,7 @@
 
 .backdrop.is-hidden .modal-exercise,
 .raiting.backdrop.is-hidden .modal-raiting {
-  transform: translateX(-50%) translateY(-50%) scale(0.3);
+  transform: translateX(-50%) translateY(-30%) scale(0.3);
   opacity: 0;
 }
 
@@ -26,7 +27,7 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translateX(-50%) translateY(-50%) scale(1);
+  transform: translateX(-50%) translateY(-30%) scale(1);
   border-radius: 20px;
   color: var(--color-secondary);
   background-color: var(--color-primary);
@@ -232,6 +233,16 @@ div[data-modal-content],
   .modal-exercise {
     width: 704px;
     padding: 32px;
+  }
+
+  .backdrop.is-hidden .modal-exercise,
+  .raiting.backdrop.is-hidden .modal-raiting {
+    transform: translateX(-50%) translateY(-50%) scale(0.3);
+  }
+
+  .modal-exercise,
+  .modal-raiting {
+    transform: translateX(-50%) translateY(-50%) scale(1);
   }
 
   .modal-exercise .close-icon {
