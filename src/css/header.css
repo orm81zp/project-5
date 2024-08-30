@@ -10,7 +10,7 @@ header .container {
 .fixed-header {
   position: fixed;
   background-color: var(--color-secondary);
-  z-index: 1000;
+  z-index: 50;
 }
 
 .menu-wrapper {
