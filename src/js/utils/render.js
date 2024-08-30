@@ -30,16 +30,33 @@ export const renderByFilters = (cards, container) => {
   container.insertAdjacentHTML('beforeend', adjacentText);
 };
 
-export const renderByExercises = (exercises, container) => {
+export const renderByExercises = (exercises, container, isFavorite = false) => {
   const adjacentText = exercises
     .map(
-      ({ bodyPart, burnedCalories, gifUrl, name, rating, target, time, _id }) =>
-        `
-      <li class="card-item">
+      ({
+        bodyPart,
+        burnedCalories,
+        gifUrl,
+        name,
+        rating,
+        target,
+        time,
+        _id,
+      }) => {
+        const ratingOrTrash = isFavorite
+          ? `<a class="trash-link" href="#" title="Remove">
+              <svg class="icon-trash" width="16" height="16">
+                <use href="../../img/icons.svg#icon-trash"></use>
+              </svg>
+            </a>`
+          : `<div class="__rating">${rating}</div>`;
+
+        return `
+      <li class="card-item" data-id="${_id}">
         <div class="card-header">
           <div class="badge-wrapper">
             <div class="__badge">WORKOUT</div>
-            <div class="__rating">${rating}</div>
+            ${ratingOrTrash}
           </div>
           <div>
             <a class="__start" href="#" data-id="${_id}">Start</a>
@@ -68,7 +85,8 @@ export const renderByExercises = (exercises, container) => {
           </ul>
         </div>
       </li>
-      `
+      `;
+      }
     )
     .join('');
 
@@ -118,7 +136,7 @@ export const renderExerciseModal = (exercise, container) => {
             </button>
           </li>
           <li class="modal-controls-item">
-            <button class="modal-rating-button">Give a rating</button>
+            <button class="modal-rating-button" data-raiting-modal-open>Give a rating</button>
           </li>
         </div>
       </div>

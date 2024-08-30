@@ -9,6 +9,7 @@
   --color-secondary: #F4F4F4;
   --color-secondary-60: rgba(244, 244, 244, 0.6);
   --color-secondary-40: rgba(244, 244, 244, 0.4);
+  --color-secondary-20: rgba(244, 244, 244, 0.2);
   --color-secondary-10: rgba(244, 244, 244, 0.1);
   --color-gold: #EEA10C;
   --color-hidden: #D4D4D4;
@@ -16,5 +17,8 @@
   --trns-slow: 600ms ease-out;
   --trns-fast: 250ms cubic-bezier(0.4, 0, 0.2, 1);
   --input-active: #3e3d3d;
+  --color-dark-gray: #F4F4F433;
+  --color-white: #FFFFFF;
+
   --overlay: rgba(18, 20, 23, 0.40)
 }

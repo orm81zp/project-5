@@ -1,1 +1,52 @@
-/**/
+.favorites {
+  width: 100%;
+}
+
+.favorites .favorites-wrapper {
+  min-height: 120px;
+  height: 100%;
+}
+
+.favorites .cards-exercises .card-item {
+  flex-basis: 335px;
+}
+
+.favorites .trash-link > svg {
+  pointer-events: none;
+}
+
+.favorites .notification-message {
+  max-width: 318px;
+  font-size: 18px;
+  line-height: 1.33;
+  text-align: center;
+  height: 100%;
+  margin: auto;
+  vertical-align: auto;
+}
+
+/* tablet */
+@media only screen and (min-width: 768px) {
+  .favorites .cards-exercises .card-item {
+    flex-basis: 344px;
+  }
+  .favorites .favorites-wrapper {
+    min-height: 306px;
+  }
+  .favorites .notification-message {
+    max-width: 554px;
+  }
+}
+
+/* desktop */
+@media only screen and (min-width: 1440px) {
+.favorites .favorites-wrapper {
+    overflow-y: auto;
+    min-height: unset;
+    max-height: 487px;
+  }
+
+  .favorites .cards-exercises .card-item {
+    flex-basis: 405px;
+  }
+}
