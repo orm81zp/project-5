@@ -93,7 +93,52 @@ export const renderByExercises = (exercises, container, isFavorite = false) => {
   container.insertAdjacentHTML('beforeend', adjacentText);
 };
 
-export const renderExerciseModal = (exercise, container) => {
+const ratingStarsHTML = rating => {
+  const fullStarsCount = Math.floor(rating);
+  const partialFillPercentage = (rating - fullStarsCount) * 100;
+
+  const starItemText = (starClass, overlay = '') => {
+    return `
+    <li class="rating-item">
+      <svg class="rating-star ${starClass}" width="18" height="18">
+        <use href="./img/icons.svg#icon-star"></use>
+        ${overlay}
+      </svg>
+    </li>`;
+  };
+
+  let starsText = '';
+  for (let i = 0; i < 5; i++) {
+    if (i < fullStarsCount) {
+      starsText += starItemText('full');
+    } else if (i == fullStarsCount && partialFillPercentage > 0) {
+      starsText += starItemText(
+        'partial',
+        `<svg class="overlay" style="clip-path:inset(0 ${
+          100 - partialFillPercentage
+        }% 0 0);"><use href="./img/icons.svg#icon-star"></use></svg>`
+      );
+    } else {
+      starsText += starItemText('empty');
+    }
+  }
+
+  return starsText;
+};
+
+export const updateFavoriteButton = (isFavorite, container) => {
+  const innerText = `
+      ${!isFavorite ? 'Add to favorites' : 'Remove from favorites'}
+        <svg class="favorite-icon" width="18" height="18">
+          <use href="./img/icons.svg#${
+            !isFavorite ? 'icon-heart' : 'icon-trash'
+          }"></use>
+        </svg>`;
+
+  container.innerHTML = innerText;
+};
+
+export const renderExerciseModal = (exercise, isFavorite, container) => {
   const {
     bodyPart,
     burnedCalories,
@@ -109,38 +154,58 @@ export const renderExerciseModal = (exercise, container) => {
   } = exercise;
 
   const innerText = `
-      <div class="modal-gif-container">
-        <img class="modal-gif" src="${gifUrl}" alt="${target}">
+      <div class="gif-container">
+        <img class="modal-gif" src="${gifUrl}" alt="${target}" width="360" height="360">
       </div>
       <div class="modal-content">
-        <h2>${name}</h2>
-        <div class="modal-rating">
-            <span>${rating}</span>
-            <span class="modal-stars">★★★★☆</span>
+        <div class="modal-header">
+          <h3 class="exercise-name capitalize">${name}</h3>
+          <ul class="rating-stars">
+            <li class="rating-item">
+              <p class="rating-value">${rating.toFixed(1)}</p>
+            </li>
+            ${ratingStarsHTML(rating)}
+          </ul>
         </div>
-        <div class="modal-details">
-            <p><strong>Target:</strong> ${target}</p>
-            <p><strong>Body Part:</strong> ${bodyPart}</p>
-            <p><strong>Equipment:</strong> ${equipment}</p>
-            <p><strong>Popular:</strong> ${popularity}</p>
-            <p><strong>Burned Calories:</strong> ${burnedCalories}/${time} min</p>
-        </div>
+        <ul class="details">
+          <li class="details-item">
+            <h4 class="details-header">Target</h4>
+            <p class="details-value capitalize">${target}</p>
+          </li>
+          <li class="details-item">
+            <h4 class="details-header">Body Part</h4>
+            <p class="details-value capitalize">${bodyPart}</p>
+          </li>
+          <li class="details-item">
+            <h4 class="details-header">Equipment</h4>
+            <p class="details-value capitalize">${equipment}</p>
+          </li>
+          <li class="details-item">
+            <h4 class="details-header">Popular</h4>
+            <p class="details-value">${popularity}</p>
+          </li>
+          <li class="details-item">
+            <h4 class="details-header">Burned Calories</h4>
+            <p class="details-value">${burnedCalories}/${time} min</p>
+          </li>
+        </ul>
         <p class="description">${description}</p>
-        <ul class="modal-controls" data-id=${_id}>
-          <li class="modal-controls-item">
-            <button class="modal-favorite-button">
-              Add to favorites
-                <svg class="modal-favorite-icon" width="24" height="24">
-                  <use href="./img/icons.svg#icon-heart"></use>
-                </svg>
+        <ul class="controls">
+          <li class="controls-item">
+            <button class="favorite-button" data-id=${_id} data-modal-favorite>
+              ${!isFavorite ? 'Add to favorites' : 'Remove from favorites'}
+              <svg class="favorite-icon" width="18" height="18">
+                <use href="./img/icons.svg#${
+                  !isFavorite ? 'icon-heart' : 'icon-trash'
+                }"></use>
+              </svg>
             </button>
           </li>
           <li class="modal-controls-item">
-            <button class="modal-rating-button" data-raiting-modal-open>Give a rating</button>
+            <button class="rating-button" data-raiting-modal-open>Give a rating</button>
           </li>
         </div>
-      </div>
-      `;
+      </div>`;
 
   container.innerHTML = innerText;
 };

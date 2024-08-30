@@ -1,5 +1,5 @@
 import Api from './api/index';
-import { renderExerciseModal } from './utils';
+import { renderExerciseModal, updateFavoriteButton } from './utils';
 import rater from 'rater-js';
 import 'izitoast/dist/css/iziToast.min.css';
 import iziToast from 'izitoast';
@@ -8,17 +8,67 @@ let refs = {};
 let raitingRefs = {};
 let modalId;
 
+const getFavorites = () => {
+  let favorites = localStorage.getItem('favorite-exercise-list');
+  if (favorites === null) {
+    return [];
+  }
+
+  return JSON.parse(favorites);
+};
+
+const isFavoriteId = id => {
+  const ids = getFavorites(id);
+  if (!ids) {
+    return false;
+  }
+
+  return ids.includes(id);
+};
+
+const processFavorites = () => {
+  const id = refs.favorite.dataset.id;
+  if (!id) {
+    return;
+  }
+
+  let ids = getFavorites();
+  if (!ids) {
+    localStorage.setItem('favorite-exercise-list', JSON.stringify([id]));
+    updateFavoriteButton(isFavoriteId(id), refs.favorite);
+    return;
+  }
+
+  if (isFavoriteId(id)) {
+    ids.splice(ids.indexOf(id), 1);
+  } else {
+    ids.push(id);
+  }
+
+  localStorage.setItem('favorite-exercise-list', JSON.stringify(ids));
+  updateFavoriteButton(isFavoriteId(id), refs.favorite);
+};
+
 const resetExerciseModal = async id => {
   try {
     const data = await Api.getExerciseById(id);
 
-    renderExerciseModal(data, refs.container);
+    const favorite = isFavoriteId(id);
+    renderExerciseModal(data, favorite, refs.container);
+
+    refs.favorite = document.querySelector('[data-modal-favorite]');
+    refs.favorite.addEventListener('click', processFavorites);
+    updateFavoriteButton(favorite, refs.favorite);
 
     refs.modal.classList.toggle('is-hidden');
 
-    setupRaitingModal(data['_id']);
+    setupRaitingModal(id);
   } catch (error) {
-    console.log(error);
+    iziToast.error({
+      title: 'Error',
+      message: `${error}`,
+    });
+    return;
   }
 };
 
@@ -40,6 +90,8 @@ const setupExerciseModal = () => {
       return;
     }
 
+    event.preventDefault();
+
     const id = target.dataset.id;
     if (!id) {
       return;
@@ -50,6 +102,15 @@ const setupExerciseModal = () => {
 
   refs.closer.addEventListener('click', () => {
     refs.modal.classList.toggle('is-hidden');
+
+    if (refs.favorite) {
+      refs.favorite.removeEventListener('click', processFavorites);
+    }
+
+    if (refs.rating) {
+      refs.rating.removeEventListener('click', processRating);
+    }
+
     refs.container.innerHTML = '';
   });
 };
