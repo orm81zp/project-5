@@ -8,21 +8,6 @@
   transition-property: opacity, visibility;
 }
 
-.modal-exercise {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translateX(-50%) translateY(-50%) scale(1);
-  width: 335px;
-  min-height: 584px;
-  border-radius: 20px;
-  color: var(--color-secondary);
-  background-color: var(--color-primary);
-  transition: var(--trns-fast);
-  transition-property: opacity, transform;
-  padding: 40px 20px 20px 20px;
-}
-
 .backdrop.is-hidden,
 .raiting.backdrop.is-hidden {
   opacity: 0;
@@ -34,6 +19,24 @@
 .raiting.backdrop.is-hidden .modal-raiting {
   transform: translateX(-50%) translateY(-50%) scale(0.3);
   opacity: 0;
+}
+
+.modal-exercise,
+.modal-raiting {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%) scale(1);
+  border-radius: 20px;
+  color: var(--color-secondary);
+  background-color: var(--color-primary);
+  transition: var(--trns-fast);
+  transition-property: opacity, transform;
+}
+
+.modal-exercise {
+  width: 335px;
+  padding: 40px 20px 20px 20px;
 }
 
 .modal-exercise .close,
@@ -60,18 +63,34 @@
   stroke: var(--color-secondary-60);
 }
 
-.modal-exercise .content-container {
+div[data-modal-content],
+.modal-exercise .modal-content {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.modal-exercise .gif-container {
+.modal-exercise .gif-container,
+.modal-exercise .rating,
+.modal-exercise .rating-stars,
+.modal-exercise .rating-item,
+.modal-exercise .details,
+.modal-exercise .controls,
+.modal-exercise .favorite-button,
+.modal-exercise .rating-button {
   display: flex;
-  width: 100%;
-  height: 100%;
   justify-content: center;
   align-items: center;
+  gap: 10px;
+}
+
+.modal-exercise .details {
+  justify-content: flex-start;
+}
+
+.modal-exercise .gif-container {
+  width: 100%;
+  height: 100%;
 }
 
 .modal-exercise .modal-gif {
@@ -82,8 +101,9 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  border-bottom: 1px solid var(--color-secondary-40);
   gap: 10px;
+  width: 100%;
+  border-bottom: 1px solid var(--color-secondary-40);
   padding: 20px 0;
 }
 
@@ -96,25 +116,17 @@
   text-transform: uppercase;
 }
 
-.modal-exercise .rating {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-}
-
 .modal-exercise .rating-stars {
-  display: flex;
-  justify-content: flex-start;
   gap: 4px;
 }
 
-.modal-exercise .rating-item {
-  display: flex;
-}
-
-.modal-exercise .rating-value {
+.modal-exercise .rating-value,
+.modal-exercise .details-value,
+.modal-exercise .description,
+.modal-exercise .favorite-button,
+.modal-exercise .rating-button {
   font-size: 14px;
-  line-height: 1.5;
+  line-height: 18px;
 }
 
 .modal-exercise .rating-star {
@@ -140,8 +152,6 @@
 }
 
 .modal-exercise .details {
-  display: flex;
-  gap: 20px;
   flex-wrap: wrap;
   padding: 10px 0;
   border-bottom: 1px solid var(--color-secondary-40);
@@ -154,84 +164,119 @@
   color: var(--color-secondary-40);
 }
 
-.modal-exercise .details-value {
-  font-size: 14px;
-  line-height: 18px;
-  font-weight: 500;
-}
-
 .modal-exercise .description {
-  font-size: 14px;
-  line-height: 18px;
-  padding: 20px 0;
   color: var(--color-secondary-60);
+  padding: 20px 0;
 }
 
 .modal-exercise .controls {
+  flex-direction: column;
   padding: 20px 0;
 }
 
-.modal-exercise .favorite-button {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
-  width: 295px;
+.modal-exercise .favorite-button,
+.modal-exercise .rating-button {
   border-radius: 30px;
   padding: 12px 0;
-  margin-bottom: 10px;
-  font-size: 14px;
-  line-height: 18px;
-  color: var(--color-primary);
-  background-color: var(--color-secondary);
-  border: 1px solid;
-  border-color: var(--color-secondary);
   transition: var(--trns-fast);
   transition-property: color, background-color, border-color;
+  border: 1px solid var(--color-secondary);
 }
 
-.modal-exercise .favorite-button:hover,
-.modal-exercise .favorite-button:focus,
-.modal-exercise .favorite-button:active {
+.modal-exercise .favorite-button {
+  width: 295px;
+  color: var(--color-primary);
+  background-color: var(--color-secondary);
+}
+
+.modal-exercise .favorite-button:hover {
   background-color: var(--color-primary);
-  border-color: var(--color-secondary);
   color: var(--color-secondary);
 }
 
-.modal-exercise .favorite-icon {
-  stroke: var(--color-primary);
+.modal-exercise .favorite-button .favorite-icon {
   fill: var(--color-secondary);
+  stroke: var(--color-primary);
   transition: var(--trns-fast);
   transition-property: stroke, fill;
 }
 
-.modal-exercise .favorite-button:hover .favorite-icon,
-.modal-exercise .favorite-button:focus .favorite-icon,
-.modal-exercise .favorite-button:active .favorite-icon {
-  stroke: var(--color-secondary);
+.modal-exercise .favorite-button:hover .favorite-icon {
   fill: var(--color-primary);
+  stroke: var(--color-secondary);
+}
+
+.modal-exercise .favorite-button.remove .favorite-icon {
+  fill: var(--color-primary);
+  stroke: var(--color-secondary);
+}
+
+.modal-exercise .favorite-button.remove:hover .favorite-icon {
+  fill: var(--color-secondary);
+  stroke: var(--color-primary);
 }
 
 .modal-exercise .rating-button {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   width: 295px;
-  border-radius: 30px;
-  padding: 12px 0;
   color: var(--color-secondary);
-  border: 1px solid;
-  border-color: var(--color-secondary);
   background-color: var(--color-primary);
-  font-size: 14px;
-  line-height: 18px;
-  transition: var(--trns-fast);
-  transition-property: color, background-color, border-color;
 }
 
-.modal-exercise .rating-button:hover,
-.modal-exercise .rating-button:focus {
+.modal-exercise .rating-button:hover {
   color: var(--color-primary);
   background-color: var(--color-secondary);
   border-color: var(--color-primary);
+}
+
+@media screen and (min-width: 768px) {
+  .modal-exercise {
+    width: 704px;
+    padding: 32px;
+  }
+
+  .modal-exercise .close-icon {
+    width: 28px;
+    height: 28px;
+  }
+
+  div[data-modal-content] {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 32px;
+  }
+
+  .modal-exercise .modal-content {
+    max-width: 338px;
+  }
+
+  .modal-exercise .modal-header {
+    padding-top: 0;
+  }
+
+  .modal-exercise .details {
+    gap: 16px;
+  }
+
+  .modal-exercise .description {
+    flex-grow: 1;
+  }
+
+  .modal-exercise .controls {
+    flex-direction: row;
+    justify-content: flex-end;
+    width: 100%;
+    padding-bottom: 0;
+  }
+
+  .modal-exercise .favorite-button {
+    width: 194px;
+  }
+
+  .modal-exercise .favorite-button.remove {
+    width: 242px;
+  }
+
+  .modal-exercise .rating-button {
+    width: 137px;
+  }
 }

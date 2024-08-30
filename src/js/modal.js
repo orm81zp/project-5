@@ -1,15 +1,16 @@
 import Api from './api/index';
-import { renderExerciseModal, updateFavoriteButton } from './utils';
+import { renderExerciseModal, updateFavoriteButton, getClosest } from './utils';
 import rater from 'rater-js';
 import 'izitoast/dist/css/iziToast.min.css';
 import iziToast from 'izitoast';
+import { LOCAL_STORAGE_KEY } from './const';
 
 let refs = {};
 let raitingRefs = {};
 let modalId;
 
 const getFavorites = () => {
-  let favorites = localStorage.getItem('favorite-exercise-list');
+  let favorites = localStorage.getItem(LOCAL_STORAGE_KEY);
   if (favorites === null) {
     return [];
   }
@@ -34,7 +35,7 @@ const processFavorites = () => {
 
   let ids = getFavorites();
   if (!ids) {
-    localStorage.setItem('favorite-exercise-list', JSON.stringify([id]));
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify([id]));
     updateFavoriteButton(isFavoriteId(id), refs.favorite);
     return;
   }
@@ -45,20 +46,19 @@ const processFavorites = () => {
     ids.push(id);
   }
 
-  localStorage.setItem('favorite-exercise-list', JSON.stringify(ids));
+  localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(ids));
   updateFavoriteButton(isFavoriteId(id), refs.favorite);
 };
 
 const resetExerciseModal = async id => {
   try {
+    refs.container.innerHTML = '';
     const data = await Api.getExerciseById(id);
 
     const favorite = isFavoriteId(id);
     renderExerciseModal(data, favorite, refs.container);
-
-    refs.favorite = document.querySelector('[data-modal-favorite]');
-    refs.favorite.addEventListener('click', processFavorites);
     updateFavoriteButton(favorite, refs.favorite);
+    refs.favorite.dataset.id = id;
 
     refs.modal.classList.toggle('is-hidden');
 
@@ -72,46 +72,62 @@ const resetExerciseModal = async id => {
   }
 };
 
+const closeExerciseModal = () => {
+  refs.modal.classList.toggle('is-hidden');
+};
+
 const setupExerciseModal = () => {
   refs = {
     opener: document.querySelector('[data-modal-open]'),
     closer: document.querySelector('[data-modal-close]'),
     modal: document.querySelector('[data-modal]'),
     container: document.querySelector('[data-modal-content]'),
+    favorite: document.querySelector('[data-modal-favorite]'),
   };
 
-  if (!refs.opener || !refs.closer || !refs.modal || !refs.container) {
+  if (
+    !refs.opener ||
+    !refs.closer ||
+    !refs.modal ||
+    !refs.container ||
+    !refs.favorite
+  ) {
     return;
   }
 
   refs.opener.addEventListener('click', event => {
-    const target = event.target;
-    if (target.nodeName !== 'A') {
-      return;
+    const className = event.target.className;
+    const isStartButton = className && className.includes('__start');
+
+    if (isStartButton) {
+      event.preventDefault();
+      const cardItem = getClosest(event.target, '.card-item');
+
+      if (cardItem && cardItem.dataset) {
+        const id = cardItem.dataset.id;
+        if (!id) {
+          return;
+        }
+
+        resetExerciseModal(id);
+      }
     }
-
-    event.preventDefault();
-
-    const id = target.dataset.id;
-    if (!id) {
-      return;
-    }
-
-    resetExerciseModal(id);
   });
 
-  refs.closer.addEventListener('click', () => {
-    refs.modal.classList.toggle('is-hidden');
+  refs.favorite.addEventListener('click', processFavorites);
 
-    if (refs.favorite) {
-      refs.favorite.removeEventListener('click', processFavorites);
+  refs.closer.addEventListener('click', closeExerciseModal);
+  document.addEventListener('keydown', function (event) {
+    if (!refs.modal.classList.contains('is-hidden')) {
+      if (event.key === 'Escape') {
+        closeExerciseModal();
+      }
     }
-
-    if (refs.rating) {
-      refs.rating.removeEventListener('click', processRating);
+  });
+  refs.modal.addEventListener('click', function (event) {
+    if (event.target === refs.modal) {
+      closeExerciseModal();
     }
-
-    refs.container.innerHTML = '';
   });
 };
 
@@ -187,6 +203,8 @@ const setupRaitingModal = id => {
     closeModalBtn: document.querySelector('[data-raiting-modal-close]'),
     modal: document.querySelector('[data-raiting-modal]'),
   };
+
+  raitingRefs.openModalBtn.dataset.id = id;
 
   raitingRefs.openModalBtn.addEventListener('click', toggleRaitingModal);
   raitingRefs.closeModalBtn.addEventListener('click', toggleRaitingModal);

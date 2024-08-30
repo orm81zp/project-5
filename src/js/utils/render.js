@@ -136,6 +136,11 @@ export const updateFavoriteButton = (isFavorite, container) => {
         </svg>`;
 
   container.innerHTML = innerText;
+  if (isFavorite) {
+    container.classList.add('remove');
+  } else {
+    container.classList.remove('remove');
+  }
 };
 
 export const renderExerciseModal = (exercise, isFavorite, container) => {
@@ -190,21 +195,6 @@ export const renderExerciseModal = (exercise, isFavorite, container) => {
           </li>
         </ul>
         <p class="description">${description}</p>
-        <ul class="controls">
-          <li class="controls-item">
-            <button class="favorite-button" data-id=${_id} data-modal-favorite>
-              ${!isFavorite ? 'Add to favorites' : 'Remove from favorites'}
-              <svg class="favorite-icon" width="18" height="18">
-                <use href="./img/icons.svg#${
-                  !isFavorite ? 'icon-heart' : 'icon-trash'
-                }"></use>
-              </svg>
-            </button>
-          </li>
-          <li class="modal-controls-item">
-            <button class="rating-button" data-raiting-modal-open>Give a rating</button>
-          </li>
-        </div>
       </div>`;
 
   container.innerHTML = innerText;
