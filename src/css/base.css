@@ -17,6 +17,7 @@ body {
 
 body > main {
   flex-grow: 1;
+  margin-top: 86px;
 }
 
 .visually-hidden {
