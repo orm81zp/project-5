@@ -1,3 +1,5 @@
+import icons from '../../img/icons.svg';
+
 export const renderFilters = (filters, container) => {
   const adjacentText = filters
     .map(name => `<li class="item"><a class="filter-link" href="#">${name}</a></li>`)
@@ -218,7 +220,7 @@ export function createDevMarkup(developers) {
                   rel="noopener noreferrer"
                 >
                   <svg class="team-icon" width="28" height="28">
-                    <use href="../../img/icons.svg#icon-linkedin"></use>
+                    <use href="${icons}#icon-linkedin"></use>
                   </svg>
                 </a>
               </li>
