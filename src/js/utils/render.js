@@ -1,3 +1,7 @@
+export const convertRating = (rating) => {
+  return rating % 1 ? `${Math.round(rating * 10) / 10}` : `${rating}.0`;
+}
+
 export const renderFilters = (filters, container) => {
   const adjacentText = filters
     .map(
@@ -52,7 +56,7 @@ export const renderByExercises = (exercises, container, isFavorite = false) => {
                 <use href="../../img/icons.svg#icon-trash"></use>
               </svg>
             </a>`
-          : `<div class="exercises-ratio"><p class="ratio-value">${rating}</p><svg class="icon-star ratio-star" width="20" height="20"><use href="./img/icons.svg#icon-star"></use></svg></div>`;
+          : `<div class="exercises-ratio"><p class="ratio-value">${convertRating(rating)}</p><svg class="icon-star ratio-star" width="20" height="20"><use href="./img/icons.svg#icon-star"></use></svg></div>`;
 
         return `
       <li class="card-item" data-id="${_id}">
