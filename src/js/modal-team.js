@@ -1,5 +1,5 @@
-import { createDevMarkup } from '../js/templates/modal-team-markup.js';
-import { developers } from '../js/templates/team-array.js';
+import { createDevMarkup } from '../js/utils/render.js';
+import { DEVELOPERS } from './const/team.js';
 
 const teamModalOpenBtn = document.querySelector('.team-btn-open');
 const teamModalCloseBtn = document.querySelector('.team-btn-close');
@@ -11,17 +11,17 @@ teamModalCloseBtn.addEventListener('click', onCloseClick);
 teamList.addEventListener('click', onDevClick);
 backdrop.addEventListener('click', onBackdropClick);
 
-teamList.insertAdjacentHTML('beforeend', createDevMarkup(developers));
+teamList.insertAdjacentHTML('beforeend', createDevMarkup(DEVELOPERS));
 const devSocials = [...teamList.children];
 
 function onOpenClick() {
-  backdrop.classList.remove('is-hidden');
+  backdrop.classList.remove('hidden');
   window.addEventListener('keydown', onEscKeyPress);
   document.body.style.overflow = 'hidden';
 }
 
 function onCloseClick() {
-  backdrop.classList.add('is-hidden');
+  backdrop.classList.add('hidden');
   window.removeEventListener('keydown', onEscKeyPress);
   document.body.style.overflow = 'auto';
 

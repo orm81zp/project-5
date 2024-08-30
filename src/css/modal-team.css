@@ -133,7 +133,6 @@
   fill: var(--color-secondary);
 }
 
-
 .project-git {
   border: 1px solid var(--color-secondary);
   border-radius: 30px;
@@ -174,4 +173,7 @@
   .team-name {
     font-size: 20px;
   }
+}
+.team-icon.github-icon {
+  fill: var(--color-secondary);
 }

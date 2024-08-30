@@ -1,4 +1,4 @@
-export const developers = [
+export const DEVELOPERS = [
   {
     name: 'Roman Onishchenko',
     linkedin: 'https://www.linkedin.com/in/onishchenko-roman/',
