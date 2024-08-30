@@ -33,14 +33,16 @@
   
   .footer_soc_link:hover,
   .footer_soc_link:focus {
-    background-color: var(--color-secondary);    
+    background-color: var(--color-secondary);   
   }
   .footer_soc_link:hover .footer_soc_icon,
   .footer_soc_link:focus .footer_soc_icon {
     fill: var(--color-primary);
     opacity: 0.8;
   }
-  
+  .footer_soc_link:hover .footer_soc_icon {
+    animation: shake 2s;
+  }
   .footer_title {
     opacity: 1;
   
@@ -240,6 +242,9 @@
       margin-top: 0;
       margin-right: 58px;
     }
+    .footer_text_year {
+      margin-left: 178px;
+    }
   }
   @media screen and (min-width: 1440px) {
     .container {
@@ -269,10 +274,6 @@
     .footer_text {
     margin-right: 122px;
     }
-    
-    .footer_list_info{
-    
-    }
     .team-btn-open {
       margin-left: 50px;
       display: block;
@@ -295,4 +296,7 @@
   .footer_form_btn.active {
     background-color: var(--color-secondary);
   }
-  
+  .footer_form > input.active {
+    background-color: var(--color-secondary);
+    color: var(--color-primary);
+  }
