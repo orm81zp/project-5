@@ -130,13 +130,14 @@ import { setupPagination } from './setup-pagination';
 
       // todo
       pagination.innerHTML = '';
-      if (results.totalPages > 1) {
-        setupPagination({
-          params: params,
-          totalPages: results?.totalPages,
-          method: searchByExercise,
-        });
-      }
+      console.log('res exercises:', results);
+      // if (results.totalPages > 1) {
+      //   setupPagination({
+      //     params: params,
+      //     totalPages: results?.totalPages,
+      //     method: searchByExercise,
+      //   });
+      // }
 
       renderByExercises(results, cardsExercises);
     } catch (error) {
@@ -163,6 +164,17 @@ import { setupPagination } from './setup-pagination';
       state.filter = filter;
 
       renderByFilters(results, cards);
+
+      // todo
+      pagination.innerHTML = '';
+      console.log('res filters:', results);
+      if (results.count > 1) {
+        setupPagination({
+          params: params,
+          totalPages: results?.totalPages,
+          method: searchByExercise,
+        });
+      }
 
       // highlight active filter
       const filterElements = breadcrumbsFilters.querySelectorAll('.item');
