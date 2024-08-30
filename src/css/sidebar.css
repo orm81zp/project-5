@@ -1,197 +1,209 @@
-.sidebar .info-card {
-  background-color: var(--color-secondary);
-  color: var(--color-primary);
-
-  box-sizing: border-box;
-  border-radius: 20px;
-  gap: 20px;
-  max-width: 900px;
-  margin: 0 auto;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-.sidebar .elm{
-  margin: 20px;
-}
-
-
-.page-favorites .sidebar{
-  display: flex;
-  flex-direction: column-reverse;
-}
-
-
-.sidebar .info-card .icon {
-  margin-top: 5px
-}
-
-.sidebar .quote-block {
-  background-color: var(--input-active);
-  color: var(--color-secondary);
-  padding: 40px;
-  border-radius: 20px;
+.sidebar .sidebar-list { 
   display: flex;
   flex-direction: column;
-  position: relative;
-  margin-bottom: 15px;
-}
-
-.sidebar .image-card {
-  padding: 0;
-}
-
-.sidebar .quote-content {
-  display: flex;
+  flex-wrap: wrap;
+  row-gap: 20px;
+  column-gap: 20px;
   align-items: flex-start;
 }
 
-.sidebar .icon .svg-icon {
+.sidebar .sidebar-list .sidebar-list-item {
+  width: 335px;
+}
+
+.sidebar .columns {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.sidebar .columns .column:first-of-type {
+  flex-shrink: 0;
+}
+
+.sidebar .columns .column:last-of-type {
+  flex-grow: 1;
+}
+
+.sidebar .sidebar-list .sidebar-list-item {
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.sidebar .quote-card, .sidebar .advice-card {
+  padding: 20px;
+}
+
+.sidebar .quote-card {
+  background-color: var(--color-primary);
+}
+
+.sidebar .quote-card .quote-content {
+  position: relative;
+}
+.sidebar .quote-card .quote-icon-wrapper {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.sidebar .quote-card .quote-content h2 {
+  color: var(--color-secondary);
+  font-size: 20px; 
+  line-height: 1;
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+
+.sidebar .quote-card .quote-content .quote-text {
+  color: var(--color-secondary-60);
+  font-size: 14px;
+  line-height: 1.3;
+  margin-bottom: 16px;
+}
+
+.sidebar .quote-card .quote-content .quote-author {
+  color: var(--color-secondary);
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.sidebar .quote-card .icon-wrapper {
   width: 32px;
   height: 32px;
-  fill: white;
-}
-
-.sidebar .quote-end-icon {
-  position: absolute;
-  top: 30px;
-  right: 20px;
-  width: 40px;
-  fill: var(--color-secondary);
-  height: 40px;
-}
-
-.sidebar h2 {
-  margin: 0;
-  font-size: 24px;
-}
-
-.sidebar #quote_text {
-  margin: 20px 0 0 0;
-  font-size: 18px;
-  line-height: 1.6;
-}
-
-.sidebar #quote_author {
-  margin-top: 20px;
-  font-style: italic;
-  font-size: 16px;
-}
-
-.sidebar .icon-wrapper {
-  margin-right: 15px;
-  fill: var(--color-secondary);
-  height: 38px;
-  width: 38px;
-  background-color: var(--color-dark-gray);
-  padding: 5px;
-  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: var(--color-secondary-20);
+  border-radius: 50%;
 }
 
-
-.sidebar h3 {
-  margin: 0;
-  font-size: 28px;
-  font-weight: 600;
-}
-
-.sidebar .subtitle {
-  margin: 5px 0;
-  font-size: 16px;
-  color: #888;
-}
-
-.sidebar .info-description {
-  margin: 0;
-  font-size: 16px;
-  line-height: 1.6;
-  color: #333;
-}
-
-.sidebar {
+.sidebar .icon-wrapper {
+  width: 32px;
+  height: 32px;
   display: flex;
-  flex-direction: column;
-  gap: 15px;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-secondary-20);
+  border-radius: 50%;
+}
+.sidebar .advice-card .icon-wrapper {
+  background-color: var(--color-primary);
+}
+.sidebar .icon-running-stick {
+  fill: var(--color-secondary);
+}
+.sidebar .icon-dumbbell {
+  fill: var(--color-white);
+}
+.sidebar .icon-quotes {
+  fill: var(--color-white);
+}
+.sidebar .advice-card {
+  background-color: var(--color-white);
+}
+.sidebar .title {
+  font-size: 20px;
+  line-height: 1;
+  font-weight: 500;
+}
+.sidebar .advice-card .info-content {
+  font-size: 14px;
+  line-height: 1.3;
+}
+.sidebar .advice-card .title {
+  margin-bottom: 2px;
+}
+.sidebar .advice-card .description {
+  margin-bottom: 16px;
+  color: var(--color-primary-60);
+  font-size: 14px;
+  line-height: 1.3;
 }
 
-.page-favorites .sidebar {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 15px;
+.page-favorites .advice-card .info-content {     
+  display: none;
 }
-
-.page-favorites .quote-block {
-  width: 50%;
+.page-favorites .sidebar .sidebar-list .list-item-quote-card { 
+  order: 1;
+}
+.page-favorites .sidebar .sidebar-list .list-item-advice-card {
+  order: 2;
+}
+.page-favorites .sidebar .sidebar-list .list-item-image-card {
   order: 3;
 }
 
+@media only screen and (min-width: 768px) {
+  .sidebar .sidebar-list {
+    flex-direction: row;
+    row-gap: 20px;
+    column-gap: 16px;
+  } 
+  .page-favorites .sidebar .sidebar-list {
+    row-gap: 16px;
+    column-gap: 16px;
+  }
+  .sidebar .sidebar-list .sidebar-list-item {
+    width: 400px;
+  }
+  .sidebar .sidebar-list .list-item-image-card {
+    width: 288px;
+  }
 
-.page-favorites .image-card {
-  order: 2;
-}
-
-
-.page-favorites .element {
-  order: 1;
-}
-
- .page-favorites .image-card,
- .page-favorites .element {
-   flex: 1 1 48%;
-   box-sizing: border-box;
- }
-
-.page-favorites .sidebar .info-description {
-  display: none;
-}
-@media  (max-width: 768px) {
-  .page-favorites .quote-block {
+  .sidebar .quote-card {
+    padding: 40px;
+  }
+  .sidebar .advice-card {
+    padding: 25px;
+  }
+  .sidebar .title {
+    font-size: 24px;
+    line-height: 1.3;
+  }
+  .page-favorites .sidebar {
     width: 100%;
   }
+  .page-favorites .sidebar .sidebar-list .list-item-quote-card {
+    width: 100%;
+  }
+
+  .page-favorites .sidebar .sidebar-list .list-item-advice-card {
+    width: 344px;
+  }
+
+  .page-favorites .sidebar .sidebar-list .list-item-image-card {
+    width: 344px;
+  }
 }
+
 @media only screen and (min-width: 1440px) {
-  .page-favorites .quote-block {
-    width: 100%;
-  }
-.page-favorites .sidebar{
-  flex-direction: row;
-}
-
-  .page-favorites .quote-block {
-    width: 50%;
-    order: 1;
-  }
-  .page-favorites .image-card {
-    order: 2;
-  }
-  .page-favorites .element {
-    order: 3;
-  }
-  .sidebar {
+  .sidebar {       
     width: 444px;
     flex-shrink: 0;
   }
-
-  .page-favorites .sidebar {
-    display: flex;
-    flex-direction: row-reverse;
+  .page-favorites .sidebar { 
     width: 494px;
-    flex-wrap: wrap;
   }
-
-  .page-favorites .sidebar .quote-block {
+  .sidebar .sidebar-list {
+    flex-direction: column;
+    row-gap: 32px;
+    column-gap: 32px;
+  }
+  .page-favorites .sidebar .sidebar-list {
+    flex-direction: row;
+  }
+  .sidebar .sidebar-list .sidebar-list-item {
     width: 100%;
   }
-
-  .page-favorites .sidebar .info-card {
-    width: 50%;
-    overflow: hidden
+  .sidebar .sidebar-list .list-item-image-card {
+    width: 100%;
   }
-
-  .page-favorites .sidebar .quote-block {
-    margin-bottom: 0px;
+  .page-favorites .sidebar .sidebar-list .list-item-advice-card {
+    width: 239px;
+  }
+  .page-favorites .sidebar .sidebar-list .list-item-image-card {
+    width: 239px;
   }
 }
 
