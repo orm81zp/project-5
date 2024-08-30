@@ -119,7 +119,7 @@
   
   .footer_form_btn:active {
     outline: var(--color-primary);
-    background-color: var(--input-active);
+    background-color:  var(--color-secondary-60);
     transform: scaleX(0.99);
     color: var(--color-secondary);
   }
@@ -294,7 +294,7 @@
   }
 
   .footer_form_btn.active {
-    background-color: var(-color-primary-20);
+    background-color: var(--color-secondary);
   }
   .footer_form > input.active {
     background-color: var(--color-secondary);
