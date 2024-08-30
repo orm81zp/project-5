@@ -16,7 +16,7 @@ import { gsap } from 'gsap';
 
   function isValidEmail(email) {
     const emailPattern =
-      /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
+      /^\w+(.\w+)?@[a-zA-Z_]+?.[a-zA-Z]{2,3}$/;
     return emailPattern.test(email);
   }
 
@@ -28,9 +28,11 @@ import { gsap } from 'gsap';
     if (isValidEmail(email)) {
       btnSubmit.classList.add('active');
       btnSubmit.disabled = false;
+      emailInput.classList.add('active')
     } else {
       btnSubmit.classList.remove('active');
       btnSubmit.disabled = true;
+      emailInput.classList.remove('active')
     }
   });
 
@@ -51,7 +53,6 @@ import { gsap } from 'gsap';
     event.preventDefault();
     const email = emailInput.value;
     if (!isValidEmail(email)) {
-      console.log('tyta');
       iziToast.error({
         title: 'Error',
         message: 'Invalid email address was entered.',
@@ -62,7 +63,6 @@ import { gsap } from 'gsap';
     const subscriptionData = {
       email: email,
     };
-    console.log(subscriptionData);
 
     Api.addSubscription(subscriptionData)
       .then(resp => {

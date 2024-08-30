@@ -298,4 +298,7 @@
   .footer_form_btn.active {
     background-color: var(--color-secondary);
   }
-  
+  .footer_form > input.active {
+    background-color: var(--color-secondary);
+    color: var(--color-primary);
+  }
