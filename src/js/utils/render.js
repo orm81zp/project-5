@@ -1,6 +1,6 @@
 export const renderFilters = (filters, container) => {
   const adjacentText = filters
-    .map(name => `<li class="item"><a href="#">${name}</a></li>`)
+    .map(name => `<li class="item"><a class="filter-link" href="#">${name}</a></li>`)
     .join('');
 
   container.insertAdjacentHTML('beforeend', adjacentText);
@@ -11,13 +11,13 @@ export const renderByFilters = (cards, container) => {
     .map(
       ({ filter, name, imgURL }) =>
         `
-      <li class="card-item">
+      <li class="card-item" data-exercise="${name}">
         <a class="card-link" href="#">
           <img
             src="${imgURL}"
             alt="${name}"
           />
-          <div class="card-content" data-category="${name}">
+          <div class="card-content">
             <div class="card-name">${name}</div>
             <div class="card-filter">${filter}</div>
           </div>
