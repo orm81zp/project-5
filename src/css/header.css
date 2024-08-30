@@ -120,7 +120,18 @@ header .container {
   top: 20px;
   right: 20px;
   border: none;
-  background: transparent;
+  background-color: var(--color-primary);
+}
+
+.mobile-menu .close .icon {
+  stroke: var(--color-secondary);
+  transition: stroke var(--trns-fast);
+}
+
+.mobile-menu .close:hover .icon,
+.mobile-menu .close:focus .icon,
+.mobile-menu .close:active .icon {
+  stroke: var(--color-secondary-60);
 }
 
 /* таблет версія */

@@ -20,7 +20,7 @@
   .footer_soc_link {
     padding: 8px;
     border-radius: 10px;
-    border: 1px solid rgba(244, 244, 244, 0.1);
+    border: 1px solid var(--color-secondary-10);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -33,14 +33,16 @@
   
   .footer_soc_link:hover,
   .footer_soc_link:focus {
-    background-color: var(--color-secondary);    
+    background-color: var(--color-secondary);   
   }
   .footer_soc_link:hover .footer_soc_icon,
   .footer_soc_link:focus .footer_soc_icon {
     fill: var(--color-primary);
     opacity: 0.8;
   }
-  
+  .footer_soc_link:hover .footer_soc_icon {
+    animation: shake 2s;
+  }
   .footer_title {
     opacity: 1;
   
@@ -234,11 +236,14 @@
     }
     .footer_wrap_info {
       margin-top: 0;
-      gap: 208px;
+      
     }
     .footer_text {
       margin-top: 0;
       margin-right: 58px;
+    }
+    .footer_text_year {
+      margin-left: 178px;
     }
   }
   @media screen and (min-width: 1440px) {
@@ -263,22 +268,23 @@
       width: 350px;
     }
     .footer_wrap2 {
+      display: flex;
       margin-top: 54px;
     }
     .footer_text {
-      margin-right: 136px;
+    margin-right: 122px;
     }
-  
     .team-btn-open {
-      margin-left: 15px;
+      margin-left: 50px;
       display: block;
       background-color: unset;
       border: none;
       color: var(--color-secondary);
       transition: all var(--trns-fast);
+      line-height: 18px;
     }
     .footer_text_year {
-      margin-left: 314px;
+      margin-left: 498px;
     }
     .team-btn-open:hover,
     .team-btn-open:focus {
@@ -290,4 +296,7 @@
   .footer_form_btn.active {
     background-color: var(--color-secondary);
   }
-  
+  .footer_form > input.active {
+    background-color: var(--color-secondary);
+    color: var(--color-primary);
+  }
