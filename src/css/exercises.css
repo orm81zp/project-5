@@ -137,14 +137,12 @@
 .modal-exercise-info {
   font-family: inherit;
   color: var(--color-primary);
-  max-width: 61px;
-  width: 100%;
-  justify-content: space-between;
   font-size: 14px;
   line-height: 1.29;
   background-color: transparent;
   border: none;
   cursor: pointer;
+  gap: 9px;
 }
 
 .icon-arrow {
