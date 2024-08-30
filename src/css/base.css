@@ -46,6 +46,10 @@ body > main {
   gap: 80px;
 }
 
+.page-favorites .main-container .container {
+  flex-direction: column;
+}
+
 .loader {
   height: 100%;
   display: flex;
@@ -61,7 +65,7 @@ body > main {
   border-bottom-color: transparent;
   border-radius: 50%;
   display: none;
-  box-sizing: border-box;
+
   animation: rotation 1s linear infinite;
   margin: 0 auto;
   display: block;
@@ -110,5 +114,8 @@ body > main {
   .main-container .container {
     flex-direction: row;
     gap: 32px;
+  }
+  .page-favorites .main-container .container {
+    flex-direction: row;
   }
 }

@@ -51,7 +51,18 @@
 }
 
 .breadcrumbs .icon-search, .breadcrumbs .icon-reset {
-  fill: var(--color-primary);
+  fill: var(--color-secondary);
+  stroke: var(--color-primary);
+  transition: stroke var(--trns-fast);
+}
+
+.breadcrumbs .search-field button:hover .icon-search,
+.breadcrumbs .search-field button:focus .icon-search,
+.breadcrumbs .search-field button:active .icon-search,
+.breadcrumbs .search-field button:hover .icon-reset,
+.breadcrumbs .search-field button:focus .icon-reset,
+.breadcrumbs .search-field button:active .icon-reset {
+  stroke: var(--color-primary-60);
 }
 
 .breadcrumbs .wrapper {

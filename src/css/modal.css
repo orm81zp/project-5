@@ -1,66 +1,282 @@
-.backdrop {
+.backdrop,
+.raiting.backdrop {
   position: fixed;
   inset: 0;
+  z-index: 99;
   background-color: var(--color-primary-50);
   transition: var(--trns-fast);
   transition-property: opacity, visibility;
 }
 
-.modal-exercise {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translateX(-50%) translateY(-50%) scale(1);
-  min-width: 335px;
-  min-height: 584px;
-  border-radius: 20px;
-  color: var(--color-secondary);
-  background-color: var(--color-primary);
-  transition: var(--trns-fast);
-  transition-property: opacity, transform;
-  padding: 40px 20px;
-}
-
-.backdrop.is-hidden {
+.backdrop.is-hidden,
+.raiting.backdrop.is-hidden {
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
 }
 
-.backdrop.is-hidden .modal-exercise {
+.backdrop.is-hidden .modal-exercise,
+.raiting.backdrop.is-hidden .modal-raiting {
   transform: translateX(-50%) translateY(-50%) scale(0.3);
   opacity: 0;
 }
 
-.modal-exercise .button-close {
+.modal-exercise,
+.modal-raiting {
   position: absolute;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  top: 24px;
-  right: 24px;
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  border: none;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%) scale(1);
+  border-radius: 20px;
+  color: var(--color-secondary);
   background-color: var(--color-primary);
-  transition: background-color var(--trns-fast);
-  cursor: pointer;
+  transition: var(--trns-fast);
+  transition-property: opacity, transform;
 }
 
-.modal-exercise .button-close:hover,
-.modal-exercise .button-close:focus,
-.modal-exercise .button-close:active {
-  background-color: var(--color-secondary);
+.modal-exercise {
+  width: 335px;
+  padding: 40px 20px 20px 20px;
 }
 
-.modal-exercise .button-close-icon {
+.modal-exercise .close,
+.modal-raiting .close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  border: none;
+  background-color: transparent;
+}
+
+.modal-exercise .close-icon,
+.modal-raiting .close-icon {
   stroke: var(--color-secondary);
   transition: stroke var(--trns-fast);
 }
 
-.modal-exercise .button-close:hover .button-close-icon,
-.modal-exercise .button-close:focus .button-close-icon,
-.modal-exercise .button-close:active .button-close-icon {
+.modal-exercise .close:hover .close-icon,
+.modal-exercise .close:focus .close-icon,
+.modal-exercise .close:active .close-icon,
+.modal-raiting .close:hover .close-icon,
+.modal-raiting .close:focus .close-icon,
+.modal-raiting .close:active .close-icon {
+  stroke: var(--color-secondary-60);
+}
+
+div[data-modal-content],
+.modal-exercise .modal-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.modal-exercise .gif-container,
+.modal-exercise .rating,
+.modal-exercise .rating-stars,
+.modal-exercise .rating-item,
+.modal-exercise .details,
+.modal-exercise .controls,
+.modal-exercise .favorite-button,
+.modal-exercise .rating-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.modal-exercise .details {
+  justify-content: flex-start;
+}
+
+.modal-exercise .gif-container {
+  width: 100%;
+  height: 100%;
+}
+
+.modal-exercise .modal-gif {
+  border-radius: 12px;
+}
+
+.modal-exercise .modal-header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  width: 100%;
+  border-bottom: 1px solid var(--color-secondary-40);
+  padding: 20px 0;
+}
+
+.modal-exercise .exercise-name {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.modal-exercise .capitalize:first-letter {
+  text-transform: uppercase;
+}
+
+.modal-exercise .rating-stars {
+  gap: 4px;
+}
+
+.modal-exercise .rating-value,
+.modal-exercise .details-value,
+.modal-exercise .description,
+.modal-exercise .favorite-button,
+.modal-exercise .rating-button {
+  font-size: 14px;
+  line-height: 18px;
+}
+
+.modal-exercise .rating-star {
+  position: relative;
+}
+
+.modal-exercise .rating-star.full,
+.modal-exercise .rating-star.partial .overlay {
+  fill: var(--color-gold);
+}
+
+.modal-exercise .rating-star.partial .overlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.modal-exercise .rating-star.partial,
+.modal-exercise .rating-star.empty {
+  fill: var(--color-secondary-20);
+}
+
+.modal-exercise .details {
+  flex-wrap: wrap;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--color-secondary-40);
+}
+
+.modal-exercise .details-header {
+  font-size: 12px;
+  line-height: 1.5;
+  font-weight: 400;
+  color: var(--color-secondary-40);
+}
+
+.modal-exercise .description {
+  color: var(--color-secondary-60);
+  padding: 20px 0;
+}
+
+.modal-exercise .controls {
+  flex-direction: column;
+  padding: 20px 0;
+}
+
+.modal-exercise .favorite-button,
+.modal-exercise .rating-button {
+  border-radius: 30px;
+  padding: 12px 0;
+  transition: var(--trns-fast);
+  transition-property: color, background-color, border-color;
+  border: 1px solid var(--color-secondary);
+}
+
+.modal-exercise .favorite-button {
+  width: 295px;
+  color: var(--color-primary);
+  background-color: var(--color-secondary);
+}
+
+.modal-exercise .favorite-button:hover {
+  background-color: var(--color-primary);
+  color: var(--color-secondary);
+}
+
+.modal-exercise .favorite-button .favorite-icon {
+  fill: var(--color-secondary);
   stroke: var(--color-primary);
+  transition: var(--trns-fast);
+  transition-property: stroke, fill;
+}
+
+.modal-exercise .favorite-button:hover .favorite-icon {
+  fill: var(--color-primary);
+  stroke: var(--color-secondary);
+}
+
+.modal-exercise .favorite-button.remove .favorite-icon {
+  fill: var(--color-primary);
+  stroke: var(--color-secondary);
+}
+
+.modal-exercise .favorite-button.remove:hover .favorite-icon {
+  fill: var(--color-secondary);
+  stroke: var(--color-primary);
+}
+
+.modal-exercise .rating-button {
+  width: 295px;
+  color: var(--color-secondary);
+  background-color: var(--color-primary);
+}
+
+.modal-exercise .rating-button:hover {
+  color: var(--color-primary);
+  background-color: var(--color-secondary);
+  border-color: var(--color-primary);
+}
+
+@media screen and (min-width: 768px) {
+  .modal-exercise {
+    width: 704px;
+    padding: 32px;
+  }
+
+  .modal-exercise .close-icon {
+    width: 28px;
+    height: 28px;
+  }
+
+  div[data-modal-content] {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 32px;
+  }
+
+  .modal-exercise .modal-content {
+    max-width: 338px;
+  }
+
+  .modal-exercise .modal-header {
+    padding-top: 0;
+  }
+
+  .modal-exercise .details {
+    gap: 16px;
+  }
+
+  .modal-exercise .description {
+    flex-grow: 1;
+  }
+
+  .modal-exercise .controls {
+    flex-direction: row;
+    justify-content: flex-end;
+    width: 100%;
+    padding-bottom: 0;
+  }
+
+  .modal-exercise .favorite-button {
+    width: 194px;
+  }
+
+  .modal-exercise .favorite-button.remove {
+    width: 242px;
+  }
+
+  .modal-exercise .rating-button {
+    width: 137px;
+  }
 }

@@ -1,11 +1,42 @@
 <div class="backdrop is-hidden" data-modal>
   <div class="modal-exercise">
-    <button type="button" class="button-close" data-modal-close>
-      <svg class="button-close-icon" width="24" height="24">
-        <use href="./img/icons.svg#icon-close"></use>
+    <button type="button" class="close" data-modal-close>
+      <svg class="close-icon" width="24" height="24">
+        <use href="./img/icons.svg#icon-cross"></use>
       </svg>
     </button>
-    <div data-modal-content>
+    <div сlass="content-container" data-modal-content>
     </div>
+    <ul class="controls">
+      <li class="controls-item">
+        <button class="favorite-button" data-modal-favorite>
+          Add to favorites
+          <svg class="favorite-icon" width="18" height="18">
+            <use href="./img/icons.svg#icon-heart"></use>
+          </svg>
+        </button>
+      </li>
+      <li class="controls-item">
+        <button class="rating-button" data-raiting-modal-open>Give a rating</button>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="raiting backdrop is-hidden" data-raiting-modal>
+  <div class="modal-raiting">
+    <button type="button" class="close" data-raiting-modal-close>
+      <svg class="close-icon" width="24" height="24">
+        <use href="./img/icons.svg#icon-cross"></use>
+      </svg>
+    </button>
+
+    <form class="raiting-form">
+      <a>Raiting</a>
+      <div class="raiting-indicator"><a class="raiting-value">0.0</a><div id="rater"></div></div>
+      <input type="email" placeholder="Email" autofocus/>
+      <textarea placeholder="Your comment" rows="5"></textarea>
+      <button type="submit">Send</button>
+    </form>
   </div>
 </div>
