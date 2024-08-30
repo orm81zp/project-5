@@ -6,7 +6,7 @@ import { gsap } from 'gsap';
 (() => {
   const footerWrapper = document.querySelector('footer');
   if (!footerWrapper) {
-    return; // Якщо футера немає на сторінці, код не виконується.
+    return; 
   }
 
   const formSubmit = document.querySelector('.js-footer-form');
@@ -16,7 +16,7 @@ import { gsap } from 'gsap';
 
   function isValidEmail(email) {
     const emailPattern =
-      /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
+      /^\w+(.\w+)?@[a-zA-Z_]+?.[a-zA-Z]{2,3}$/;
     return emailPattern.test(email);
   }
 
@@ -28,9 +28,11 @@ import { gsap } from 'gsap';
     if (isValidEmail(email)) {
       btnSubmit.classList.add('active');
       btnSubmit.disabled = false;
+      emailInput.classList.add('active')
     } else {
       btnSubmit.classList.remove('active');
       btnSubmit.disabled = true;
+      emailInput.classList.remove('active')
     }
   });
 
@@ -51,7 +53,6 @@ import { gsap } from 'gsap';
     event.preventDefault();
     const email = emailInput.value;
     if (!isValidEmail(email)) {
-      console.log('tyta');
       iziToast.error({
         title: 'Error',
         message: 'Invalid email address was entered.',
@@ -65,14 +66,14 @@ import { gsap } from 'gsap';
 
     Api.addSubscription(subscriptionData)
       .then(resp => {
-        const message = resp.data.message;
+        const message = resp.message;
         iziToast.success({
           title: 'Success',
           message: message,
         });
       })
       .catch(error => {
-        const badRequest = error.response.data.message;
+        const badRequest = error.response.message;
         if (error.response.status === 409) {
           iziToast.warning({
             title: 'Warning',
@@ -87,49 +88,6 @@ import { gsap } from 'gsap';
       });
     formSubmit.reset();
   }
-
-  const socialItems = document.querySelectorAll('.footer_soc_item');
-
-  socialItems.forEach(item => {
-    const icon = item.querySelector('.footer_soc_icon');
-    item.addEventListener('mouseenter', () => {
-      gsap.to(item, {
-        keyframes: {
-          '0%': { rotation: -5 },
-          '25%': { rotation: 5 },
-          '50%': { rotation: -5 },
-          '75%': { rotation: 5 },
-          '100%': { rotation: 0 },
-        },
-        duration: 0.5,
-        repeat: 1,
-      });
-
-      gsap.to(icon, {
-        keyframes: {
-          '0%': { x: -3 },
-          '25%': { x: 3 },
-          '50%': { x: -3 },
-          '75%': { x: 3 },
-          '100%': { x: 0 },
-        },
-        duration: 0.2,
-        repeat: 3,
-      });
-    });
-
-    item.addEventListener('mouseleave', () => {
-      gsap.to(item, {
-        rotation: 0,
-        duration: 0.2,
-      });
-
-      gsap.to(icon, {
-        x: 0,
-        duration: 0.2,
-      });
-    });
-  });
 
   const options = {
     root: null,

@@ -1,6 +1,14 @@
 import Api from './api';
+
 import { renderByExercises, renderByFilters, renderFilters } from './utils';
 import { setupPagination } from './setup-pagination';
+
+import {
+  getClosest,
+  renderByExercises,
+  renderByFilters,
+  renderFilters,
+} from './utils';
 
 (() => {
   const HIDDEN_CLASS = 'hidden';
@@ -196,8 +204,10 @@ import { setupPagination } from './setup-pagination';
   // filter click listerner
   const filterClickHandler = event => {
     event.preventDefault();
+    const isFilterLink =
+      event.target.className && event.target.className.includes('filter-link');
 
-    if (event.target.nodeName !== 'A') {
+    if (!isFilterLink) {
       return;
     }
 
@@ -211,14 +221,14 @@ import { setupPagination } from './setup-pagination';
   const exerciseClickHandler = event => {
     event.preventDefault();
     const { filter } = state;
+    const cardLink = getClosest(event.target, '.card-item');
 
-    if (event.target.nodeName !== 'DIV') {
+    if (!cardLink) {
       return;
     }
 
-    const exercise = event.target.dataset.category.trim();
-
-    if (exercise) {
+    if (cardLink.dataset && cardLink.dataset.exercise) {
+      const exercise = cardLink.dataset.exercise.trim();
       searchByExercise(filter, exercise);
     }
   };
