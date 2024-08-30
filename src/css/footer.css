@@ -33,7 +33,8 @@
   
   .footer_soc_link:hover,
   .footer_soc_link:focus {
-    background-color: var(--color-secondary);    
+    background-color: var(--color-secondary);   
+    animation: shake 2s; 
   }
   .footer_soc_link:hover .footer_soc_icon,
   .footer_soc_link:focus .footer_soc_icon {
@@ -271,10 +272,6 @@
     }
     .footer_text {
     margin-right: 122px;
-    }
-    
-    .footer_list_info{
-    
     }
     .team-btn-open {
       margin-left: 50px;
