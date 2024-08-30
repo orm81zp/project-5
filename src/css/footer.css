@@ -112,7 +112,7 @@
   
    .footer_form_btn:hover {
     outline: none;
-    background-color: var(--color-secondary);
+    background-color: var(--color-secondary-60);
     font-weight: 500;
     transform: scaleX(1.01);
   }
@@ -294,7 +294,7 @@
   }
 
   .footer_form_btn.active {
-    background-color: var(--color-secondary);
+    background-color: var(-color-primary-20);
   }
   .footer_form > input.active {
     background-color: var(--color-secondary);
