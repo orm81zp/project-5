@@ -7,6 +7,12 @@ header .container {
   padding-bottom: 20px;
 }
 
+.fixed-header {
+  position: fixed;
+  background-color: var(--color-secondary);
+  z-index: 1000;
+}
+
 .menu-wrapper {
   align-items: center;
   display: flex;
@@ -90,12 +96,12 @@ header .container {
   overflow: auto;
   pointer-events: auto;
   opacity: 1;
-  transition: all .25s linear;
+  transition: all 0.25s linear;
 }
 
 .mobile-menu-container.is-open .mobile-menu {
   transform: translateX(0);
-  transition: transform .25s linear;
+  transition: transform 0.25s linear;
 }
 
 .mobile-menu {
