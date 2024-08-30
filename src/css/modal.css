@@ -35,44 +35,45 @@
   opacity: 0;
 }
 
-.modal-exercise .button-close {
+.mobile-menu .close {
   position: absolute;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  top: 24px;
-  right: 24px;
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
+  top: 20px;
+  right: 20px;
   border: none;
   background-color: var(--color-primary);
-  transition: background-color var(--trns-fast);
-  cursor: pointer;
 }
 
-.modal-exercise .button-close:hover,
-.modal-exercise .button-close:focus,
-.modal-exercise .button-close:active,
-
-.modal-raiting .button-close:hover,
-.modal-raiting .button-close:focus,
-.modal-raiting .button-close:active{
-  background-color: var(--color-secondary);
-}
-
-.modal-exercise .button-close-icon,
-.modal-raiting .button-close-icon{
+.mobile-menu .close .icon {
   stroke: var(--color-secondary);
   transition: stroke var(--trns-fast);
 }
 
-.modal-exercise .button-close:hover .button-close-icon,
-.modal-exercise .button-close:focus .button-close-icon,
-.modal-exercise .button-close:active .button-close-icon,
+.mobile-menu .close:hover .icon,
+.mobile-menu .close:focus .icon,
+.mobile-menu .close:active .icon {
+  stroke: var(--color-secondary-60);
+}
 
-.modal-raiting .button-close:hover .button-close-icon,
-.modal-raiting .button-close:focus .button-close-icon,
-.modal-raiting .button-close:active .button-close-icon {
-  stroke: var(--color-primary);
+.modal-exercise .close,
+.modal-raiting .close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  border: none;
+  background-color: var(--color-primary);
+}
+
+.modal-exercise .close-icon,
+.modal-raiting .close-icon {
+  stroke: var(--color-secondary);
+  transition: stroke var(--trns-fast);
+}
+
+.modal-exercise .close:hover .close-icon,
+.modal-exercise .close:focus .close-icon,
+.modal-exercise .close:active .close-icon,
+.modal-raiting .close:hover .close-icon,
+.modal-raiting .close:focus .close-icon,
+.modal-raiting .close:active .close-icon {
+  stroke: var(--color-secondary-60);
 }
