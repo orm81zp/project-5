@@ -50,9 +50,10 @@ class Api {
    * @param {{ filter?: string, page?: number, limit?: number }} params
    */
   static async getFilters(params = {}) {
-    const { page = 1, limit = 12 } = params;
+    const { page = 1 } = params;
+    console.log('filters params:', params);
     const response = await client.get('/filters', {
-      params: { page, limit, ...params },
+      params: { page, ...params },
     });
     return response.data;
   }

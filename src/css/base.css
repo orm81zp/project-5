@@ -83,7 +83,7 @@ body > main {
   background-color: transparent;
   border: none;
   border-radius: 50%;
-  color: var(--inactive-pagination-color);
+  color: var(--color-hidden);
   padding: 0;
 }
 

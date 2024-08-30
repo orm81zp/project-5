@@ -1,6 +1,4 @@
 import Api from './api';
-
-import { renderByExercises, renderByFilters, renderFilters } from './utils';
 import { setupPagination } from './setup-pagination';
 
 import {
@@ -12,6 +10,7 @@ import {
 
 (() => {
   const HIDDEN_CLASS = 'hidden';
+  const PAGE = 1;
   const FILTERS = {
     muscles: 'Muscles',
     bodyParts: 'Body parts',
@@ -167,20 +166,22 @@ import {
       clearBreadcrumbs();
       showLoader();
       showSearchField(true, true);
-      const response = await Api.getFilters({ filter });
+      const limit = window.innerWidth < 768 ? 9 : 12
+      const response = await Api.getFilters({ filter, limit });
       const { results } = response;
       state.filter = filter;
 
       renderByFilters(results, cards);
 
-      // todo
+      // setup pagination
       pagination.innerHTML = '';
-      console.log('res filters:', results);
-      if (results.count > 1) {
+      const perPage = window.innerWidth > 1280 ? 10000 : window.innerWidth < 768 ? 8 : 10;
+      const totalPages = results.length > perPage ? Math.ceil(results.length / perPage) : 1;
+      if (totalPages > 1) {
         setupPagination({
-          params: params,
-          totalPages: results?.totalPages,
-          method: searchByExercise,
+          params: {page: 1},
+          totalPages: totalPages,
+          method: searchByFilter,
         });
       }
 
@@ -200,6 +201,34 @@ import {
       showLoader(true);
     }
   };
+
+  // export function fetchFavorites(params) {
+  //   const perPage = window.innerWidth > 1280 ? 10000 : window.innerWidth < 768 ? 8 : 10;
+  //   const favoritesMap = JSON.parse(localStorage.getItem(constants.FAV_KEY)) ?? [];
+  //   const exercises = Object.values(favoritesMap);
+  //   if (exercises && exercises.length) {
+  //     const start = params && params.page ? (parseInt(params.page) - 1) * perPage : 0;
+  //     const slicedExercises = exercises.slice(start, start + perPage);
+  //     document.querySelector('.content').innerHTML = createExerciseMarkup(slicedExercises, true);
+  //     document.querySelector('.pagination').innerHTML = '';
+  //     const totalPages = exercises.length > perPage ? Math.ceil(exercises.length / perPage) : 1;
+  //     if (totalPages > 1) {
+  //       createPagination({
+  //         params: params,
+  //         totalPages: totalPages,
+  //         method: fetchFavorites,
+  //       });
+  //     }
+  //     attachExerciseModalListeners();
+  //     attachRemoveFavoriteListeners();
+  //   } else {
+  //     document.querySelector('.content').innerHTML = `<p class="empty">
+  //         It appears that you haven't added any exercises to your favorites yet.
+  //         To get started, you can add exercises that you like to your favorites for easier access in the future.
+  //       </p>`;
+  //     document.querySelector('.pagination').innerHTML = '';
+  //   }
+  // }
 
   // filter click listerner
   const filterClickHandler = event => {

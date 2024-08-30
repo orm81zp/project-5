@@ -4,6 +4,10 @@
   width: 100%;
 }
 
+.exercises .content-wrap {
+  margin-bottom: 32px;
+}
+
 .exercises-ratio,
 .modal-exercise-info {
   padding: 0;
