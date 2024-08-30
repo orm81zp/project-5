@@ -34,14 +34,15 @@
   .footer_soc_link:hover,
   .footer_soc_link:focus {
     background-color: var(--color-secondary);   
-    animation: shake 2s; 
   }
   .footer_soc_link:hover .footer_soc_icon,
   .footer_soc_link:focus .footer_soc_icon {
     fill: var(--color-primary);
     opacity: 0.8;
   }
-  
+  .footer_soc_link:hover .footer_soc_icon {
+    animation: shake 2s;
+  }
   .footer_title {
     opacity: 1;
   
