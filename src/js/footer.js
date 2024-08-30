@@ -38,6 +38,9 @@ import { gsap } from 'gsap';
 
   emailInput.addEventListener('blur', () => {
     const email = emailInput.value;
+    if (email === '') {
+      return;
+    }
 
     if (!isValidEmail(email)) {
       iziToast.error({
