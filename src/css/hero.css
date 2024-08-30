@@ -1,16 +1,4 @@
-body,
-html {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-}
-
-.header {
-    background-color: #fff;
-    padding: 10px 0;
-}
-
+/* Hero */
 .hero {
     display: flex;
     flex-direction: column;
@@ -18,18 +6,12 @@ html {
     justify-content: center;
     text-align: center;
     padding: 20px;
-    background-color: #fff;
+    background-color: var(--color-primary);
     border-radius: 15px;
     margin: 20px;
 }
 
-.container {
-    max-width: 1200px;
-    width: 100%;
-    padding: 0 20px;
-}
-
-.hero-content {
+.hero .hero-content {
     max-width: 600px;
 }
 
@@ -39,11 +21,11 @@ html {
     animation: fadeIn 1s forwards;
 }
 
-.fade-in-delay {
+.hero .fade-in-delay {
     animation-delay: 0.5s;
 }
 
-.tags {
+.hero.tags {
     display: flex;
     gap: 10px;
     flex-wrap: wrap;
@@ -53,32 +35,24 @@ html {
     animation-delay: 1s;
 }
 
-.tags .tag {
+.hero .tags .tag {
     background-color: #e0e0e0;
     padding: 5px 10px;
     border-radius: 20px;
     font-size: 0.9em;
 }
 
-.hero-image img {
+.hero .hero-main-image img {
     max-width: 100%;
     border-radius: 15px;
     margin-top: 20px;
     opacity: 0;
-    transform: translateY(20px);
     animation: slideUp 1s forwards;
     animation-delay: 1.5s;
 }
 
-@keyframes fadeIn {
-    to {
-        opacity: 1;
-    }
+.hero .hero-small-image {
+    display: none;
 }
 
-@keyframes slideUp {
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
+
