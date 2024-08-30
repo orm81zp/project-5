@@ -5,61 +5,52 @@ import { gsap } from 'gsap';
 
 (() => {
   const footerWrapper = document.querySelector('footer');
-  const headerLogo = document.querySelector('.header_logo_icon'); // Правильний селектор для логотипу хедера
-  console.log('Header logo:', headerLogo);
-  const footerLogo = document.querySelector('.footer_logo_icon');
-  const footerTitleSpan = document.querySelector('.footer_title_span');
-
-  if (!footerWrapper && !headerLogo) {
+  if (!footerWrapper) {
     return; 
   }
 
   const formSubmit = document.querySelector('.js-footer-form');
   const emailInput = document.querySelector('input[type="email"]');
   const btnSubmit = document.querySelector('.footer_form_btn');
-
-  if (btnSubmit) {
-    btnSubmit.addEventListener('click', fetchSubscription);
-  }
+  btnSubmit.addEventListener('click', fetchSubscription);
 
   function isValidEmail(email) {
-    const emailPattern = /^\w+(.\w+)?@[a-zA-Z_]+?.[a-zA-Z]{2,3}$/;
+    const emailPattern =
+      /^\w+(.\w+)?@[a-zA-Z_]+?.[a-zA-Z]{2,3}$/;
     return emailPattern.test(email);
   }
 
-  if (emailInput) {
-    btnSubmit.disabled = true;
+  btnSubmit.disabled = true;
 
-    emailInput.addEventListener('input', () => {
-      const email = emailInput.value;
+  emailInput.addEventListener('input', () => {
+    const email = emailInput.value;
 
-      if (isValidEmail(email)) {
-        btnSubmit.classList.add('active');
-        btnSubmit.disabled = false;
-        emailInput.classList.add('active');
-      } else {
-        btnSubmit.classList.remove('active');
-        btnSubmit.disabled = true;
-        emailInput.classList.remove('active');
-      }
-    });
+    if (isValidEmail(email)) {
+      btnSubmit.classList.add('active');
+      btnSubmit.disabled = false;
+      emailInput.classList.add('active')
+    } else {
+      btnSubmit.classList.remove('active');
+      btnSubmit.disabled = true;
+      emailInput.classList.remove('active')
+    }
+  });
 
-    emailInput.addEventListener('blur', () => {
-      const email = emailInput.value;
-      if (email === '') {
-        return;
-      }
+  emailInput.addEventListener('blur', () => {
+    const email = emailInput.value;
+    if (email === '') {
+      return;
+    }
 
-      if (!isValidEmail(email)) {
-        iziToast.error({
-          title: 'Error',
-          message: 'Invalid email address was entered.',
-        });
-      } else {
-        btnSubmit.classList.add('active');
-      }
-    });
-  }
+    if (!isValidEmail(email)) {
+      iziToast.error({
+        title: 'Error',
+        message: 'Invalid email address was entered.',
+      });
+    } else {
+      btnSubmit.classList.add('active');
+    }
+  });
 
   function fetchSubscription(event) {
     event.preventDefault();
@@ -72,7 +63,9 @@ import { gsap } from 'gsap';
       return;
     }
 
-    const subscriptionData = { email: email };
+    const subscriptionData = {
+      email: email,
+    };
 
     Api.addSubscription(subscriptionData)
       .then(resp => {
@@ -107,19 +100,19 @@ import { gsap } from 'gsap';
     rootMargin: '0px',
     threshold: 0,
   };
-
   // Анімація для логотипу хедера
+  const headerLogo = document.querySelector('#header_logo_icon');
   if (headerLogo) {
     const headerObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          gsap.to(headerLogo, {
-            duration: 2,
-            opacity: 1,
-            x: 0,
-            rotationX: 360,
-          });
-        }
+        if (!entry.isIntersecting) return;
+
+        gsap.to(headerLogo, {
+          duration: 2,
+          opacity: 1,
+          x: 0,
+          rotationX: 360,
+        });
       });
     }, options);
 
@@ -127,24 +120,27 @@ import { gsap } from 'gsap';
   }
 
   // Анімація для логотипу футера
-  if (footerLogo && footerTitleSpan) {
+  const icon = document.querySelector('.footer_logo_icon');
+  const text = document.querySelector('.footer_title_span');
+
+  if (icon) {
     const footerObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          gsap.to(footerLogo, {
-            duration: 2,
-            opacity: 1,
-            x: 0,
-            rotationX: 360,
-          });
-          gsap.to(footerTitleSpan, {
-            duration: 2,
-            opacity: 1,
-          });
-        }
+        if (!entry.isIntersecting) return;
+
+        gsap.to(icon, {
+          duration: 2,
+          opacity: 1,
+          x: 0,
+          rotationX: 360,
+        });
+        gsap.to(text, {
+          duration: 2,
+          opacity: 1,
+        });
       });
     }, options);
 
-    footerObserver.observe(footerLogo);
+    footerObserver.observe(icon);
   }
 })();
