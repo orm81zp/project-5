@@ -1,21 +1,16 @@
-import Api from './api/index';
-import { renderExerciseModal, updateFavoriteButton, getClosest } from './utils';
-import rater from 'rater-js';
-import 'izitoast/dist/css/iziToast.min.css';
 import iziToast from 'izitoast';
-import { LOCAL_STORAGE_KEY } from './const';
+import 'izitoast/dist/css/iziToast.min.css';
+import rater from 'rater-js';
+import Api from './api/index';
+import { LOCAL_STORAGE_KEY, UPDATE_LOCAL_STORAGE_EVENT } from './const';
+import { getClosest, renderExerciseModal, updateFavoriteButton } from './utils';
 
 let refs = {};
 let raitingRefs = {};
 let modalId;
 
 const getFavorites = () => {
-  let favorites = localStorage.getItem(LOCAL_STORAGE_KEY);
-  if (favorites === null) {
-    return [];
-  }
-
-  return JSON.parse(favorites);
+  return JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) || [];
 };
 
 const isFavoriteId = id => {
@@ -25,6 +20,12 @@ const isFavoriteId = id => {
   }
 
   return ids.includes(id);
+};
+
+const storeUpdated = () => {
+  document.dispatchEvent(
+    new CustomEvent(UPDATE_LOCAL_STORAGE_EVENT, { detail: getFavorites() })
+  );
 };
 
 const processFavorites = () => {
@@ -37,6 +38,7 @@ const processFavorites = () => {
   if (!ids) {
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify([id]));
     updateFavoriteButton(isFavoriteId(id), refs.favorite);
+    storeUpdated();
     return;
   }
 
@@ -48,6 +50,7 @@ const processFavorites = () => {
 
   localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(ids));
   updateFavoriteButton(isFavoriteId(id), refs.favorite);
+  storeUpdated();
 };
 
 const resetExerciseModal = async id => {
