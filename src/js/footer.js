@@ -62,17 +62,18 @@ import { gsap } from 'gsap';
     const subscriptionData = {
       email: email,
     };
+    console.log(subscriptionData);
 
     Api.addSubscription(subscriptionData)
       .then(resp => {
-        const message = resp.data.message;
+        const message = resp.message;
         iziToast.success({
           title: 'Success',
           message: message,
         });
       })
       .catch(error => {
-        const badRequest = error.response.data.message;
+        const badRequest = error.response.message;
         if (error.response.status === 409) {
           iziToast.warning({
             title: 'Warning',
