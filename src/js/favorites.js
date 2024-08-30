@@ -1,5 +1,5 @@
 import Api from './api';
-import { LOCAL_STORAGE_KEY } from './const';
+import { LOCAL_STORAGE_KEY, UPDATE_LOCAL_STORAGE_EVENT } from './const';
 import {
   clearContent,
   getClosest,
@@ -17,19 +17,8 @@ import {
     exercisesIds: [],
   };
 
-  // TODO remove mock data before going to LIVE
-  const MOCK_EXERCISES = [
-    '64f389465ae26083f39b1b16',
-    '64f389465ae26083f39b1b22',
-    '64f389465ae26083f39b19d8',
-    '64f389465ae26083f39b1b08',
-    '64f389465ae26083f39b1859',
-    '64f389465ae26083f39b1a3a',
-    '64f389465ae26083f39b1964',
-  ];
-
   state.exercisesIds =
-    JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) || MOCK_EXERCISES;
+    JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) || [];
   const exercisesContainer = favoritesWrapper.querySelector('.cards-exercises');
   const favoritesWrapperContainer =
     favoritesWrapper.querySelector('.favorites-wrapper');
@@ -37,31 +26,56 @@ import {
     '.notification-message'
   );
 
-  // helpers
-  const removeIdFromStorage = exerciseId => {
-    state.exercisesIds = state.exercisesIds.filter(id => id !== exerciseId);
+  const removeExerciseFromUI = exerciseId => {
+    const cardItem = exercisesContainer.querySelector(
+      `.card-item[data-id="${exerciseId}"]`
+    );
+
+    if (cardItem) {
+      exercisesContainer.removeChild(cardItem);
+    }
   };
 
-  const exerciseClickHandler = event => {
+  const isExistsFilter = exerciseId => {
+    const cardItem = exercisesContainer.querySelector(
+      `.card-item[data-id="${exerciseId}"]`
+    );
+
+    return cardItem ? false : true;
+  };
+
+  // helpers
+  const removeById = exerciseId => {
+    try {
+      const exercisesFromStore =
+        JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) || [];
+      const exercisesIds = exercisesFromStore.filter(id => id !== exerciseId);
+      state.exercisesIds = exercisesIds;
+      localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(exercisesIds));
+      removeExerciseFromUI(exerciseId);
+      if (exercisesIds.length === 0) {
+        messageContainer.classList.remove('hidden');
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const removeClickHandler = event => {
     event.preventDefault();
-    // check if clicked trash-button
     const className = event.target.className;
     const isTrashButton = className && className.includes('trash-link');
 
     if (isTrashButton) {
       const cardItem = getClosest(event.target, '.card-item');
-
       if (cardItem && cardItem.dataset) {
-        removeIdFromStorage(cardItem.dataset.id);
-        const { exercisesIds } = state;
-        searchExercises(exercisesIds);
+        removeById(cardItem.dataset.id);
       }
     }
   };
 
   const searchExercises = async exercisesIds => {
     if (!exercisesIds || exercisesIds.length === 0) {
-      clearContent(exercisesContainer);
       messageContainer.classList.remove('hidden');
       return;
     }
@@ -72,7 +86,7 @@ import {
       clearContent(exercisesContainer);
       showLoader(favoritesWrapperContainer);
       const [...exercises] = await Promise.all(
-        exercisesIds.map(id => Api.getExerciseById(id))
+        exercisesIds.filter(isExistsFilter).map(id => Api.getExerciseById(id))
       );
       renderByExercises(exercises, exercisesContainer, true);
     } catch (error) {
@@ -82,6 +96,11 @@ import {
     }
   };
 
-  exercisesContainer.addEventListener('click', exerciseClickHandler);
+  exercisesContainer.addEventListener('click', removeClickHandler);
+
+  document.addEventListener(UPDATE_LOCAL_STORAGE_EVENT, event => {
+    searchExercises(event.detail);
+  });
+
   searchExercises(state.exercisesIds);
 })();
