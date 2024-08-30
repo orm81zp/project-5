@@ -13,9 +13,9 @@
     <title>Your energy</title>
     <script type="module" crossorigin src="/project-5/index.js"></script>
     <link rel="modulepreload" crossorigin href="/project-5/assets/vendor-DvC1QdLM.js">
-    <link rel="modulepreload" crossorigin href="/project-5/assets/main-Ownt9dzo.js">
+    <link rel="modulepreload" crossorigin href="/project-5/assets/main-DyDzi15V.js">
+    <link rel="stylesheet" crossorigin href="/project-5/assets/main-V5LAvtQx.css">
     <link rel="stylesheet" crossorigin href="/project-5/assets/vendor-DnveWo0P.css">
-    <link rel="stylesheet" crossorigin href="/project-5/assets/main-DXAYbDmx.css">
   </head>
   <body>
     <header id="header" class="header">
@@ -127,50 +127,54 @@
       <div class="main-container">
         <div class="container">
           <section class="sidebar">
-  <div class="quote-block">
-    <div class="quote-content">
-      <div class="icon-wrapper">
-        <svg class="sidebar-icon-1" width="32" height="32">
-          <use href="/project-5/assets/icons-DTua4FNh.svg#icon-running-stick"></use>
-        </svg>
+  <ul class="sidebar-list">
+    <li class="sidebar-list-item list-item-quote-card">
+      <div class="columns quote-card">
+        <div class="column icon-wrapper">
+          <svg class="icon-running-stick" width="18" height="20">
+            <use href="/project-5/assets/icons-DTua4FNh.svg#icon-running-stick"></use>
+          </svg>
+        </div>
+        <div class="column quote-content">
+          <h2 class="title">Quote of the day</h2>
+          <p class="quote-text" id="quote-text"></p>
+          <div class="quote-author" id="quote-author"></div>
+          <div class="quote-icon-wrapper">
+            <svg class="icon-quotes" width="24" height="24">
+              <use href="/project-5/assets/icons-DTua4FNh.svg#icon-quotes"></use>
+            </svg>
+          </div>
+        </div>
       </div>
-      <div>
-        <h2>Quote of the day</h2>
-        <p id="quote_text"></p>
-        <footer id="quote_author"></footer>
+    </li>
+    <li class="sidebar-list-item list-item-image-card">
+      <div class="image-card">
+        <img src="/project-5/assets/sports-DtOz7Lwc.png" alt="Two women talking after a workout" />
       </div>
-      <div class="quote-end-icon">
-        <svg class="sidebar-icon-2" width="32" height="32">
-          <use href="/project-5/assets/icons-DTua4FNh.svg#icon-quotes"></use>
-        </svg>
+    </li>
+    <li class="sidebar-list-item list-item-advice-card">
+      <div class="columns advice-card">
+        <div class="column icon-wrapper">
+          <svg class="icon-dumbbell" width="20" height="20">
+            <use href="/project-5/assets/icons-DTua4FNh.svg#icon-dumbbell"></use>
+          </svg>
+        </div>
+        <div class="column advice-content">
+          <h3 class="title">110 min</h3>
+          <p class="description">Daily norm of sports</p>
+          <p class="info-content">
+            The World Health Organization recommends at least 150 minutes of
+            moderate-intensity aerobic physical activity throughout the week for
+            adults aged 18-64. However, what happens if we adjust that number to
+            110 minutes every day? While it might seem like a high number to
+            hit, dedicating 110 minutes daily to sporting activities may offer
+            unparalleled benefits to physical health, mental well-being, and
+            overall quality of life.
+          </p>
+        </div>
       </div>
-    </div>
-  </div>
-  <div class="info-card image-card">
-    <img src="/project-5/assets/sports-DtOz7Lwc.png" alt="Two women talking after a workout" />
-  </div>
-  <div class="info-card element">
-    <div class="elm">
-      <div class="icon">
-        <svg class="sidebar-icon-3" width="32" height="32">
-          <use href="/project-5/assets/icons-DTua4FNh.svg#icon-dumbbell"></use>
-        </svg>
-      </div>
-      <div>
-        <h3>110 min</h3>
-        <p class="subtitle">Daily norm of sports</p>
-        <p class="info-description">
-          The World Health Organization recommends at least 150 minutes of
-          moderate-intensity aerobic physical activity throughout the week for
-          adults aged 18-64. However, what happens if we adjust that number to
-          110 minutes every day? While it might seem like a high number to hit,
-          dedicating 110 minutes daily to sporting activities may offer
-          unparalleled benefits to physical health, mental well-being, and
-          overall quality of life.
-        </p>
-      </div>
-    </div>
-  </div>
+    </li>
+  </ul>
 </section>
 
           <section class="exercises">
