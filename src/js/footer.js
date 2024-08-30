@@ -74,6 +74,9 @@ import { gsap } from 'gsap';
           title: 'Success',
           message: message,
         });
+        btnSubmit.disabled = true;
+        emailInput.classList.remove('active');
+        btnSubmit.classList.remove('active');
       })
       .catch(error => {
         const badRequest = error.response.message;
