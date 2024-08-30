@@ -100,7 +100,7 @@ const setupExerciseModal = () => {
 
   refs.opener.addEventListener('click', event => {
     const className = event.target.className;
-    const isStartButton = className && className.includes('__start');
+    const isStartButton = className && className.includes('modal-exercise-info');
 
     if (isStartButton) {
       event.preventDefault();
