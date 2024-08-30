@@ -1,5 +1,9 @@
 import iconsPath from '../../img/icons.svg';
 
+export const convertRating = (rating) => {
+  return rating % 1 ? `${Math.round(rating * 10) / 10}` : `${rating}.0`;
+}
+
 export const renderFilters = (filters, container) => {
   const adjacentText = filters
     .map(
@@ -54,7 +58,7 @@ export const renderByExercises = (exercises, container, isFavorite = false) => {
                 <use href="${iconsPath}#icon-trash"></use>
               </svg>
             </a>`
-          : `<div class="__rating">${rating}</div>`;
+          : `<div class="exercises-ratio"><p class="ratio-value">${convertRating(rating)}</p><svg class="icon-star ratio-star" width="20" height="20"><use href="${iconsPath}#icon-star"></use></svg></div>`;
 
         return `
       <li class="card-item" data-id="${_id}">
@@ -63,9 +67,10 @@ export const renderByExercises = (exercises, container, isFavorite = false) => {
             <div class="__badge">WORKOUT</div>
             ${ratingOrTrash}
           </div>
-          <div>
-            <a class="__start" href="#" data-id="${_id}">Start</a>
-          </div>
+          <button class="modal-exercise-info" type="button" data-id="${_id}">
+                        <span>Start</span>
+                        <svg class="icon-arrow-right icon-arrow" width="12" height="12"><use href="${iconsPath}#icon-arrow-right"></use></svg>
+          </button>
         </div>
         <div class="card-content">
           <img
