@@ -10,12 +10,7 @@ let raitingRefs = {};
 let modalId;
 
 const getFavorites = () => {
-  let favorites = localStorage.getItem(LOCAL_STORAGE_KEY);
-  if (favorites === null) {
-    return [];
-  }
-
-  return JSON.parse(favorites);
+  return JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) || [];
 };
 
 const isFavoriteId = id => {
@@ -25,6 +20,12 @@ const isFavoriteId = id => {
   }
 
   return ids.includes(id);
+};
+
+const storeUpdated = () => {
+  document.dispatchEvent(
+    new CustomEvent(UPDATE_LOCAL_STORAGE_EVENT, { detail: getFavorites() })
+  );
 };
 
 const processFavorites = () => {
@@ -37,10 +38,7 @@ const processFavorites = () => {
   if (!ids) {
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify([id]));
     updateFavoriteButton(isFavoriteId(id), refs.favorite);
-
-    document.dispatchEvent(
-      new CustomEvent(UPDATE_LOCAL_STORAGE_EVENT, { detail: getFavorites() })
-    );
+    storeUpdated();
     return;
   }
 
@@ -52,9 +50,7 @@ const processFavorites = () => {
 
   localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(ids));
   updateFavoriteButton(isFavoriteId(id), refs.favorite);
-  document.dispatchEvent(
-    new CustomEvent(UPDATE_LOCAL_STORAGE_EVENT, { detail: getFavorites() })
-  );
+  storeUpdated();
 };
 
 const resetExerciseModal = async id => {

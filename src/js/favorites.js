@@ -53,6 +53,9 @@ import {
       state.exercisesIds = exercisesIds;
       localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(exercisesIds));
       removeExerciseFromUI(exerciseId);
+      if (exercisesIds.length === 0) {
+        messageContainer.classList.remove('hidden');
+      }
     } catch (error) {
       console.log(error);
     }
