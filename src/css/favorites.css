@@ -20,9 +20,14 @@
   font-size: 18px;
   line-height: 1.33;
   text-align: center;
-  height: 100%;
   margin: auto;
-  vertical-align: auto;
+  display: none;
+  align-items: center;
+  height: 100%;
+}
+
+.favorites .notification-message.vissible {
+  display: flex;
 }
 
 /* tablet */
