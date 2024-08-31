@@ -34,12 +34,18 @@
 }
 
 .exercises .cards .card-link:hover .card-content {
-  background-color: transparent;
+  background-color: var(--color-primary-10);
 }
 
 .exercises .cards .card-link:hover,
 .exercises .cards .card-link:focus {
   box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.35);
+  transition: transform var(--trns-fast);
+  transform: scale(1.02);
+}
+
+.exercises .cards .card-link:hover .card-name {
+  animation: pulse 1s ease-out infinite;
 }
 
 .exercises .cards .card-content {
@@ -54,7 +60,7 @@
   align-items: center;
   justify-content: center;
   gap: 4px;
-  transition: var(--trns-fast);
+  transition: all var(--trns-fast);
 }
 
 .exercises .cards .card-name {
