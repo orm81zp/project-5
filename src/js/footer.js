@@ -2,6 +2,7 @@ import 'izitoast/dist/css/iziToast.min.css';
 import iziToast from 'izitoast';
 import Api from './api/index';
 import { gsap } from 'gsap';
+import { isValidEmail } from './utils';
 
 (() => {
   const footerWrapper = document.querySelector('footer');
@@ -13,12 +14,6 @@ import { gsap } from 'gsap';
   const emailInput = document.querySelector('input[type="email"]');
   const btnSubmit = document.querySelector('.footer_form_btn');
   btnSubmit.addEventListener('click', fetchSubscription);
-
-  function isValidEmail(email) {
-    const emailPattern =
-      /^\w+(.\w+)?@[a-zA-Z_]+?.[a-zA-Z]{2,3}$/;
-    return emailPattern.test(email);
-  }
 
   btnSubmit.disabled = true;
 

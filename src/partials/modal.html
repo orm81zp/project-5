@@ -5,8 +5,7 @@
         <use href="./img/icons.svg#icon-cross"></use>
       </svg>
     </button>
-    <div сlass="content-container" data-modal-content>
-    </div>
+    <div class="content-container" data-modal-content></div>
     <ul class="controls">
       <li class="controls-item">
         <button class="favorite-button" data-modal-favorite>
@@ -17,26 +16,31 @@
         </button>
       </li>
       <li class="controls-item">
-        <button class="rating-button" data-raiting-modal-open>Give a rating</button>
+        <button class="rating-button" data-rating-modal-open>
+          Give a rating
+        </button>
       </li>
     </ul>
   </div>
 </div>
 
-<div class="raiting backdrop is-hidden" data-raiting-modal>
-  <div class="modal-raiting">
-    <button type="button" class="close" data-raiting-modal-close>
+<div class="rating backdrop is-hidden" data-rating-modal>
+  <div class="modal-rating">
+    <button type="button" class="close" data-rating-modal-close>
       <svg class="close-icon" width="24" height="24">
         <use href="./img/icons.svg#icon-cross"></use>
       </svg>
     </button>
 
-    <form class="raiting-form">
-      <a>Raiting</a>
-      <div class="raiting-indicator"><a class="raiting-value">0.0</a><div id="rater"></div></div>
-      <input type="email" placeholder="Email" autofocus/>
+    <form class="rating-form">
+      <h3 class="rating-form-title">Rating</h3>
+      <div class="rating-indicator">
+        <a class="rater-value">0.0</a>
+        <div id="rater"></div>
+      </div>
+      <input placeholder="Email" autofocus />
       <textarea placeholder="Your comment" rows="5"></textarea>
-      <button type="submit">Send</button>
+      <button type="submit" disabled>Send</button>
     </form>
   </div>
 </div>
