@@ -6,7 +6,7 @@ import { LOCAL_STORAGE_KEY, UPDATE_LOCAL_STORAGE_EVENT } from './const';
 import { getClosest, renderExerciseModal, updateFavoriteButton, isValidEmail } from './utils';
 
 let refs = {};
-let raitingRefs = {};
+let ratingRefs = {};
 let modalId;
 
 const getFavorites = () => {
@@ -65,7 +65,7 @@ const resetExerciseModal = async id => {
 
     refs.modal.classList.toggle('is-hidden');
 
-    setupRaitingModal(id);
+    setupratingModal(id);
   } catch (error) {
     iziToast.error({
       title: 'Error',
@@ -133,30 +133,34 @@ const setupExerciseModal = () => {
   });
 };
 
-function setValueToRaiting(raiting) {
-  let value = document.querySelector('.raiting-value');
-  value.innerText = `${raiting.toFixed(1)}`;
+function setValueToRating(rating) {
+  let value = document.querySelector('.rater-value');
+  value.innerText = `${rating.toFixed(1)}`;
 }
 
 let myRater = rater({
   starSize: 20,
   element: document.querySelector('#rater'),
-  rateCallback: function rateCallback(raiting, done) {
-    setValueToRaiting(raiting);
-    this.setRating(raiting);
+  rateCallback: function rateCallback(rating, done) {
+    setValueToRating(rating);
+    this.setRating(rating);
     done();
   },
 });
 
 function resetRateForm() {
-  document.querySelector('.raiting-form input').value = '';
-  document.querySelector('.raiting-form textarea').value = '';
+  document.querySelector('.rating-form input').value = '';
+  document.querySelector('.rating-form textarea').value = '';
   myRater.clear();
 }
 
-function sendRaiting(event) {
+function hasErrorResponseMessage(error){
+  return ('response' in error) && ('data' in error.response) && ('message' in error.response.data)
+}
+
+const sendRating = async event => {
   try {
-    Api.addRateByExerciseId(modalId, {
+    await Api.addRateByExerciseId(modalId, {
       rate: myRater.getRating(),
       email: event.target[0].value,
       review: event.target[1].value,
@@ -164,19 +168,19 @@ function sendRaiting(event) {
   } catch (error) {
     iziToast.error({
       title: 'Error',
-      message: 'Unable to send rate',
+      message: (hasErrorResponseMessage(error) ? error.response.data.message : 'Unable to send rate')
     });
     console.log(error);
   } finally {
-    toggleRaitingModal();
+    toggleratingModal();
   }
 }
 
-const form = document.querySelector('.raiting-form');
+const form = document.querySelector('.rating-form');
 form.addEventListener('submit', event => {
   event.preventDefault();
 
-  const email = document.querySelector('.raiting-form input').value;
+  const email = document.querySelector('.rating-form input').value;
   if (!isValidEmail(email)) {
     iziToast.error({
       title: 'Error',
@@ -185,55 +189,55 @@ form.addEventListener('submit', event => {
     return;
   }
 
-  sendRaiting(event);
+  sendRating(event);
 });
 
-function toggleRaitingModal() {
-  raitingRefs.modal.classList.toggle('is-hidden');
+function toggleratingModal() {
+  ratingRefs.modal.classList.toggle('is-hidden');
   refs.modal.classList.toggle('is-hidden');
 
   //reset form if closed
-  if (raitingRefs.modal.classList.contains('is-hidden')) {
-    setValueToRaiting(0);
+  if (ratingRefs.modal.classList.contains('is-hidden')) {
+    setValueToRating(0);
     resetRateForm();
   }
 }
 
 const onChange = (event) => {
-  const email = !document.querySelector('.raiting-form input').value;
-  const comment = !document.querySelector('.raiting-form textarea').value;
-  const raiting = !myRater.getRating();
+  const email = !document.querySelector('.rating-form input').value;
+  const comment = !document.querySelector('.rating-form textarea').value;
+  const rating = !myRater.getRating();
 
-  const button = document.querySelector('.raiting-form button');
+  const button = document.querySelector('.rating-form button');
 
-  button.disabled = raiting || email || comment;
+  button.disabled = rating || email || comment;
 } 
 
-const setupRaitingModal = id => {
+const setupratingModal = id => {
   modalId = id;
 
-  raitingRefs = {
-    openModalBtn: document.querySelector('[data-raiting-modal-open]'),
-    closeModalBtn: document.querySelector('[data-raiting-modal-close]'),
-    modal: document.querySelector('[data-raiting-modal]'),
+  ratingRefs = {
+    openModalBtn: document.querySelector('[data-rating-modal-open]'),
+    closeModalBtn: document.querySelector('[data-rating-modal-close]'),
+    modal: document.querySelector('[data-rating-modal]'),
   };
 
-  raitingRefs.openModalBtn.dataset.id = id;
+  ratingRefs.openModalBtn.dataset.id = id;
 
   //reassign event listener to avoid multiple assigment to elements
-  raitingRefs.openModalBtn.removeEventListener('click', toggleRaitingModal);
-  raitingRefs.closeModalBtn.removeEventListener('click', toggleRaitingModal);
+  ratingRefs.openModalBtn.removeEventListener('click', toggleratingModal);
+  ratingRefs.closeModalBtn.removeEventListener('click', toggleratingModal);
 
-  raitingRefs.openModalBtn.addEventListener('click', toggleRaitingModal);
-  raitingRefs.closeModalBtn.addEventListener('click', toggleRaitingModal);
+  ratingRefs.openModalBtn.addEventListener('click', toggleratingModal);
+  ratingRefs.closeModalBtn.addEventListener('click', toggleratingModal);
 
   //reassign event listener to avoid multiple assigment to elements
-  document.querySelector('.raiting-form input').removeEventListener("keyup", onChange);
-  document.querySelector('.raiting-form textarea').removeEventListener("keyup", onChange);
+  document.querySelector('.rating-form input').removeEventListener("keyup", onChange);
+  document.querySelector('.rating-form textarea').removeEventListener("keyup", onChange);
   document.getElementById('rater').removeEventListener("click", onChange);
 
-  document.querySelector('.raiting-form input').addEventListener("keyup", onChange);
-  document.querySelector('.raiting-form textarea').addEventListener("keyup", onChange);
+  document.querySelector('.rating-form input').addEventListener("keyup", onChange);
+  document.querySelector('.rating-form textarea').addEventListener("keyup", onChange);
   document.getElementById('rater').addEventListener("click", onChange);
 };
 
