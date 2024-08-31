@@ -11,7 +11,7 @@ export const DEVELOPERS = [
   },
   {
     name: 'Kryvko Sergii',
-    linkedin: 'dd',
+    linkedin: 'https://www.linkedin.com/in/sergii-kryvko',
     github: 'https://github.com/KryvkoSergii',
   },
   {

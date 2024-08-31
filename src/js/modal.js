@@ -3,7 +3,7 @@ import 'izitoast/dist/css/iziToast.min.css';
 import rater from 'rater-js';
 import Api from './api/index';
 import { LOCAL_STORAGE_KEY, UPDATE_LOCAL_STORAGE_EVENT } from './const';
-import { getClosest, renderExerciseModal, updateFavoriteButton } from './utils';
+import { getClosest, renderExerciseModal, updateFavoriteButton, isValidEmail } from './utils';
 
 let refs = {};
 let raitingRefs = {};
@@ -139,7 +139,7 @@ function setValueToRaiting(raiting) {
 }
 
 let myRater = rater({
-  starSize: 24,
+  starSize: 20,
   element: document.querySelector('#rater'),
   rateCallback: function rateCallback(raiting, done) {
     setValueToRaiting(raiting);
@@ -168,8 +168,6 @@ function sendRaiting(event) {
     });
     console.log(error);
   } finally {
-    setValueToRaiting(0);
-    resetRateForm();
     toggleRaitingModal();
   }
 }
@@ -178,13 +176,11 @@ const form = document.querySelector('.raiting-form');
 form.addEventListener('submit', event => {
   event.preventDefault();
 
-  const email = !event.target[0].value;
-  const comment = !event.target[1].value;
-
-  if (email || comment) {
+  const email = document.querySelector('.raiting-form input').value;
+  if (!isValidEmail(email)) {
     iziToast.error({
       title: 'Error',
-      message: 'Email and comment fields should not be empty',
+      message: 'Invalid email address was entered.',
     });
     return;
   }
@@ -195,7 +191,23 @@ form.addEventListener('submit', event => {
 function toggleRaitingModal() {
   raitingRefs.modal.classList.toggle('is-hidden');
   refs.modal.classList.toggle('is-hidden');
+
+  //reset form if closed
+  if (raitingRefs.modal.classList.contains('is-hidden')) {
+    setValueToRaiting(0);
+    resetRateForm();
+  }
 }
+
+const onChange = (event) => {
+  const email = !document.querySelector('.raiting-form input').value;
+  const comment = !document.querySelector('.raiting-form textarea').value;
+  const raiting = !myRater.getRating();
+
+  const button = document.querySelector('.raiting-form button');
+
+  button.disabled = raiting || email || comment;
+} 
 
 const setupRaitingModal = id => {
   modalId = id;
@@ -208,8 +220,21 @@ const setupRaitingModal = id => {
 
   raitingRefs.openModalBtn.dataset.id = id;
 
+  //reassign event listener to avoid multiple assigment to elements
+  raitingRefs.openModalBtn.removeEventListener('click', toggleRaitingModal);
+  raitingRefs.closeModalBtn.removeEventListener('click', toggleRaitingModal);
+
   raitingRefs.openModalBtn.addEventListener('click', toggleRaitingModal);
   raitingRefs.closeModalBtn.addEventListener('click', toggleRaitingModal);
+
+  //reassign event listener to avoid multiple assigment to elements
+  document.querySelector('.raiting-form input').removeEventListener("keyup", onChange);
+  document.querySelector('.raiting-form textarea').removeEventListener("keyup", onChange);
+  document.getElementById('rater').removeEventListener("click", onChange);
+
+  document.querySelector('.raiting-form input').addEventListener("keyup", onChange);
+  document.querySelector('.raiting-form textarea').addEventListener("keyup", onChange);
+  document.getElementById('rater').addEventListener("click", onChange);
 };
 
 window.addEventListener('load', () => {
