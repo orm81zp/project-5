@@ -13,6 +13,7 @@ body {
   flex-direction: column;
   background-color: var(--color-secondary);
   margin: 0;
+  user-select: none;
 }
 
 body > main {
