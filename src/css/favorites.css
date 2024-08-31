@@ -21,6 +21,9 @@
   line-height: 1.33;
   text-align: center;
   margin: auto;
+  display: flex;
+  align-items: center;
+  height: 100%;
 }
 
 /* tablet */
