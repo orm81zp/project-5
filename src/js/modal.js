@@ -99,11 +99,10 @@ const setupExerciseModal = () => {
   }
 
   refs.opener.addEventListener('click', event => {
-    const className = event.target.className;
-    const isStartButton = className && className.includes('__start');
+    event.preventDefault();
+    const isStartButton = getClosest(event.target, '.modal-exercise-info');
 
     if (isStartButton) {
-      event.preventDefault();
       const cardItem = getClosest(event.target, '.card-item');
 
       if (cardItem && cardItem.dataset) {

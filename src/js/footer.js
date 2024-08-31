@@ -38,6 +38,9 @@ import { gsap } from 'gsap';
 
   emailInput.addEventListener('blur', () => {
     const email = emailInput.value;
+    if (email === '') {
+      return;
+    }
 
     if (!isValidEmail(email)) {
       iziToast.error({
@@ -71,6 +74,9 @@ import { gsap } from 'gsap';
           title: 'Success',
           message: message,
         });
+        btnSubmit.disabled = true;
+        emailInput.classList.remove('active');
+        btnSubmit.classList.remove('active');
       })
       .catch(error => {
         const badRequest = error.response.message;
