@@ -1,0 +1,53 @@
+<section class="sidebar">
+  <ul class="sidebar-list">
+    <li class="sidebar-list-item list-item-quote-card">
+      <div class="columns quote-card">
+        <load src="/partials/__quote.html" />
+      </div>
+    </li>
+    <li class="sidebar-list-item list-item-image-card">
+      <div class="image-card">
+        <picture>
+          <source
+            srcset="
+              ./img/sports/sports-favorites.jpg    1x,
+              ./img/sports/sports-favorites@2x.jpg 2x
+            "
+            media="(min-width: 1440px)"
+          />
+          <source
+            srcset="
+              ./img/sports/sports-favorites-tablet.jpg    1x,
+              ./img/sports/sports-favorites-tablet@2x.jpg 2x
+            "
+            media="(min-width: 768px)"
+          />
+          <source
+            srcset="
+              ./img/sports/sports-favorites-mobile.jpg    1x,
+              ./img/sports/sports-favorites-mobile@2x.jpg 2x
+            "
+            media="(min-width: 320px)"
+          />
+          <img
+            src="./img/sports/sports-favorites-mobile.jpg"
+            alt="Two women talking after a workout"
+          />
+        </picture>
+      </div>
+    </li>
+    <li class="sidebar-list-item list-item-advice-card">
+      <div class="advice-card">
+        <div class="advice-content">
+          <div class="column icon-wrapper">
+            <svg class="icon-dumbbell" width="20" height="20">
+              <use href="./img/icons.svg#icon-dumbbell"></use>
+            </svg>
+          </div>
+          <h3 class="title">110 min</h3>
+          <p class="description">Daily norm of sports</p>
+        </div>
+      </div>
+    </li>
+  </ul>
+</section>
