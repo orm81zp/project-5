@@ -28,6 +28,12 @@
   padding: 40px 20px;
 }
 
+.raiting-indicator{
+  margin-top: 2px;
+  margin-bottom: 2px;
+  display: flex;
+}
+
 .raiting-form {
   box-sizing: border-box;
   color: var(--color-secondary-40);
@@ -39,8 +45,9 @@
   font-weight: 400;
   font-size: 12px;
   line-height: 18px;
-  vertical-align: super;
   padding-right: 2px;
+  display: block;
+  width: 19px;
 }
 
 .raiting-form input{
