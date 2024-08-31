@@ -43,3 +43,7 @@ img {
 * {
   box-sizing: border-box;
 }
+
+input, textarea {
+  outline: none;
+}
