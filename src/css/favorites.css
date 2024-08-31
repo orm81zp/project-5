@@ -21,9 +21,13 @@
   line-height: 1.33;
   text-align: center;
   margin: auto;
-  display: flex;
+  display: none;
   align-items: center;
   height: 100%;
+}
+
+.favorites .notification-message.vissible {
+  display: flex;
 }
 
 /* tablet */

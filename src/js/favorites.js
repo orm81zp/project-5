@@ -54,7 +54,7 @@ import {
       localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(exercisesIds));
       removeExerciseFromUI(exerciseId);
       if (exercisesIds.length === 0) {
-        messageContainer.classList.remove('hidden');
+        messageContainer.classList.add('vissible');
       }
     } catch (error) {
       console.log(error);
@@ -76,11 +76,11 @@ import {
 
   const searchExercises = async exercisesIds => {
     if (!exercisesIds || exercisesIds.length === 0) {
-      messageContainer.classList.remove('hidden');
+      messageContainer.classList.add('vissible');
       return;
     }
 
-    messageContainer.classList.add('hidden');
+    messageContainer.classList.remove('vissible');
 
     try {
       clearContent(exercisesContainer);
