@@ -1,5 +1,5 @@
 .backdrop,
-.raiting.backdrop {
+.rating.backdrop {
   position: fixed;
   inset: 0;
   z-index: 99;
@@ -10,20 +10,20 @@
 }
 
 .backdrop.is-hidden,
-.raiting.backdrop.is-hidden {
+.rating.backdrop.is-hidden {
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
 }
 
 .backdrop.is-hidden .modal-exercise,
-.raiting.backdrop.is-hidden .modal-raiting {
+.rating.backdrop.is-hidden .modal-rating {
   transform: translateX(-50%) translateY(-30%) scale(0.3);
   opacity: 0;
 }
 
 .modal-exercise,
-.modal-raiting {
+.modal-rating {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -41,7 +41,7 @@
 }
 
 .modal-exercise .close,
-.modal-raiting .close {
+.modal-rating .close {
   position: absolute;
   top: 14px;
   right: 14px;
@@ -50,7 +50,7 @@
 }
 
 .modal-exercise .close-icon,
-.modal-raiting .close-icon {
+.modal-rating .close-icon {
   stroke: var(--color-secondary);
   transition: stroke var(--trns-fast);
 }
@@ -58,9 +58,9 @@
 .modal-exercise .close:hover .close-icon,
 .modal-exercise .close:focus .close-icon,
 .modal-exercise .close:active .close-icon,
-.modal-raiting .close:hover .close-icon,
-.modal-raiting .close:focus .close-icon,
-.modal-raiting .close:active .close-icon {
+.modal-rating .close:hover .close-icon,
+.modal-rating .close:focus .close-icon,
+.modal-rating .close:active .close-icon {
   stroke: var(--color-secondary-60);
 }
 
@@ -236,12 +236,12 @@ div[data-modal-content],
   }
 
   .backdrop.is-hidden .modal-exercise,
-  .raiting.backdrop.is-hidden .modal-raiting {
+  .rating.backdrop.is-hidden .modal-rating {
     transform: translateX(-50%) translateY(-50%) scale(0.3);
   }
 
   .modal-exercise,
-  .modal-raiting {
+  .modal-rating {
     transform: translateX(-50%) translateY(-50%) scale(1);
   }
 
