@@ -1,28 +1,72 @@
 <section class="hero">
-  <di class="container">
-    <div class="hero-content">
-      <div class="hero-title">
-        <img src="./img/icons.svg" alt="Sun Icon" class="icon-sun">
-        <h1 class="fade-in">Get <em>Body</em> in shape, Stay healthy</h1>
-        <p class="fade-in-delay">
+  <div class="container">
+    <div class="hero-wrapper">
+      <div class="hero-header">
+        <div class="title-wrapper">
+          <svg class="icon-sun" width="38" height="38">
+            <use href="./img/icons.svg#icon-sun"></use>
+          </svg>
+          <h1 class="hero-header-title">
+            Get <em>Body</em> in shape, Stay healthy
+          </h1>
+        </div>
+        <p class="hero-header-text">
           Transform your physique and embrace a healthier lifestyle with our
           comprehensive fitness and nutrition support.
         </p>
       </div>
-    </div>
-    <div class="hero-main-image">
-      <img src="./img/hero/hero-main-image.jpg"
-        srcset="./img/hero/hero-main-image.jpg 1x, ./img/hero/hero-main-image@2x.jpg 2x" alt="Two people exercising"
-        class="slide-up">
-    </div>
-      <div class="hero-tags fade-in-delay">
-        <span class="tag">#Sport</span>
-        <span class="tag">#Healthy</span>
-        <span class="tag">#Workout</span>
-        <span class="tag">#Diet</span>
+
+      <div class="hero-tags">
+        <div class="image-wrapper">
+          <picture>
+            <source
+              srcset="
+                ./img/hero/hero-small.jpg    1x,
+                ./img/hero/hero-small@2x.jpg 2x
+              "
+              media="(min-width: 320px)"
+            />
+            <img
+              src="./img/hero/hero-small.jpg"
+              alt="Feet together"
+              width="168"
+            />
+          </picture>
+        </div>
+        <ul class="tags-list">
+          <li class="tag">#Sport</li>
+          <li class="tag">#Healthy</li>
+          <li class="tag">#Workout</li>
+          <li class="tag">#Diet</li>
+        </ul>
       </div>
-      <img src="./img/hero/hero-small-image.jpg"
-        srcset="./img/hero/hero-small-image.jpg 1x, ./img/hero/hero-small-image@2x.jpg 2x" alt="Feet together"
-        class="hero-small-image">
+
+      <div class="hero-main-image">
+        <picture>
+          <source
+            srcset="./img/hero/hero.jpg 1x, ./img/hero/hero@2x.jpg 2x"
+            media="(min-width: 1440px)"
+          />
+          <source
+            srcset="
+              ./img/hero/hero-tablet.jpg    1x,
+              ./img/hero/hero-tablet@2x.jpg 2x
+            "
+            media="(min-width: 768px)"
+          />
+          <source
+            srcset="
+              ./img/hero/hero-mobile.jpg    1x,
+              ./img/hero/hero-mobile@2x.jpg 2x
+            "
+            media="(min-width: 320px)"
+          />
+          <img
+            src="./img/hero/hero.jpg"
+            alt="Get Body in shape, Stay healthy"
+          />
+        </picture>
+      </div>
+    </div>
   </div>
 </section>

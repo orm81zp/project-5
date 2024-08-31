@@ -1,103 +1,141 @@
-/* Hero */
 .hero {
-    position: relative;
+  margin-bottom: 40px;
+  margin-top: 64px;
+}
+
+.hero .hero-wrapper {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.hero .hero-header {
+  order: 1;
+}
+.hero .hero-tags {
+  order: 3;
+  display: flex;
+  align-items: flex-end;
+  flex-direction: column;
+}
+.hero .hero-main-image {
+  order: 2;
+}
+
+.hero .hero-header .title-wrapper {
+  margin-bottom: 16px;
+}
+
+.hero .hero-header .icon-sun {
+  width: 32px;
+  height: 32px;
+  margin-right: 10px;
+}
+
+.hero .hero-header .hero-header-title {
+  font-size: 38px;
+  line-height: 1.15;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  display: inline;
+}
+
+.hero .hero-header .hero-header-text {
+  font-size: 14px;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+}
+
+.hero .hero-tags .image-wrapper {
+  margin-bottom: 32px;
+  display: none;
+}
+
+.hero .hero-tags .image-wrapper img {
+  border-radius: 20px;
+}
+
+.hero .hero-tags .tags-list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  line-height: 1.3;
+}
+
+.hero .hero-tags .tags-list .tag {
+  padding: 4px 10px;
+  border: 1px solid var(--color-primary);
+  border-radius: 30px;
+}
+
+.hero .hero-main-image {
+  margin: 20px 0;
+}
+
+.hero .hero-main-image img {
+  border-radius: 60px;
+}
+
+/* Tablet */
+@media only screen and (min-width: 768px) {
+  .hero {
+    margin-bottom: 64px;
+    margin-top: 80px;
+  }
+  .hero .hero-wrapper {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: left;
-    padding: 20px;
-    background: #f4f4f4;
-    transition: filter 0.5s ease;
-    background-image: url('hero-mobile-image.jpg');
-    background-position: center;
-    background-size: cover;
-    height: 50vh;
-}
-
-.hero.darkened {
-    filter: brightness(50%);
-}
-
-.hero-content {
-    max-width: 800px;
-    padding: 20px;
-    background-color: rgba(255, 255, 255, 0.8);
-    border-radius: 10px;
-}
-
-.hero-title {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.hero .icon-sun {
-    width: 24px;
-    height: 24px;
-}
-
-.hero-content h1 {
-    font-size: 2.5rem;
-    margin-bottom: 10px;
-}
-
-.hero-content p {
-    font-size: 1rem;
-    color: #666;
-    margin-bottom: 20px;
-}
-
-.hero .tags {
-    display: flex;
-    gap: 10px;
+    align-items: flex-start;
     flex-wrap: wrap;
-    justify-content: center;
-    opacity: 0;
-    animation: fadeIn 1s forwards;
-    animation-delay: 1s;
+    justify-content: flex-start;
+  }
+  .hero .hero-tags {
+    margin-left: auto;
+  }
+  .hero .hero-tags .tags-list {
+    font-size: 16px;
+  }
+  .hero .hero-header .icon-sun {
+    width: 60px;
+    height: 60px;
+  }
+  .hero .hero-header .hero-header-title {
+    font-size: 74px;
+    line-height: 1;
+  }
+  .hero .hero-header .hero-header-text {
+    font-size: 18px;
+  }
+  .hero .hero-main-image {
+    margin: 32px 0 16px 0;
+  }
+  .hero .hero-tags .tags-list .tag {
+    padding: 4px 16px;
+  }
 }
 
-.hero .tags span {
-    background-color: #f0f0f0;
-    padding: 5px 10px;
-    border-radius: 20px;
-    font-size: 0.9rem;
-}
-
-.hero-small-image {
-    display: none;
-}
-
-/* Retina display support */
-@media only screen and (-webkit-min-device-pixel-ratio: 2),
-only screen and (min-resolution: 192dpi) {
-    .hero {
-        background-image: url('hero-mobile-image@2x.jpg');
-    }
-}
-
-/* Desktop styles */
-@media (min-width: 768px) {
-    .hero {
-        background-image: url('hero-main-image.jpg');
-        height: 70vh;
-    }
-
-    @media only screen and (-webkit-min-device-pixel-ratio: 2),
-    only screen and (min-resolution: 192dpi) {
-        .hero {
-            background-image: url('hero-main-image-2x.jpg');
-        }
-    }
-
-    .hero .hero-content {
-        padding: 40px;
-    }
-
-    .hero .hero-small-image {
-        display: block;
-        margin-bottom: 10px;
-        max-width: 150px;
-        border-radius: 10px;
-    }
+/* Desktop */
+@media only screen and (min-width: 1440px) {
+  .hero {
+    margin-bottom: 80px;
+  }
+  .hero .hero-header {
+    max-width: 640px;
+  }
+  .hero .hero-tags {
+    max-width: 200px;
+  }
+  .hero .hero-tags .image-wrapper {
+    display: block;
+  }
+  .hero .hero-header {
+    order: 1;
+  }
+  .hero .hero-tags {
+    order: 2;
+  }
+  .hero .hero-main-image {
+    order: 3;
+  }
 }
