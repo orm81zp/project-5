@@ -1,31 +1,53 @@
 /* Hero */
 .hero {
+    position: relative;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
-    text-align: center;
+    text-align: left;
     padding: 20px;
-    background-color: var(--color-primary);
-    border-radius: 15px;
-    margin: 20px;
+    background: #f4f4f4;
+    transition: filter 0.5s ease;
+    background-image: url('hero-mobile-image.jpg');
+    background-position: center;
+    background-size: cover;
+    height: 50vh;
 }
 
-.hero .hero-content {
-    max-width: 600px;
+.hero.darkened {
+    filter: brightness(50%);
 }
 
-.hero h1,
-.hero p {
-    opacity: 0;
-    animation: fadeIn 1s forwards;
+.hero-content {
+    max-width: 800px;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
 }
 
-.hero .fade-in-delay {
-    animation-delay: 0.5s;
+.hero-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
-.hero.tags {
+.hero .icon-sun {
+    width: 24px;
+    height: 24px;
+}
+
+.hero-content h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.hero-content p {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.hero .tags {
     display: flex;
     gap: 10px;
     flex-wrap: wrap;
@@ -35,24 +57,47 @@
     animation-delay: 1s;
 }
 
-.hero .tags .tag {
-    background-color: #e0e0e0;
+.hero .tags span {
+    background-color: #f0f0f0;
     padding: 5px 10px;
     border-radius: 20px;
-    font-size: 0.9em;
+    font-size: 0.9rem;
 }
 
-.hero .hero-main-image img {
-    max-width: 100%;
-    border-radius: 15px;
-    margin-top: 20px;
-    opacity: 0;
-    animation: slideUp 1s forwards;
-    animation-delay: 1.5s;
-}
-
-.hero .hero-small-image {
+.hero-small-image {
     display: none;
 }
 
+/* Retina display support */
+@media only screen and (-webkit-min-device-pixel-ratio: 2),
+only screen and (min-resolution: 192dpi) {
+    .hero {
+        background-image: url('hero-mobile-image@2x.jpg');
+    }
+}
 
+/* Desktop styles */
+@media (min-width: 768px) {
+    .hero {
+        background-image: url('hero-main-image.jpg');
+        height: 70vh;
+    }
+
+    @media only screen and (-webkit-min-device-pixel-ratio: 2),
+    only screen and (min-resolution: 192dpi) {
+        .hero {
+            background-image: url('hero-main-image-2x.jpg');
+        }
+    }
+
+    .hero .hero-content {
+        padding: 40px;
+    }
+
+    .hero .hero-small-image {
+        display: block;
+        margin-bottom: 10px;
+        max-width: 150px;
+        border-radius: 10px;
+    }
+}
