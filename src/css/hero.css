@@ -30,9 +30,6 @@
   width: 32px;
   height: 32px;
   margin-right: 10px;
-}
-
-.hero .hero-header .icon-sun {
   fill: var(--color-primary);
 }
 
