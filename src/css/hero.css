@@ -80,6 +80,7 @@
 
 .hero .hero-main-image img {
   border-radius: 60px;
+  max-width: 335px;
 }
 
 /* Tablet */
@@ -117,12 +118,15 @@
   .hero .hero-tags .tags-list .tag {
     padding: 4px 16px;
   }
+  .hero .hero-main-image img {
+    max-width: 704px;
+  }
 }
 
 /* Desktop */
 @media only screen and (min-width: 1440px) {
   .hero {
-    margin-bottom: 80px;
+    margin-bottom: 48px;
   }
   .hero .hero-header {
     max-width: 640px;
@@ -132,6 +136,9 @@
   }
   .hero .hero-tags .image-wrapper {
     display: block;
+  }
+  .hero .hero-main-image img {
+    max-width: 1376px;
   }
   .hero .hero-header {
     order: 1;
