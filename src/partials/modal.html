@@ -5,8 +5,7 @@
         <use href="./img/icons.svg#icon-cross"></use>
       </svg>
     </button>
-    <div сlass="content-container" data-modal-content>
-    </div>
+    <div class="content-container" data-modal-content></div>
     <ul class="controls">
       <li class="controls-item">
         <button class="favorite-button" data-modal-favorite>
@@ -17,7 +16,9 @@
         </button>
       </li>
       <li class="controls-item">
-        <button class="rating-button" data-raiting-modal-open>Give a rating</button>
+        <button class="rating-button" data-raiting-modal-open>
+          Give a rating
+        </button>
       </li>
     </ul>
   </div>
@@ -33,8 +34,11 @@
 
     <form class="raiting-form">
       <a>Raiting</a>
-      <div class="raiting-indicator"><a class="raiting-value">0.0</a><div id="rater"></div></div>
-      <input type="email" placeholder="Email" autofocus/>
+      <div class="raiting-indicator">
+        <a class="raiting-value">0.0</a>
+        <div id="rater"></div>
+      </div>
+      <input type="email" placeholder="Email" autofocus />
       <textarea placeholder="Your comment" rows="5"></textarea>
       <button type="submit">Send</button>
     </form>
