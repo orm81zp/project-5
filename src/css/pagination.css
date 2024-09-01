@@ -29,6 +29,17 @@
   justify-content: center;
   width: 32px;
   height: 32px;
+  color: var(--color-hidden);
+}
+
+.pagination .list-item-action {
+  border: 1px solid var(--color-hidden);
+  color: var(--color-hidden);
+}
+
+.pagination .list-item-action:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
 }
 
 .pagination .list-item:not(.list-item-action) {
