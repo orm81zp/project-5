@@ -83,7 +83,7 @@ import { isValidEmail } from './utils';
         } else if (error.response.status === 400) {
           iziToast.warning({
             title: 'Warning',
-            message: badRequest,
+            message: 'Bad request (invalid request body)',
           });
         }
       });
