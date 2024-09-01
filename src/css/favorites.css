@@ -48,12 +48,13 @@
 
   .page-title .container h2 {
     margin: 100px 0px 32px 0px;
+    font-size: 44px;
   }
 }
 
 /* desktop */
 @media only screen and (min-width: 1440px) {
-.favorites .favorites-wrapper {
+  .favorites .favorites-wrapper {
     overflow-y: auto;
     min-height: unset;
     max-height: 487px;
