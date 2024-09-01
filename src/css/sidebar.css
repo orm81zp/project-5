@@ -169,7 +169,7 @@
     width: 100%;
   }
   .page-favorites .sidebar .sidebar-list .list-item-quote-card {
-    width: 100%;
+    min-width: 100%;
   }
 
   .page-favorites .sidebar .sidebar-list .list-item-advice-card {
