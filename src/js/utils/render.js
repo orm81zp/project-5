@@ -266,9 +266,11 @@ export const renderPagination = (container, totalPages, currentPage) => {
 
   if (currentPage > 1) {
     adjacentText += `<li class="list-item list-item-action go-to-start" data-page="1"><a class="page-link" href="#"><<</a></li>`;
-    adjacentText += `<li class="list-item list-item-action go-to-prev" data-page="${
-      currentPage - visiblePages
-    }"><a class="page-link" href="#"><</a></li>`;
+    let prevPage = currentPage - visiblePages;
+    if (prevPage < 1) {
+      prevPage = 1;
+    }
+    adjacentText += `<li class="list-item list-item-action go-to-prev" data-page="${prevPage}"><a class="page-link" href="#"><</a></li>`;
   }
 
   if (currentPage - 1 >= 1) {
@@ -292,9 +294,12 @@ export const renderPagination = (container, totalPages, currentPage) => {
   }
 
   if (currentPage < totalPages) {
-    adjacentText += `<li class="list-item list-item-action go-to-next" data-page="${
-      currentPage + visiblePages
-    }"><a class="page-link" href="#">></a></li>`;
+    let nexPage = currentPage + visiblePages;
+    if (nexPage > totalPages) {
+      nexPage = totalPages;
+    }
+
+    adjacentText += `<li class="list-item list-item-action go-to-next" data-page="${nexPage}"><a class="page-link" href="#">></a></li>`;
     adjacentText += `<li class="list-item list-item-action go-to-end" data-page="${totalPages}"><a class="page-link" href="#">>></a></li>`;
   }
 
