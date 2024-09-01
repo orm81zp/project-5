@@ -40,7 +40,9 @@
   letter-spacing: -0.02em;
   display: inline;
 }
-
+.hero .hero-header .hero-header-title span {
+  display: block;
+}
 .hero .hero-header .hero-header-text {
   font-size: 14px;
   line-height: 1.3;
@@ -73,11 +75,11 @@
 
 .hero .hero-main-image {
   margin: 20px 0;
+  max-width: 335px;
 }
 
 .hero .hero-main-image img {
   border-radius: 60px;
-  max-width: 335px;
 }
 
 /* Tablet */
@@ -108,15 +110,14 @@
   }
   .hero .hero-header .hero-header-text {
     font-size: 18px;
+    max-width: 528px;
   }
   .hero .hero-main-image {
     margin: 32px 0 16px 0;
+    max-width: 704px;
   }
   .hero .hero-tags .tags-list .tag {
     padding: 4px 16px;
-  }
-  .hero .hero-main-image img {
-    max-width: 704px;
   }
 }
 
@@ -134,7 +135,7 @@
   .hero .hero-tags .image-wrapper {
     display: block;
   }
-  .hero .hero-main-image img {
+  .hero .hero-main-image {
     max-width: 1376px;
   }
   .hero .hero-header {
