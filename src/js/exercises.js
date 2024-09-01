@@ -335,7 +335,8 @@ import {
 
   paginationContainer.addEventListener('click', paginationHandler);
 
-  breadcrumbsHome.addEventListener('click', () => {
+  breadcrumbsHome.addEventListener('click', event => {
+    event.preventDefault();
     state.pagination.filters.currentPage = 1;
     state.pagination.exercises.currentPage = 1;
     searchByFilter(DEFAULT_FILTER);
