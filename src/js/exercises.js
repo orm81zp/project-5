@@ -253,6 +253,8 @@ import {
     }
 
     const filter = event.target.innerText.trim();
+    state.pagination.filters.currentPage = 1;
+    state.pagination.exercises.currentPage = 1;
     searchByFilter(filter);
   };
 
@@ -270,6 +272,8 @@ import {
 
     if (cardLink.dataset && cardLink.dataset.exercise) {
       const exercise = cardLink.dataset.exercise.trim();
+      state.pagination.filters.currentPage = 1;
+      state.pagination.exercises.currentPage = 1;
       searchByExercise(filter, exercise);
     }
   };
@@ -332,6 +336,8 @@ import {
   paginationContainer.addEventListener('click', paginationHandler);
 
   breadcrumbsHome.addEventListener('click', () => {
+    state.pagination.filters.currentPage = 1;
+    state.pagination.exercises.currentPage = 1;
     searchByFilter(DEFAULT_FILTER);
   });
 
