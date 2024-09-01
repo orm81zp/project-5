@@ -29,7 +29,7 @@ import {
       filters: {
         currentPage: 1,
         totalPages: 1,
-        limit: 3,
+        limit: 12,
       },
       exercises: {
         currentPage: 1,
