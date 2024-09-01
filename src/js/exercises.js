@@ -4,6 +4,8 @@ import {
   renderByExercises,
   renderByFilters,
   renderFilters,
+  renderPagination,
+  showNotification,
 } from './utils';
 
 (() => {
@@ -22,6 +24,19 @@ import {
   const state = {
     filter: null,
     exercise: null,
+    keyword: '',
+    pagination: {
+      filters: {
+        currentPage: 1,
+        totalPages: 1,
+        limit: 3,
+      },
+      exercises: {
+        currentPage: 1,
+        totalPages: 1,
+        limit: 10,
+      },
+    },
   };
 
   const breadcrumbsNav = document.getElementById('breadcrumbs-nav');
@@ -35,8 +50,16 @@ import {
   const searchFieldInput = searchField.querySelector('.search-input');
   const searchFieldSubmit = searchField.querySelector('.seach-submit');
   const searchFieldReset = searchField.querySelector('.seach-reset');
+  const paginationContainer = exercisesWrapper.querySelector('.pagination');
 
   // helpers
+  const updateLimits = () => {
+    if (window.innerWidth < 768) {
+      state.pagination.filters.limit = 9;
+      state.pagination.exercises.limit = 8;
+    }
+  };
+
   const showLoader = (shouldHide = false) => {
     if (shouldHide) {
       const loader = exercisesWrapper.querySelector('.loader');
@@ -121,17 +144,38 @@ import {
       clearCards();
       showLoader();
       updateBreadcrumbs(exercise);
-
+      const { limit, currentPage } = state.pagination.exercises;
       const params = {
         [SEARCH_FILTER_MAPPING[filter]]: exercise,
         keyword,
+        limit,
+        page: currentPage,
       };
 
       const response = await Api.getExercises(params);
-      const { results } = response;
+      const { results, totalPages, perPage } = response;
       state.exercise = exercise;
+      state.keyword = keyword;
+
+      // checking for empty response from api
+      if (results.length === 0) {
+        showNotification(
+          'Sorry, there are no matching your request. Please try again!'
+        );
+        return;
+      }
+
+      state.pagination.exercises.totalPages = parseInt(totalPages);
+      state.pagination.exercises.currentPage = currentPage + 1;
+      state.pagination.exercises.limit = parseInt(perPage);
 
       renderByExercises(results, cardsExercises);
+      renderPagination(paginationContainer, totalPages, currentPage);
+
+      // checking if the end of search results has been reached
+      if (currentPage > totalPages) {
+        showNotification("We're sorry, but you've reached the end of results.");
+      }
     } catch (error) {
       console.error(error);
     } finally {
@@ -151,11 +195,35 @@ import {
       clearBreadcrumbs();
       showLoader();
       showSearchField(true, true);
-      const response = await Api.getFilters({ filter });
-      const { results } = response;
+      const { limit, currentPage } = state.pagination.filters;
+      const response = await Api.getFilters({
+        filter,
+        limit,
+        page: currentPage,
+      });
+      const { results, totalPages, perPage } = response;
       state.filter = filter;
+      state.exercise = null;
+
+      // checking for empty response from api
+      if (results.length === 0) {
+        showNotification(
+          'Sorry, there are no matching your request. Please try again!'
+        );
+        return;
+      }
+
+      state.pagination.filters.totalPages = parseInt(totalPages);
+      state.pagination.filters.currentPage = currentPage + 1;
+      state.pagination.filters.limit = parseInt(perPage);
 
       renderByFilters(results, cards);
+      renderPagination(paginationContainer, totalPages, currentPage);
+
+      // checking if the end of search results has been reached
+      if (currentPage > totalPages) {
+        showNotification("We're sorry, but you've reached the end of results.");
+      }
 
       // highlight active filter
       const filterElements = breadcrumbsFilters.querySelectorAll('.item');
@@ -240,12 +308,41 @@ import {
 
   searchFieldInput.addEventListener('input', searchInputHandler);
 
+  // search input listerner
+  const paginationHandler = event => {
+    event.preventDefault();
+    const pageLink = getClosest(event.target, '.list-item');
+
+    if (pageLink && pageLink.dataset.page) {
+      const { filter, exercise, keyword } = state;
+      const currentPage = parseInt(pageLink.dataset.page);
+
+      if (exercise) {
+        state.pagination.filters.currentPage = 1;
+        state.pagination.exercises.currentPage = currentPage;
+        searchByExercise(filter, exercise, keyword);
+      } else {
+        state.pagination.exercises.currentPage = 1;
+        state.pagination.filters.currentPage = currentPage;
+        searchByFilter(filter);
+      }
+    }
+  };
+
+  paginationContainer.addEventListener('click', paginationHandler);
+
   breadcrumbsHome.addEventListener('click', () => {
     searchByFilter(DEFAULT_FILTER);
   });
 
+  // Update api limits for mibile view port
+  window.matchMedia('(max-width: 767px)').addEventListener('change', e => {
+    updateLimits();
+  });
+
   // init
   // rendering filters
+  updateLimits();
   renderFilters(Object.values(FILTERS), breadcrumbsFilters);
 
   // rendering cards by default filter

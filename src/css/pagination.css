@@ -1,0 +1,63 @@
+
+ .pagination {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+  font-size: 20px;
+  line-height: 1;
+}
+
+.pagination .list-item {
+  cursor: pointer;
+}
+.pagination .list-item-action .page-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pagination .list-item-action,
+.pagination .list-item.active {
+  border: 1px solid var(--color-primary);
+  border-radius: 50%;
+  padding: 0 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+}
+
+.pagination .list-item:not(.list-item-action) {
+  color: var(--color-hidden);
+}
+.pagination .list-item:hover {
+  color: var(--color-primary);
+}
+.pagination .list-item.active {
+  pointer-events: none;
+  color: var(--color-primary);
+}
+
+.pagination .go-to-prev{
+  margin-right: 20px;
+}
+.pagination .go-to-next {
+  margin-left: 20px;
+}
+
+/* Tablet */
+@media only screen and (min-width: 768px) {
+.pagination {
+    margin-top: 32px;
+    font-size: 20px;
+  }
+}
+
+/* Desktop */
+@media only screen and (min-width: 1440px) {
+
+}

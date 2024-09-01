@@ -258,3 +258,50 @@ export function createDevMarkup(developers) {
     })
     .join('');
 }
+
+export const renderPagination = (container, totalPages, currentPage) => {
+  let adjacentText = '';
+  container.innerHTML = '';
+  const visiblePages = 3;
+
+  if (currentPage > 1) {
+    adjacentText += `<li class="list-item list-item-action go-to-start" data-page="1"><a class="page-link" href="#"><<</a></li>`;
+    let prevPage = currentPage - visiblePages;
+    if (prevPage < 1) {
+      prevPage = 1;
+    }
+    adjacentText += `<li class="list-item list-item-action go-to-prev" data-page="${prevPage}"><a class="page-link" href="#"><</a></li>`;
+  }
+
+  if (currentPage - 1 >= 1) {
+    adjacentText += `<li class="list-item" data-page="${
+      currentPage - 1
+    }"><a class="page-link" href="#">${currentPage - 1}</a></li>`;
+  }
+
+  adjacentText += `<li class="list-item active" data-page="${currentPage}"><a class="page-link" href="#">${currentPage}</a></li>`;
+
+  if (currentPage + 1 <= totalPages) {
+    adjacentText += `<li class="list-item" data-page="${
+      currentPage + 1
+    }"><a class="page-link" href="#">${currentPage + 1}</a></li>`;
+  }
+
+  if (currentPage === 1 && currentPage + 2 <= totalPages) {
+    adjacentText += `<li class="list-item" data-page="${
+      currentPage + 2
+    }"><a class="page-link" href="#">${currentPage + 2}</a></li>`;
+  }
+
+  if (currentPage < totalPages) {
+    let nexPage = currentPage + visiblePages;
+    if (nexPage > totalPages) {
+      nexPage = totalPages;
+    }
+
+    adjacentText += `<li class="list-item list-item-action go-to-next" data-page="${nexPage}"><a class="page-link" href="#">></a></li>`;
+    adjacentText += `<li class="list-item list-item-action go-to-end" data-page="${totalPages}"><a class="page-link" href="#">>></a></li>`;
+  }
+
+  container.insertAdjacentHTML('beforeend', adjacentText);
+};
