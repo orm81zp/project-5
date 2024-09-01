@@ -260,6 +260,10 @@ export function createDevMarkup(developers) {
 }
 
 export const renderPagination = (container, totalPages, currentPage) => {
+  if (totalPages < 2) {
+    return;
+  }
+
   let adjacentText = '';
   container.innerHTML = '';
   const visiblePages = 3;
