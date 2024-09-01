@@ -144,6 +144,7 @@ import {
       clearCards();
       showLoader();
       updateBreadcrumbs(exercise);
+      paginationContainer.innerHTML = '';
       const { limit, currentPage } = state.pagination.exercises;
       const params = {
         [SEARCH_FILTER_MAPPING[filter]]: exercise,
@@ -158,7 +159,7 @@ import {
       state.keyword = keyword;
 
       // checking for empty response from api
-      if (results.length === 0) {
+      if (keyword && results.length === 0) {
         showNotification(
           'Sorry, there are no matching your request. Please try again!'
         );
@@ -171,11 +172,6 @@ import {
 
       renderByExercises(results, cardsExercises);
       renderPagination(paginationContainer, totalPages, currentPage);
-
-      // checking if the end of search results has been reached
-      if (currentPage > totalPages) {
-        showNotification("We're sorry, but you've reached the end of results.");
-      }
     } catch (error) {
       console.error(error);
     } finally {
@@ -195,6 +191,7 @@ import {
       clearBreadcrumbs();
       showLoader();
       showSearchField(true, true);
+      paginationContainer.innerHTML = '';
       const { limit, currentPage } = state.pagination.filters;
       const response = await Api.getFilters({
         filter,
@@ -219,11 +216,6 @@ import {
 
       renderByFilters(results, cards);
       renderPagination(paginationContainer, totalPages, currentPage);
-
-      // checking if the end of search results has been reached
-      if (currentPage > totalPages) {
-        showNotification("We're sorry, but you've reached the end of results.");
-      }
 
       // highlight active filter
       const filterElements = breadcrumbsFilters.querySelectorAll('.item');
