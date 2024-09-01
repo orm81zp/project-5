@@ -110,6 +110,7 @@
   }
   .hero .hero-header .hero-header-text {
     font-size: 18px;
+    max-width: 528px;
   }
   .hero .hero-main-image {
     margin: 32px 0 16px 0;
