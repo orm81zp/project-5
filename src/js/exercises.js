@@ -5,6 +5,8 @@ import {
   renderByFilters,
   renderFilters,
 } from './utils';
+import 'izitoast/dist/css/iziToast.min.css';
+import iziToast from 'izitoast';
 
 (() => {
   const HIDDEN_CLASS = 'hidden';
@@ -132,6 +134,15 @@ import {
       state.exercise = exercise;
 
       renderByExercises(results, cardsExercises);
+
+      if (results.length === 0) {
+        const message =
+          'Sorry, there are no exercises matching your search query. Please try again!';
+        iziToast.error({
+          title: 'Error',
+          message,
+        });
+      }
     } catch (error) {
       console.error(error);
     } finally {
