@@ -74,7 +74,6 @@ import { isValidEmail } from './utils';
         btnSubmit.classList.remove('active');
       })
       .catch(error => {
-        const badRequest = error.response.message;
         if (error.response.status === 409) {
           iziToast.warning({
             title: 'Warning',
@@ -83,7 +82,12 @@ import { isValidEmail } from './utils';
         } else if (error.response.status === 400) {
           iziToast.warning({
             title: 'Warning',
-            message: badRequest,
+            message: error.response.data?.message || 'An error occurred',
+          });
+        } else {
+          iziToast.error({
+            title: 'Error',
+            message: 'An unexpected error occurred. Please try again later.',
           });
         }
       });
