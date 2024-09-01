@@ -80,7 +80,6 @@ import { isValidEmail } from './utils';
             message: 'Subscription already exists',
           });
         } else if (error.response.status === 400) {
-          console.log(error.response);
           iziToast.warning({
             title: 'Warning',
             message: error.response.data?.message || 'An error occurred',
