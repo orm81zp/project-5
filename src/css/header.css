@@ -72,13 +72,13 @@ header .container {
 
 .socials-menu .menu-item {
   cursor: pointer;
-  padding: 8px;
   border-radius: 10px;
   border: 1px solid var(--color-secondary-10);
 }
 
 .socials-menu .menu-item .menu-link {
   display: flex;
+  padding: 8px;
 }
 
 .socials-menu .menu-item .menu-icon {
@@ -174,6 +174,7 @@ header .container {
     color: var(--color-secondary);
     border-radius: 30px;
     padding: 6px 12px;
+    font-size: 16px;
   }
 
   .navigation-menu .menu-item .menu-link.active {
