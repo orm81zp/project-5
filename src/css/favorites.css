@@ -26,10 +26,6 @@
   height: 100%;
 }
 
-.page-title .container h2 {
-  margin: 80px 0px 20px 0px;
-}
-
 .favorites .notification-message.vissible {
   display: flex;
 }
@@ -45,11 +41,6 @@
   .favorites .notification-message {
     max-width: 554px;
   }
-
-  .page-title .container h2 {
-    margin: 100px 0px 32px 0px;
-    font-size: 44px;
-  }
 }
 
 /* desktop */
@@ -62,9 +53,5 @@
 
   .favorites .cards-exercises .card-item {
     flex-basis: 405px;
-  }
-
-  .page-title .container h2 {
-    margin: 90px 0px 32px 0px;
   }
 }
