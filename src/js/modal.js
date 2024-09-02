@@ -3,7 +3,12 @@ import 'izitoast/dist/css/iziToast.min.css';
 import rater from 'rater-js';
 import Api from './api/index';
 import { LOCAL_STORAGE_KEY, UPDATE_LOCAL_STORAGE_EVENT } from './const';
-import { getClosest, renderExerciseModal, updateFavoriteButton, isValidEmail } from './utils';
+import {
+  getClosest,
+  isValidEmail,
+  renderExerciseModal,
+  updateFavoriteButton,
+} from './utils';
 
 let refs = {};
 let ratingRefs = {};
@@ -64,6 +69,7 @@ const resetExerciseModal = async id => {
     refs.favorite.dataset.id = id;
 
     refs.modal.classList.toggle('is-hidden');
+    document.body.classList.add('modal-open');
 
     setupratingModal(id);
   } catch (error) {
@@ -77,6 +83,7 @@ const resetExerciseModal = async id => {
 
 const closeExerciseModal = () => {
   refs.modal.classList.toggle('is-hidden');
+  document.body.classList.remove('modal-open');
 };
 
 const setupExerciseModal = () => {
@@ -154,8 +161,12 @@ function resetRateForm() {
   myRater.clear();
 }
 
-function hasErrorResponseMessage(error){
-  return ('response' in error) && ('data' in error.response) && ('message' in error.response.data)
+function hasErrorResponseMessage(error) {
+  return (
+    'response' in error &&
+    'data' in error.response &&
+    'message' in error.response.data
+  );
 }
 
 const sendRating = async event => {
@@ -168,13 +179,15 @@ const sendRating = async event => {
   } catch (error) {
     iziToast.error({
       title: 'Error',
-      message: (hasErrorResponseMessage(error) ? error.response.data.message : 'Unable to send rate')
+      message: hasErrorResponseMessage(error)
+        ? error.response.data.message
+        : 'Unable to send rate',
     });
     console.log(error);
   } finally {
     toggleratingModal();
   }
-}
+};
 
 const form = document.querySelector('.rating-form');
 form.addEventListener('submit', event => {
@@ -203,7 +216,7 @@ function toggleratingModal() {
   }
 }
 
-const onChange = (event) => {
+const onChange = event => {
   const email = !document.querySelector('.rating-form input').value;
   const comment = !document.querySelector('.rating-form textarea').value;
   const rating = !myRater.getRating();
@@ -211,7 +224,7 @@ const onChange = (event) => {
   const button = document.querySelector('.rating-form button');
 
   button.disabled = rating || email || comment;
-} 
+};
 
 const setupratingModal = id => {
   modalId = id;
@@ -232,13 +245,21 @@ const setupratingModal = id => {
   ratingRefs.closeModalBtn.addEventListener('click', toggleratingModal);
 
   //reassign event listener to avoid multiple assigment to elements
-  document.querySelector('.rating-form input').removeEventListener("keyup", onChange);
-  document.querySelector('.rating-form textarea').removeEventListener("keyup", onChange);
-  document.getElementById('rater').removeEventListener("click", onChange);
+  document
+    .querySelector('.rating-form input')
+    .removeEventListener('keyup', onChange);
+  document
+    .querySelector('.rating-form textarea')
+    .removeEventListener('keyup', onChange);
+  document.getElementById('rater').removeEventListener('click', onChange);
 
-  document.querySelector('.rating-form input').addEventListener("keyup", onChange);
-  document.querySelector('.rating-form textarea').addEventListener("keyup", onChange);
-  document.getElementById('rater').addEventListener("click", onChange);
+  document
+    .querySelector('.rating-form input')
+    .addEventListener('keyup', onChange);
+  document
+    .querySelector('.rating-form textarea')
+    .addEventListener('keyup', onChange);
+  document.getElementById('rater').addEventListener('click', onChange);
 };
 
 window.addEventListener('load', () => {
