@@ -175,8 +175,10 @@ header .container {
     border-radius: 30px;
     padding: 6px 12px;
     font-size: 16px;
+    transition: all var(--trns-fast);
   }
 
+  .navigation-menu .menu-item .menu-link:hover,
   .navigation-menu .menu-item .menu-link.active {
     background-color: var(--color-secondary);
     color: var(--color-primary);
