@@ -69,7 +69,7 @@ const resetExerciseModal = async id => {
     refs.favorite.dataset.id = id;
 
     refs.modal.classList.toggle('is-hidden');
-    document.body.classList.toggle('modal-open');
+    document.body.classList.add('modal-open');
 
     setupratingModal(id);
   } catch (error) {
@@ -83,7 +83,7 @@ const resetExerciseModal = async id => {
 
 const closeExerciseModal = () => {
   refs.modal.classList.toggle('is-hidden');
-  document.body.classList.toggle('modal-open');
+  document.body.classList.remove('modal-open');
 };
 
 const setupExerciseModal = () => {
